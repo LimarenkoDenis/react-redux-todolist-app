@@ -1,0 +1,27 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "outDir": "./build/",
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "jsx": "react",
+        "noUnusedLocals": true,
+        "noFallthroughCasesInSwitch": true,
+        "lib": [
+            "es5",
+            "es6",
+            "es7",
+            "es2015",
+            "es2016",
+            "es2017",
+            "dom"
+        ]
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

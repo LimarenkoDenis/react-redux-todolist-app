@@ -1,0 +1,36 @@
+{
+  "name": "react-redux-todolist-app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "start": "cross-env NODE_ENV=development webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodinwow/react-redux-todolist-app.git"
+  },
+  "keywords": [],
+  "author": "Eugene Rodin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rodinwow/react-redux-todolist-app/issues"
+  },
+  "homepage": "https://github.com/rodinwow/react-redux-todolist-app#readme",
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "file-loader": "^0.9.0",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^1.3.3",
+    "typescript": "^2.1.4",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2",
+    "webpack-merge": "^2.0.0"
+  },
+  "dependencies": {
+    "cross-env": "^3.1.3",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
+}

@@ -3,7 +3,7 @@ var merge = require('webpack-merge');
 var path = require('path');
 
 var common = {
-	entry: path.resolve(__dirname, 'src/index.ts'),
+	entry: path.resolve(__dirname, 'src/app.tsx'),
 	output: {
 		publicPath: '/build/',
 		path: 'build',

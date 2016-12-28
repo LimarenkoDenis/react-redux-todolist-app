@@ -1,0 +1,21 @@
+export enum TodoActions {
+	ADD_TODO,
+	EDIT_TODO,
+	TOGGLE_TODO,
+	SAVE_TODO,
+	CANCEL_EDIT_TODO
+}
+
+export enum FilterActions {
+	SET_ACTIVE_FILTER,
+	SET_SEARCH_TEMPLATE
+}
+
+export enum CategoryActions {
+	ADD_CATEGORY,
+	EDIT_CATEGORY,
+	TOGGLE_CATEGORY,
+	DELETE_CATEGORY,
+	NEST_CATEGORY,
+	ADD_SUBCATEGORY
+}

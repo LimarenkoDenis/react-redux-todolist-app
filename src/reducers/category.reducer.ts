@@ -1,10 +1,10 @@
-import { CategoryActions } from '../actions/action-types';
+import { CategoryActions } from '../actions/action.types';
 
 const initialState = {
 	categoryByID: {}
 }
 
-const categoryList = (state = initialState, action) => {
+const categoryReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case CategoryActions[CategoryActions.ADD_CATEGORY]:
 			return {
@@ -25,4 +25,4 @@ const categoryList = (state = initialState, action) => {
 	}
 };
 
-export default categoryList;
+export default categoryReducer;

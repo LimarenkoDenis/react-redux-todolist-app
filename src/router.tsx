@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { browserHistory, Route, Router } from 'react-router/lib';
 
-import TodoApp from './components/TodoApp';
-import TaskList from './components/TaskList';
-import NotFoundPage from './components/NotFoundPage';
+import { MainLayout, WorkspaceLayout, NotFoundPage } from './components';
 
 const router = (
 	<Router history={browserHistory}>
-		<Route path='/' component={TodoApp} >
-			<Route path='categoryName' component={TaskList} />
+		<Route path='/' component={MainLayout} >
+			<Route path='categoryName' component={WorkspaceLayout} />
 		</Route>
 		<Route path='*' component={NotFoundPage} />
 	</Router>

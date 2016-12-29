@@ -1,4 +1,4 @@
-import { TodoActions } from './action-types';
+import { TodoActions } from './action.types';
 
 let nextTodoID = 0;
 

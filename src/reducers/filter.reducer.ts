@@ -1,11 +1,11 @@
-import { FilterActions } from '../actions/action-types';
+import { FilterActions } from '../actions/action.types';
 
 const initialState = {
 	searchTemplate: '',
 	active: false
 };
 
-const filterStore = (state = initialState, action) => {
+const filterReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case FilterActions[FilterActions.SET_ACTIVE_FILTER]:
 			break;
@@ -16,4 +16,4 @@ const filterStore = (state = initialState, action) => {
 	}
 };
 
-export default filterStore;
+export default filterReducer;

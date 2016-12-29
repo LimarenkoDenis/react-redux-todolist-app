@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 
-import todoList from './todo-reducer';
-import categoryList from './category-reducer';
-import filterState from './filter-reducer';
+import todoReducer from './todo.reducer';
+import categoryReducer from './category.reducer';
+import filterReducer from './filter.reducer';
+import editReducer from './edit.reducer';
 
 const reducer = combineReducers({
-	todoList,
-	categoryList,
-	filterState
+	todoList: todoReducer,
+	categoryList: categoryReducer,
+	filterState: filterReducer,
+	editState: editReducer
 });
 
 export default reducer;

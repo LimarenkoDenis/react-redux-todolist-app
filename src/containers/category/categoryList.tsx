@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CategoryLink from './CategoryLink';
+import CategoryLink from '../../components/category/categoryLink';
 
 class CategoryList extends React.Component<any, any>{
 

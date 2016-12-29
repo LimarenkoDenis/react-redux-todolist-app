@@ -1,10 +1,10 @@
-import { TodoActions } from '../actions/action-types';
+import { TodoActions } from '../actions/action.types';
 
 const initialState = {
 	todoByID: {}
 };
 
-const todoList = (state = initialState, action) => {
+const todoReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case TodoActions[TodoActions.ADD_TODO]:
 			let id = action.id;
@@ -32,4 +32,4 @@ const todoList = (state = initialState, action) => {
 	}
 };
 
-export default todoList;
+export default todoReducer;

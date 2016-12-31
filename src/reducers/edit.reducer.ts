@@ -1,13 +1,18 @@
-import { TodoActions, CategoryActions } from '../actions/action.types';
+// import { TaskActions, CategoryActions } from '../actions/action.types';
 
-const editReducer = (state, action) => {
+const initialState = {
+	active: false,
+	currentTodoID: null
+};
+
+const editReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case TodoActions[TodoActions.EDIT_TODO]:
-			break;
-		case CategoryActions[CategoryActions.EDIT_CATEGORY]:
-			break;
+		// case TaskActions[TaskActions.EDIT_TASK]:
+		// 	break;
+		// case CategoryActions[CategoryActions.EDIT_CATEGORY]:
+		// 	break;
 		default:
-			return false;
+			return state;
 	}
 }
 

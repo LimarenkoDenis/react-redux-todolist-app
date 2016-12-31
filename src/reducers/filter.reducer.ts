@@ -1,16 +1,16 @@
-import { FilterActions } from '../actions/action.types';
+// import { FilterActions } from '../actions/action.types';
 
 const initialState = {
-	searchTemplate: '',
-	active: false
+	active: false,
+	searchTemplate: ''
 };
 
 const filterReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case FilterActions[FilterActions.SET_ACTIVE_FILTER]:
-			break;
-		case FilterActions[FilterActions.SET_SEARCH_TEMPLATE]:
-			break;
+		// case FilterActions[FilterActions.SET_ACTIVE_FILTER]:
+		// 	break;
+		// case FilterActions[FilterActions.SET_SEARCH_TEMPLATE]:
+		// 	break;
 		default:
 			return state;
 	}

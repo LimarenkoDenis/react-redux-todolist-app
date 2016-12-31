@@ -1,9 +1,9 @@
-export enum TodoActions {
-	ADD_TODO,
-	EDIT_TODO,
-	TOGGLE_TODO,
-	SAVE_TODO,
-	CANCEL_EDIT_TODO
+export enum TaskActions {
+	ADD_TASK,
+	EDIT_TASK,
+	TOGGLE_TASK,
+	SAVE_TASK,
+	CANCEL_EDIT_TASK
 }
 
 export enum FilterActions {
@@ -11,8 +11,14 @@ export enum FilterActions {
 	SET_SEARCH_TEMPLATE
 }
 
+export enum EditActions {
+	//TODO
+}
+
 export enum CategoryActions {
 	ADD_CATEGORY,
+	CHOOSE_CATEGORY,
+	SHOW_TASK_LIST,
 	EDIT_CATEGORY,
 	TOGGLE_CATEGORY,
 	DELETE_CATEGORY,

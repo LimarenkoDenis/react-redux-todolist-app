@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TaskList from '../../containers/task/taskList';
+import TaskList from '../task/taskList';
 
 export const WorkspaceLayout = () => (
 	<TaskList />

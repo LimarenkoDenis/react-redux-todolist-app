@@ -10,10 +10,11 @@ const CategoryList = (props) => (
 				level={c.level}
 				key={c.id}
 				title={c.title}
+				expand={c.expanded}
 				onAddClick={(id, subSize) => props.onAddClick(c.id, c.subs.length)}
 				onExpandClick={id => props.onExpandClick(c.id)}
 				onLIClick={(id, title) => props.onLIClick(c.id, c.title)}
-				onDeleteClick={(id, subs) => props.onDeleteClick(c.id, c.subs)}
+				onDeleteClick={(id, title, subs, tasks) => props.onDeleteClick(c.id, c.title, c.subs, c.tasks)}
 				/>
 		)}
 	</ListGroup>

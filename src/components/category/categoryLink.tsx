@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ListGroupItem, Glyphicon } from 'react-bootstrap';
 
-const CategoryLink = ({title, onAddClick, onExpandClick, onLIClick, onDeleteClick, level}) => (
+const CategoryLink = ({title, onAddClick, expand, onExpandClick, onLIClick, onDeleteClick, level}) => (
 	<ListGroupItem
 		onClick={onLIClick}
 		style={{
@@ -9,9 +9,9 @@ const CategoryLink = ({title, onAddClick, onExpandClick, onLIClick, onDeleteClic
 			width: `${100 - level * 5}%`
 		}}>
 		<Glyphicon
-			glyph='collapse-down'
+			glyph={expand ? 'collapse-down' : 'expand'}
 			onClick={onExpandClick}
-			/>
+		/>
 		{title}
 		<Glyphicon glyph='edit' />
 		<Glyphicon

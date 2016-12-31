@@ -12,11 +12,12 @@ const initialState = [
 ];
 
 const categoryReducer = (state = initialState, action) => {
-	// console.log(action);
 	switch (action.type) {
 		// case CategoryActions[CategoryActions.ADD_CATEGORY]:
 		// 	return state;
 		// case CategoryActions[CategoryActions.EDIT_CATEGORY]:
+		// 	return;
+		// caseCategoryActions[CategoryActions.NEST_CATEGORY]:
 		// 	return;
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
 			state.forEach(c => {
@@ -24,15 +25,15 @@ const categoryReducer = (state = initialState, action) => {
 					browserHistory.push(`${c.title.split(' ').join('')}`);
 				}
 			});
-
 			return state;
-		case CategoryActions[CategoryActions.TOGGLE_CATEGORY]:
-			return state.map(c => {
-				if (c.id !== action.id) return c;
 
-				return { ...c, expanded: !c.expanded };
-			});
+		case CategoryActions[CategoryActions.TOGGLE_CATEGORY]:
+			return state.map(c => c.id !== action.id ? c : { ...c, expanded: !c.expanded });
+
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
+			if (!confirm(`Do you really want to delete ${action.title}?`))
+				return state;
+
 			let subIdSet = new Set(action.subs);
 
 			state.forEach(item => {
@@ -42,29 +43,18 @@ const categoryReducer = (state = initialState, action) => {
 			});
 
 			return state.filter(c => (c.id !== action.id && !subIdSet.has(c.id)));
-		// case CategoryActions[CategoryActions.NEST_CATEGORY]:
-		// 	return;
+
 		case CategoryActions[CategoryActions.ADD_SUBCATEGORY]:
 			let newCategoryId = Number(`${action.parentId}${action.parentSubSize + 1}`);
 			let newCategoryTitleId = String(newCategoryId).split('').join('_');
+
 			return [
-				...state.map(c => {
-
-					// if (String(c.id)[0] === String(newCategoryId)[0]) {
-
-					// 	return { ...c, expanded: true }
-					// };
-
-					if (c.id !== action.parentId) return c;
-
-					return { ...c, subs: [...c.subs, newCategoryId], expanded:true };
-				}),
+				...state.map(c => c.id !== action.parentId ? c : { ...c, subs: [...c.subs, newCategoryId], expanded: true }),
 				{
-					id: newCategoryId,
-					title: `Category ${newCategoryTitleId}`,
+					id: newCategoryId, title: `Category ${newCategoryTitleId}`,
 					subs: [], tasks: [], expanded: true, root: false, level: null
 				}
-			]
+			];
 
 		default:
 			return state;

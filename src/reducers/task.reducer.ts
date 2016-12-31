@@ -19,6 +19,7 @@ const taskReducer = (state = initialState, action) => {
 					[id]: { id: id, text: action.text, completed: false }
 				}
 			};
+
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
 			let tasks = new Set(action.tasks || []);
 
@@ -27,17 +28,14 @@ const taskReducer = (state = initialState, action) => {
 					...Object.keys(state.taskListByID).filter(index => !tasks.has(state.taskListByID[index].id))
 				}
 			};
-		// case TaskActions[TaskActions.EDIT_TASK]:
 
+		// case TaskActions[TaskActions.EDIT_TASK]:
 		// 	break;
 		// case TaskActions[TaskActions.TOGGLE_TASK]:
-
 		// 	break;
 		// case TaskActions[TaskActions.SAVE_TASK]:
-
 		// 	break;
 		// case TaskActions[TaskActions.CANCEL_EDIT_TASK]:
-
 		// 	break;
 		default:
 			return state;

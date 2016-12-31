@@ -4,10 +4,6 @@ button
 {
     outline: none !important;
 }
-/*.inner-group{
-    margin-bottom: 0;
-    margin-left: 20px;
-}*/
 .list-group-item
 {
     min-width: 50%;

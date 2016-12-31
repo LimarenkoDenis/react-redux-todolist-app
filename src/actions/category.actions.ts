@@ -18,10 +18,11 @@ const toggleCategory = (id) => {
 	};
 };
 
-const deleteCategory = (id, subs, tasks) => {
+const deleteCategory = (id, title, subs, tasks) => {
 	return {
 		type: CategoryActions[CategoryActions.DELETE_CATEGORY],
 		id,
+		title,
 		subs,
 		tasks
 	};

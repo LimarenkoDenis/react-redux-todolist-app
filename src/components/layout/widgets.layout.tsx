@@ -5,7 +5,7 @@ import ProgressBar from '../widget/progressBar.widget';
 import Filter from '../widget/filter.widget';
 import AddForm from '../widget/AddForm.widget';
 
-const WidgetsLayout = () => {
+export const WidgetsLayout = (props) => {
 	return (
 		<Row>
 			<Row>
@@ -15,7 +15,7 @@ const WidgetsLayout = () => {
 			</Row>
 			<Row>
 				<Col md={6} mdOffset={3}>
-					<ProgressBar />
+					<ProgressBar now={props.progressCounter}/>
 				</Col>
 			</Row>
 			<Row>
@@ -29,5 +29,3 @@ const WidgetsLayout = () => {
 		</Row>
 	);
 };
-
-export default WidgetsLayout;

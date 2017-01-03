@@ -1,14 +1,18 @@
-// import { TaskActions, CategoryActions } from '../actions/action.types';
+import { TaskActions, CategoryActions } from '../actions/action.types';
 
 const initialState = {
 	active: false,
-	currentTodoID: null
+	task: null
 };
 
 const editReducer = (state = initialState, action) => {
 	switch (action.type) {
-		// case TaskActions[TaskActions.EDIT_TASK]:
-		// 	break;
+		case TaskActions[TaskActions.EDIT_TASK]:
+			let {id, title, completed} = action;
+			return { active: true, task: { id, title, completed } };
+
+		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
+			return { active: false, task: null };
 		// case CategoryActions[CategoryActions.EDIT_CATEGORY]:
 		// 	break;
 		default:

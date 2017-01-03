@@ -1,5 +1,5 @@
 import * as React from 'react';
 
-const Header = (props) => <h1>{props.title}1</h1>;
+const Header = ({title}) => <h1>{title}</h1>;
 
 export default Header;

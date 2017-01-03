@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { addSubcategory, toggleCategory, chooseCategory, deleteCategory } from '../../actions/category.actions';
+import { addSubcategory, nestCategory, changeTitle, toggleCategory, editCategory, chooseCategory, deleteCategory } from '../../actions/category.actions';
 import CategoryList from '../../components/category/categoryList';
 
 const getSubCategories = (category, storeList) => {
@@ -18,8 +18,6 @@ const getSubCategories = (category, storeList) => {
 
 const getCategoryList = (currentCategories, inputCategories, depth, storeCategories) => {
 	let categories = inputCategories;
-	//?
-	currentCategories.sort((a, b) => a.id - b.id);
 
 	for (let i = 0; i < currentCategories.length; i++) {
 
@@ -45,7 +43,8 @@ const getCategoryList = (currentCategories, inputCategories, depth, storeCategor
 
 const mapStateToProps = (store) => {
 	return {
-		categories: getCategoryList(store.categoryList, [], 0, store.categoryList)
+		categories: getCategoryList(store.categories.list, [], 0, store.categories.list),
+		editState: store.editState
 	};
 };
 
@@ -53,8 +52,11 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onAddClick: (parentId, parentSubSize) => dispatch(addSubcategory(parentId, parentSubSize)),
 		onExpandClick: (id) => dispatch(toggleCategory(id)),
-		onLIClick: (id, title) => dispatch(chooseCategory(id, title)),
-		onDeleteClick: (id, title, subs, tasks) => dispatch(deleteCategory(id, title, subs, tasks))
+		onEditClick: (id, title) => dispatch(editCategory(id, title)),
+		onLIClick: (id, title, tasks) => dispatch(chooseCategory(id, title, tasks)),
+		onDeleteClick: (id, title, subs, tasks) => dispatch(deleteCategory(id, title, subs, tasks)),
+		onTitleChange: (id, title) => dispatch(changeTitle(id, title)),
+		onArrowClick: (id) => dispatch(nestCategory(id))
 	}
 };
 

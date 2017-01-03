@@ -18,6 +18,14 @@ const toggleCategory = (id) => {
 	};
 };
 
+const editCategory = (id, title) => {
+	return {
+		type: CategoryActions[CategoryActions.EDIT_CATEGORY],
+		id,
+		title
+	};
+};
+
 const deleteCategory = (id, title, subs, tasks) => {
 	return {
 		type: CategoryActions[CategoryActions.DELETE_CATEGORY],
@@ -28,12 +36,29 @@ const deleteCategory = (id, title, subs, tasks) => {
 	};
 };
 
-const chooseCategory = (id, title) => {
+const changeTitle = (id, title) => {
 	return {
-		type: CategoryActions[CategoryActions.CHOOSE_CATEGORY],
+		type: CategoryActions[CategoryActions.CHANGE_CATEGORY_TITLE],
 		id,
 		title
 	};
 };
 
-export { addSubcategory, toggleCategory, chooseCategory, deleteCategory };
+const chooseCategory = (id, title, tasks) => {
+	return {
+		type: CategoryActions[CategoryActions.CHOOSE_CATEGORY],
+		id,
+		title,
+		tasks
+	};
+};
+
+const nestCategory = (id) => {
+	return {
+		type: CategoryActions[CategoryActions.NEST_CATEGORY],
+		id
+	};
+};
+
+
+export { addSubcategory, changeTitle, editCategory, nestCategory, toggleCategory, chooseCategory, deleteCategory };

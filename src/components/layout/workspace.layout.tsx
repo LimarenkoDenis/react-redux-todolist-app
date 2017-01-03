@@ -1,9 +1,13 @@
 import * as React from 'react';
-import TaskList from '../task/taskList';
+import { Col } from 'react-bootstrap';
 
-export const WorkspaceLayout = () => (
-	<TaskList />
-	// { (store.todoList ) ? <TaskList /> : <ClearPage />}
+import TaskList from '../../containers/task/visibleTaskList';
+import EditPage from './editPage.layout';
+
+const style = { border: '2px solid red', height: '100%' };
+
+export const WorkspaceLayout = (props) => (
+	<Col md={8} style={style}>
+		{props.editState.active ? (<EditPage task={props.editState.task} />) : (<TaskList />)}
+	</Col>
 );
-
-// if else state

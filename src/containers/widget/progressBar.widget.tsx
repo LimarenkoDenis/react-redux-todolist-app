@@ -11,7 +11,7 @@ const getAppProgress = (list) => {
 
 const mapStateToProps = (store) => {
 	return {
-		percentage: getAppProgress(store.todoList)
+		percentage: getAppProgress(store.taskList.listById)
 	}
 };
 

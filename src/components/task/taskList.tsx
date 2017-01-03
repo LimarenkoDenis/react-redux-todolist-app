@@ -1,6 +1,24 @@
 import * as React from 'react';
-import TaskLink from './taskLink';
+import { ListGroup } from 'react-bootstrap';
 
-const TaskList = () => <div><TaskLink text='kek' completed={false} /></div>;
+import TaskLink from './taskLink';
+import './style.css';
+
+const TaskList = (props) => {
+	return (
+		<ListGroup>
+			{props.tasks.map(t =>
+				<TaskLink
+					key={t.id}
+					title={t.text}
+					completed={t.completed}
+					onLIClick={(id, title) => props.onLIClick(t.id, t.text)}
+					onCheckClick={id => props.onCheckClick(t.id)}
+					onEditClick={(id, title, completed) => props.onEditClick(t.id, t.text, t.completed)}
+					/>
+			)}
+		</ListGroup>
+	);
+};
 
 export default TaskList;

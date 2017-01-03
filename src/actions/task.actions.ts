@@ -11,17 +11,28 @@ const addTask = (text) => {
 };
 
 //TODO
-const editTask = (id) => {
+const editTask = (id, title, completed) => {
 	return {
 		type: TaskActions[TaskActions.EDIT_TASK],
+		id,
+		title,
+		completed
+	};
+};
+
+const toggleTask = (id) => {
+	return {
+		type: TaskActions[TaskActions.TOGGLE_TASK],
 		id
 	};
 };
 
-const toggleTask = () => {
+const chooseTask = (id, title) => {
 	return {
-		type: TaskActions[TaskActions.TOGGLE_TASK],
-	};
+		type: TaskActions[TaskActions.CHOOSE_TASK],
+		id,
+		title
+	}
 };
 
 const saveTask = () => {
@@ -36,4 +47,4 @@ const cancelEdit = () => {
 	};
 };
 
-export { addTask, editTask, toggleTask, saveTask, cancelEdit };
+export { addTask, chooseTask, editTask, toggleTask, saveTask, cancelEdit };

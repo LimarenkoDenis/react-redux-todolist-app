@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { browserHistory, Route, Router } from 'react-router/lib';
 
-import { MainLayout, WorkspaceLayout, NotFoundPage } from './components';
+import MainLayout from './containers/main';
+import { NotFoundPage } from './components';
+import WorkspaceLayout from './containers/task/visibleTaskList';
 
 const router = (
 	<Router history={browserHistory}>

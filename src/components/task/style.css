@@ -1,0 +1,63 @@
+@import '../../reset.css';
+
+button
+{
+    outline: none !important;
+}
+.glyphicon
+{
+    margin: 0 8px;
+    opacity: .1;
+}
+.glyphicon:hover
+{   
+    cursor: pointer;
+    opacity: 1;
+}
+.icon-right-align
+{
+    display: block;
+    float: right;
+}
+.list-group-item.task-item
+{
+    padding: 1.5em 1em;
+    border-radius: 0;
+    border: 2px solid #000;    
+}
+.list-group-item.task-item.item-checked input
+{
+    text-decoration:line-through;
+    opacity: .3;
+}
+button.list-group-item.task-item:hover
+{
+    transition: background-color .5s cubic-bezier(.19, 1, .22, 1);
+    /*background-color: #c0e0ff;*/
+}
+button.list-group-item.task-item span.icon-right-align
+{
+    visibility: hidden;
+}
+button.list-group-item.task-item:hover span.icon-right-align
+{
+    visibility: visible;
+}
+
+.list-group-item.task-item input
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    border: none;
+    background-color: inherit;
+}
+input[type='text']:focus
+{
+    outline: 0;
+}
+button.list-group-item.task-item:hover span + input
+{
+    /*transition: background-color .5s cubic-bezier(.19, 1, .22, 1);*/
+    cursor: pointer;
+    /*background-color: #c0e0ff;*/
+}

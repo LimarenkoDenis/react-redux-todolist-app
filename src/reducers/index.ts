@@ -6,8 +6,8 @@ import filterReducer from './filter.reducer';
 import editReducer from './edit.reducer';
 
 const reducer = combineReducers({
-	taskList: taskReducer,
-	categoryList: categoryReducer,
+	tasks: taskReducer,
+	categories: categoryReducer,
 	filterState: filterReducer,
 	editState: editReducer
 });

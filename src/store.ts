@@ -2,5 +2,7 @@ import { createStore } from 'redux';
 import reducer from './reducers/index';
 
 const store = createStore(reducer);
-setTimeout(()=> console.log(store.getState()), 3000);
+//debug
+setTimeout(()=> console.log(store.getState()), 7000);
+
 export default store;

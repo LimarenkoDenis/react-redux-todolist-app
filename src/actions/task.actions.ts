@@ -2,11 +2,11 @@ import { TaskActions } from './action.types';
 
 let nextTodoID = 0;
 
-const addTask = (text) => {
+const addTask = (title) => {
 	return {
 		type: TaskActions[TaskActions.ADD_TASK],
 		id: nextTodoID,
-		text
+		title
 	};
 };
 
@@ -32,7 +32,7 @@ const chooseTask = (id, title) => {
 		type: TaskActions[TaskActions.CHOOSE_TASK],
 		id,
 		title
-	}
+	};
 };
 
 const saveTask = () => {

@@ -1,20 +1,20 @@
 import { TaskActions, CategoryActions } from '../actions/action.types';
-import { browserHistory } from 'react-router/lib';
+// import { browserHistory } from 'react-router/lib';
 
 const initialState = {
 	listById: {
-		1: { id: 1, text: 'make coffee', completed: true },
-		2: { id: 2, text: 'drink coffee', completed: false },
-		3: { id: 3, text: 'do it again', completed: false },
-		4: { id: 4, text: 'make coffee', completed: true },
-		5: { id: 5, text: 'drink coffee', completed: false },
-		6: { id: 6, text: 'do it again', completed: false },
-		7: { id: 7, text: 'make coffee', completed: true },
-		8: { id: 8, text: 'drink coffee', completed: false },
-		9: { id: 9, text: 'do it again', completed: false },
-		10: { id: 10, text: 'make coffee', completed: true },
-		11: { id: 11, text: 'drink coffee', completed: false },
-		12: { id: 12, text: 'do it again', completed: false }
+		1: { id: 1, title: 'make coffee', completed: true, description: '' },
+		2: { id: 2, title: 'drink coffee', completed: false, description: '' },
+		3: { id: 3, title: 'do it again', completed: false, description: '' },
+		4: { id: 4, title: 'make coffee', completed: true, description: '' },
+		5: { id: 5, title: 'drink coffee', completed: false, description: '' },
+		6: { id: 6, title: 'do it again', completed: false, description: '' },
+		7: { id: 7, title: 'make coffee', completed: true, description: '' },
+		8: { id: 8, title: 'drink coffee', completed: false, description: '' },
+		9: { id: 9, title: 'do it again', completed: false, description: '' },
+		10: { id: 10, title: 'make coffee', completed: true, description: '' },
+		11: { id: 11, title: 'drink coffee', completed: false, description: '' },
+		12: { id: 12, title: 'do it again', completed: false, description: '' }
 	},
 	visibleList: []
 };
@@ -27,7 +27,7 @@ const taskReducer = (state = initialState, action) => {
 			return {
 				listById: {
 					...state.listById,
-					[id]: { id: id, text: action.text, completed: false }
+					[id]: { id: id, title: action.text, completed: false, description: '' }
 				},
 				visibleList: state.visibleList
 			};
@@ -56,8 +56,8 @@ const taskReducer = (state = initialState, action) => {
 			};
 
 		case TaskActions[TaskActions.CHOOSE_TASK]:
-		//TODO
-			browserHistory.push(`${action.title.split(' ').join('')}`);
+			//TODO
+			// browserHistory.push(`${action.title.split(' ').join('')}`);
 			return state;
 		// case TaskActions[TaskActions.EDIT_TASK]:
 		// 	break;

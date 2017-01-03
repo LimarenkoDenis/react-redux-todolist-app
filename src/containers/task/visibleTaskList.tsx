@@ -7,12 +7,14 @@ const getFilteredTasks = (taskListById, visibleTaskArray, filter) => {
 	let taskSet = new Set(visibleTaskArray);
 	let visibleList = [...Object.values(taskListById).filter(t => taskSet.has(t.id))];
 	let filteredList;
-
+	
 	if (filter.searchTemplate) {
 		filteredList = visibleList.filter(t => t.title.toLowerCase().match(filter.searchTemplate));
+	} else {
+		filteredList = visibleList;
 	}
 
-	return filter.active ? filteredList.filter(t => !t.completed) : visibleList;
+	return filter.active ? filteredList.filter(t => !t.completed) : filteredList;
 };
 
 

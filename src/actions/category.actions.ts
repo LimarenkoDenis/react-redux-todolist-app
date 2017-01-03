@@ -60,5 +60,4 @@ const nestCategory = (id) => {
 	};
 };
 
-
 export { addSubcategory, changeTitle, editCategory, nestCategory, toggleCategory, chooseCategory, deleteCategory };

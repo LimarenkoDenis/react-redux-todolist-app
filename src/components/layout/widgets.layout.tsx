@@ -10,12 +10,15 @@ export const WidgetsLayout = (props) => {
 		<Row>
 			<Row>
 				<Col md={6} mdOffset={6} >
-					<Filter />
+					<Filter
+						onActiveToggle={props.onActiveToggle}
+						onFilterInput={props.onFilterInput}
+						/>
 				</Col>
 			</Row>
 			<Row>
 				<Col md={6} mdOffset={3}>
-					<ProgressBar now={props.progressCounter}/>
+					<ProgressBar now={props.progressCounter} />
 				</Col>
 			</Row>
 			<Row>

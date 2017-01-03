@@ -9,7 +9,7 @@ const CategoryLink = ({ title, edit, subs, expand, editState, onTitleChange, onA
 			onClick={onLIClick}
 			style={{
 				marginLeft: `${level * 5}%`,
-				width: `${100 - level * 5}%`,
+				width: `${100 - level * 5}%`
 			}}>
 			{!editState.active &&
 				<Glyphicon
@@ -24,9 +24,9 @@ const CategoryLink = ({ title, edit, subs, expand, editState, onTitleChange, onA
 				size={title.length}
 				disabled={!edit}
 				className={edit ? 'active' : 'disabled'}
-				// onChange={(e) => onTitleChange()}
+				onChange={(e) => onTitleChange()}
 				// ref={(input) => { textInput = input; }} 
-				// defaultValue={title}
+				defaultValue={title}
 				/>
 			{!editState.active ? (
 				<span>

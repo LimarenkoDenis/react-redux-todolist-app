@@ -21,13 +21,13 @@ const getCategoryList = (currentCategories, inputCategories, depth, storeCategor
 
 	for (let i = 0; i < currentCategories.length; i++) {
 
-		if (currentCategories[i].root) {
+		if (!currentCategories[i].parentId) {
 			categories.push({ ...currentCategories[i], level: depth });
 		}
 
-		if (!currentCategories[i].root && depth > 0) {
+		if (currentCategories[i].parentId && depth > 0) {
 			categories.push({ ...currentCategories[i], level: depth });
-		} else if (!currentCategories[i].root && depth === 0) {
+		} else if (currentCategories[i].parentId && depth === 0) {
 			continue;
 		}
 

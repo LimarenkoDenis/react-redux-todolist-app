@@ -8,7 +8,7 @@ export enum TaskActions {
 }
 
 export enum FilterActions {
-	SET_ACTIVE_FILTER,
+	TOGGLE_ACTIVE_FILTER,
 	SET_SEARCH_TEMPLATE
 }
 
@@ -26,4 +26,11 @@ export enum CategoryActions {
 	NEST_CATEGORY,
 	ADD_SUBCATEGORY,
 	CHANGE_CATEGORY_TITLE
+}
+
+export enum FormActions {
+	ADD_CATEGORY,
+	ADD_TASK,
+	SAVE_TASK,
+	CANCEL_EDIT_TASK
 }

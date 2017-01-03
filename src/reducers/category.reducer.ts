@@ -3,13 +3,13 @@ import { browserHistory } from 'react-router/lib';
 
 const initialState = {
 	list: [
-		{ id: 1, title: 'category 1', subs: [11, 12], tasks: [1, 2, 3], parentNode: null, expanded: true, root: true, level: null, edit: false },
-		{ id: 2, title: 'category 2', subs: [21], tasks: [4, 5, 6], parentNode: null, expanded: false, root: true, level: null, edit: false },
-		{ id: 3, title: 'category 3', subs: [], tasks: [7, 8, 9], parentNode: null, expanded: false, root: true, level: null, edit: false },
-		{ id: 11, title: 'category 1_1', subs: [111], tasks: [10], parentNode: 1, expanded: false, root: false, level: null, edit: false },
-		{ id: 12, title: 'category 1_2', subs: [], tasks: [], parentNode: 1, expanded: false, root: false, level: null, edit: false },
-		{ id: 111, title: 'category 1_1_1', subs: [], tasks: [11], parentNode: 11, expanded: false, root: false, level: null, edit: false },
-		{ id: 21, title: 'category 2_1', subs: [], tasks: [12], parentNode: 2, expanded: false, root: false, level: null, edit: false }
+		{ id: 1, title: 'category 1', subs: [11, 12], tasks: [1, 2, 3], parentId: null, expanded: true, level: null, edit: false },
+		{ id: 2, title: 'category 2', subs: [21], tasks: [4, 5, 6], parentId: null, expanded: false, level: null, edit: false },
+		{ id: 3, title: 'category 3', subs: [], tasks: [7, 8, 9], parentId: null, expanded: false, level: null, edit: false },
+		{ id: 11, title: 'category 1_1', subs: [111], tasks: [10], parentId: 1, expanded: false, level: null, edit: false },
+		{ id: 12, title: 'category 1_2', subs: [], tasks: [], parentId: 1, expanded: false, level: null, edit: false },
+		{ id: 111, title: 'category 1_1_1', subs: [], tasks: [11], parentId: 11, expanded: false, level: null, edit: false },
+		{ id: 21, title: 'category 2_1', subs: [], tasks: [12], parentId: 2, expanded: false, level: null, edit: false }
 	],
 	activeCategory: null
 };
@@ -24,7 +24,8 @@ const categoryReducer = (state = initialState, action) => {
 		// 	return state;
 
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
-			browserHistory.push(`${action.title.split(' ').join('')}`);
+			// browserHistory.push(`${action.title.split(' ').join('')}`);
+			browserHistory.push(`${action.id}`);
 
 			return {
 				list: state.list,
@@ -47,21 +48,20 @@ const categoryReducer = (state = initialState, action) => {
 			let newId;
 			return {
 				list: state.list.map(c => {
-					let root = false;
 					let parentNode;
 
-					if (c.id !== action.id || c.root) return c;
+					if (c.id !== action.id || !c.parentId) return c;
 
-					if (String(c.parentNode).length === 1) {
+					if (String(c.parentId).length === 1) {
 						parentNode = null;
-						root = true;
 						newId = state.list.filter(c => String(c.id).length === 1).length + 1; //GLOBAL 
 					} else {
 						parentNode = Number(String(action.id).slice(0, -2));
-						newId = state.list.find(c => c.id === parentNode).subs.length + 1;
+						newId = Number(String(parentNode) + String(state.list.find(c => c.id === parentNode).subs.length + 1));
+						state.list.find(c => c.id === parentNode).subs.push(newId);
 					}
 
-					return { ...c, root, parentNode, id: newId };
+					return { ...c, parentId: parentNode, id: newId };
 				}),
 				activeCategory: newId
 			};
@@ -93,7 +93,7 @@ const categoryReducer = (state = initialState, action) => {
 					...state.list.map(c => c.id !== action.parentId ? c : { ...c, subs: [...c.subs, newCategoryId], expanded: true }),
 					{
 						id: newCategoryId, title: `category ${newCategoryTitle}`,
-						subs: [], tasks: [], expanded: true, root: false, level: null, parentNode: action.parentId
+						subs: [], tasks: [], expanded: true, root: false, level: null, parentId: action.parentId
 					}
 				],
 				activeCategory: state.activeCategory

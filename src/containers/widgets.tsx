@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { setSearchTemplate, toggleActiveFilter } from '../actions/filter.actions';
 import { WidgetsLayout } from '../components/layout/widgets.layout';
 // import { WidgetsLayout } from '../components';
 
@@ -13,12 +14,15 @@ const getAppProgress = (list) => {
 
 const mapStateToProps = (store) => {
 	return {
-		progressCounter: getAppProgress(store.tasks.listById)
+		progressCounter: getAppProgress(store.tasks.listById),
 	};
 };
 
-const mapDispatchToProps = (store) => {
-	return {};
+const mapDispatchToProps = (dispath) => {
+	return {
+		onFilterInput: (template) => dispath(setSearchTemplate(template)),
+		onActiveToggle: (active) => dispath(toggleActiveFilter(active))
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WidgetsLayout);

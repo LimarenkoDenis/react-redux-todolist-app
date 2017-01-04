@@ -14,7 +14,7 @@ const TaskList = (props) => {
 					completed={t.completed}
 					onLIClick={(id, title) => props.onLIClick(t.id, t.title)}
 					onCheckClick={id => props.onCheckClick(t.id)}
-					onEditClick={(id, title, completed) => props.onEditClick(t.id, t.title, t.completed)}
+					onEditClick={(id, title, completed, description) => { props.onEditClick(t.id, t.title, t.completed, t.description) } }
 					/>
 			)}
 		</ListGroup>

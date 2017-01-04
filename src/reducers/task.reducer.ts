@@ -1,9 +1,9 @@
-import { TaskActions, CategoryActions } from '../actions/action.types';
+import { TaskActions, FormActions, CategoryActions } from '../actions/action.types';
 // import { browserHistory } from 'react-router/lib';
 
 const initialState = {
 	listById: {
-		1: { id: 1, title: 'make coffee', completed: true, description: '' },
+		1: { id: 1, title: 'make coffee', completed: true, description: 'huhuhue' },
 		2: { id: 2, title: 'drink coffee', completed: false, description: '' },
 		3: { id: 3, title: 'do it again', completed: false, description: '' },
 		4: { id: 4, title: 'make coffee', completed: true, description: '' },
@@ -61,8 +61,9 @@ const taskReducer = (state = initialState, action) => {
 			return state;
 		// case TaskActions[TaskActions.EDIT_TASK]:
 		// 	break;
-		// case TaskActions[TaskActions.SAVE_TASK]:
-		// 	break;
+		case FormActions[FormActions.SAVE_TASK]:
+			console.log(action);
+			return state;
 		// case TaskActions[TaskActions.CANCEL_EDIT_TASK]:
 		// 	break;
 		default:

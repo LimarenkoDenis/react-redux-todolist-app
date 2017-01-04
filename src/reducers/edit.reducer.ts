@@ -10,9 +10,9 @@ const initialState = {
 const editReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case TaskActions[TaskActions.EDIT_TASK]:
-			let {id, title, completed} = action;
+			let {id, title, completed, description} = action;
 			browserHistory.push(`edit${id}`);
-			return { active: true, task: { id, title, completed } };
+			return { active: true, task: { id, title, completed, description } };
 
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
 			return { active: false, task: null };

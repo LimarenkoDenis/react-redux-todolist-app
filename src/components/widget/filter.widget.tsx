@@ -5,8 +5,7 @@ const Filter = ({ onFilterInput, onActiveToggle }) => {
 
 	let _handleFilter = (e) => {
 		let value = e.target.value.replace(/[^(?!' )a-zA-z0-9]+/g, '').replace(/\s{2,}/, ' ').toLowerCase();
-		
-		e.target.value = value;
+
 		onFilterInput(value);
 	};
 

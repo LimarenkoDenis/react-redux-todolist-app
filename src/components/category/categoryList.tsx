@@ -18,7 +18,7 @@ const CategoryList = (props) => {
 					onAddClick={(id, subSize) => props.onAddClick(c.id, c.subs.length)}
 					onArrowClick={(id) => props.onArrowClick(c.id)}
 					onExpandClick={id => props.onExpandClick(c.id)}
-					onTitleChange={(id, title) => props.onTitleChange()}
+					onTitleChange={(id, title) => props.onTitleChange}
 					onEditClick={(id, title) => props.onEditClick(c.id, c.title)}
 					onLIClick={(id, title, tasks) => props.onLIClick(c.id, c.title, c.tasks)}
 					onDeleteClick={(id, title, subs, tasks) => props.onDeleteClick(c.id, c.title, c.subs, c.tasks)}

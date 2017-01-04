@@ -1,5 +1,43 @@
 @import './reset.css';
 
+body
+{
+    font-family: 'Lucida Grande', Verdana, Tahoma, Arial, Sans-Serif, 'Lucida Sans';
+}
+#root
+{
+    margin: 2em .5em;
+}
+.todo-header
+{
+    font-size: 1.7em;
+}
+.todo-search
+{
+    position: relative;
+    top: -2em;
+    overflow-y: hidden;
+}
+.todo-progressbar
+{
+    margin: 0 .5em;
+}
+.todo-form-container
+{
+    margin: 0 2em 1em 2em; 
+}
+.form-container__add-form
+{
+    text-align: center;
+}
+.todo-content-container
+{
+    margin: 1.2em 0;
+}
+.content-container__category
+{
+   margin-left: -15px;
+}
 button
 {
     outline: none !important;
@@ -9,13 +47,6 @@ button
     min-width: 50%;
     padding: 5px 15px;
 }
-button.list-group-item.category-item:hover span + input
-{
-    /*transition: background-color .5s cubic-bezier(.19, 1, .22, 1);*/
-    cursor: pointer;
-    /*background-color: #c0e0ff;*/
-
-}
 .list-group-item.category-item input
 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -24,15 +55,6 @@ button.list-group-item.category-item:hover span + input
     border-radius: 5px;
     background-color: inherit;
 }
-/*button.list-group-item.category-item span:not(.bind-icon)
-{
-    visibility: hidden;
-}
-button.list-group-item.category-item:hover span:not(.bind-icon)
-{
-    transition: visibility .5s cubic-bezier(.19, 1, .22, 1);
-    visibility: visible;
-}*/
 input.active,
 button.list-group-item.category-item:hover span + input.active
 {

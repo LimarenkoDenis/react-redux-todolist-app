@@ -25,8 +25,6 @@ const CategoryLink = ({ title, edit, subs, expand, editState, onTitleChange, onA
 				disabled={!edit}
 				className={edit ? 'active' : 'disabled'}
 				onChange={(e) => onTitleChange()}
-				// ref={(input) => { textInput = input; }} 
-				defaultValue={title}
 				/>
 			{!editState.active ? (
 				<span>

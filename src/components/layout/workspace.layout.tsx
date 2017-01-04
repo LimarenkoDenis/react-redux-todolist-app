@@ -2,12 +2,10 @@ import * as React from 'react';
 import { Col } from 'react-bootstrap';
 
 import TaskList from '../../containers/task/visibleTaskList';
-import EditPage from './editPage.layout';
-
-const style = { border: '2px solid red', height: '100%' };
+import EditForm from '../../containers/form/editForm';
 
 export const WorkspaceLayout = (props) => (
-	<Col md={8} style={style}>
-		{props.editState.active ? (<EditPage task={props.editState.task} />) : (<TaskList />)}
+	<Col xs={7} xsOffset={3} md={7} mdOffset={0}  >
+		{props.editState.active ? (<EditForm />) : (<TaskList />)}
 	</Col>
 );

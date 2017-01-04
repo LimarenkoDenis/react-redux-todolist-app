@@ -22,7 +22,7 @@ const TaskLink = ({title, completed, onLIClick, onEditClick, onCheckClick}: ITas
 				glyph={`${completed ? 'check' : 'unchecked'}`}
 				onClick={onCheckClick}
 				/>
-			<input type='text' value={title} size={title.length} disabled />
+			<input type='text' value={title} size={title.length} disabled maxLength={30}/>
 			<Glyphicon
 				glyph='edit'
 				onClick={onEditClick}

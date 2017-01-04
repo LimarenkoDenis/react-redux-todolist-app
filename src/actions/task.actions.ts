@@ -10,13 +10,13 @@ const addTask = (title) => {
 	};
 };
 
-//TODO
-const editTask = (id, title, completed) => {
+const editTask = (id, title, completed, description) => {
 	return {
 		type: TaskActions[TaskActions.EDIT_TASK],
 		id,
 		title,
-		completed
+		completed,
+		description
 	};
 };
 

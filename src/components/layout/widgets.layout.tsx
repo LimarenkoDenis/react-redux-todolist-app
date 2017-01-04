@@ -8,24 +8,22 @@ import AddForm from '../widget/AddForm.widget';
 export const WidgetsLayout = (props) => {
 	return (
 		<Row>
-			<Row>
-				<Col md={6} mdOffset={6} >
-					<Filter
-						onActiveToggle={props.onActiveToggle}
-						onFilterInput={props.onFilterInput}
-						/>
-				</Col>
-			</Row>
-			<Row>
-				<Col md={6} mdOffset={3}>
+			<Col xs={4} xsOffset={7} md={4} mdOffset={8} className='todo-search'>
+				<Filter
+					onActiveToggle={props.onActiveToggle}
+					onFilterInput={props.onFilterInput}
+					/>
+			</Col>
+			<Row className='todo-progressbar'>
+				<Col>
 					<ProgressBar now={props.progressCounter} />
 				</Col>
 			</Row>
-			<Row>
-				<Col md={6}>
+			<Row className='todo-form-container'>
+				<Col md={4} className='form-container__add-form'>
 					<AddForm placeholder='Enter category title' btnText='Add' />
 				</Col>
-				<Col mdOffset={8}>
+				<Col mdOffset={8} className='form-container__add-form'>
 					<AddForm placeholder='Enter task title' btnText='Add' />
 				</Col>
 			</Row>

@@ -11,15 +11,15 @@ export class MainLayout extends React.Component<any, any> {
 		let {editState, children} = this.props;
 
 		return (
-			<Grid>
+			<Grid fluid>
 				{!editState.active ?
 					<div>
-						<Header title='To - Do List' />
-						< WidgetsLayout />
+						<Header title='To-Do List' />
+						<WidgetsLayout />
 					</div> :
 					<Header title={editState.task.title} />
 				}
-				<Row>
+				<Row className='todo-content-container'>
 					<Aside />
 					<WorkspaceLayout editState={editState}>{children}</WorkspaceLayout>
 				</Row>

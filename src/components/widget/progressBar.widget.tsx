@@ -1,12 +1,6 @@
 import * as React from 'react';
-import { Col, ProgressBar as Bar, Row } from 'react-bootstrap';
+import { ProgressBar as Bar } from 'react-bootstrap';
 
-const ProgressBar = (props) => (
-	<Row>
-		<Col md={12}>
-			<Bar style={{ width: '100%' }} active now={props.now} />
-		</Col>
-	</Row>
-);
+const ProgressBar = (props) => <Bar style={{ width: '100%' }} active now={props.now} />;
 
 export default ProgressBar;

@@ -1,5 +1,6 @@
 import * as React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
-const Header = ({title}) => <h1>{title}</h1>;
+const Header = ({title}) => <Row><Col xs={6} md={4}><h1 className='todo-header'>{title}</h1></Col></Row>;
 
 export default Header;

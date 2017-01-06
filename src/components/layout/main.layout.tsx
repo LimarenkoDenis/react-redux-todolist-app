@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Row, Grid } from 'react-bootstrap';
 
 import Header from '../header/header';
-import WidgetsLayout from '../../containers/widgets';
 import Aside from './aside.layout';
+import { WidgetsLayout } from './widgets.layout';
 import { WorkspaceLayout } from './workspace.layout';
 
 export class MainLayout extends React.Component<any, any> {

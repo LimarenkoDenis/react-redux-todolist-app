@@ -11,10 +11,10 @@ const TaskList = (props) => {
 				<TaskLink
 					key={t.id}
 					title={t.title}
-					completed={t.completed}
+					active={t.active}
 					onLIClick={(id, title) => props.onLIClick(t.id, t.title)}
 					onCheckClick={id => props.onCheckClick(t.id)}
-					onEditClick={(id, title, completed, description) => { props.onEditClick(t.id, t.title, t.completed, t.description) } }
+					onEditClick={(task) => props.onEditClick(t)}
 					/>
 			)}
 		</ListGroup>

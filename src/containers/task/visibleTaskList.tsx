@@ -14,7 +14,7 @@ const getFilteredTasks = (taskListById, visibleTaskArray, filter) => {
 		filteredList = visibleList;
 	}
 
-	return filter.active ? filteredList.filter(t => !t.completed) : filteredList;
+	return filter.active ? filteredList.filter(t => t.active) : filteredList;
 };
 
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onLIClick: (id, title) => dispatch(chooseTask(id, title)),
 		onCheckClick: (id) => dispatch(toggleTask(id)),
-		onEditClick: (id, title, completed, description) => dispatch(editTask(id, title, completed, description))
+		onEditClick: (task) => dispatch(editTask(task))
 	}
 };
 

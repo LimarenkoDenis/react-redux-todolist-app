@@ -14,7 +14,7 @@ const filterReducer = (state = initialState, action) => {
 			} else {
 				browserHistory.push('all');
 			}
-			
+
 			return { ...state, active: action.active };
 
 		case FilterActions[FilterActions.SET_SEARCH_TEMPLATE]:

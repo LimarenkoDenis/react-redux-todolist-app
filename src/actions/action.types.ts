@@ -4,16 +4,7 @@ export enum TaskActions {
 	CHOOSE_TASK,
 	TOGGLE_TASK,
 	SAVE_TASK,
-	CANCEL_EDIT_TASK
-}
-
-export enum FilterActions {
-	TOGGLE_ACTIVE_FILTER,
-	SET_SEARCH_TEMPLATE
-}
-
-export enum EditActions {
-	//TODO
+	CANCEL_TASK_EDIT
 }
 
 export enum CategoryActions {
@@ -24,13 +15,10 @@ export enum CategoryActions {
 	TOGGLE_CATEGORY,
 	DELETE_CATEGORY,
 	NEST_CATEGORY,
-	ADD_SUBCATEGORY,
-	CHANGE_CATEGORY_TITLE
+	ADD_SUBCATEGORY
 }
 
-export enum FormActions {
-	ADD_CATEGORY,
-	ADD_TASK,
-	SAVE_TASK,
-	CANCEL_EDIT_TASK
+export enum FilterActions {
+	TOGGLE_ACTIVE_FILTER,
+	SET_SEARCH_TEMPLATE
 }

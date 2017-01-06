@@ -1,32 +1,33 @@
 import { CategoryActions } from './action.types';
 
-let nextTodoId = 4;
+let NEXT_TODO_ID = 4;
 
-const addSubcategory = (parentId, parentSubSize) => {
+const addCategory = (title: string) => {
+	return {
+		type: CategoryActions[CategoryActions.ADD_CATEGORY],
+		title
+	};
+};
+
+const addSubcategory = (parentId: number, parentSubSize: number) => {
 	return {
 		type: CategoryActions[CategoryActions.ADD_SUBCATEGORY],
-		id: nextTodoId++,
+		id: NEXT_TODO_ID++,
 		parentSubSize,
 		parentId,
 	};
 };
 
-const toggleCategory = (id) => {
+const chooseCategory = (id: number, title: string, tasks: Array<number>) => {
 	return {
-		type: CategoryActions[CategoryActions.TOGGLE_CATEGORY],
-		id
-	};
-};
-
-const editCategory = (id, title) => {
-	return {
-		type: CategoryActions[CategoryActions.EDIT_CATEGORY],
+		type: CategoryActions[CategoryActions.CHOOSE_CATEGORY],
 		id,
-		title
+		title,
+		tasks
 	};
 };
 
-const deleteCategory = (id, title, subs, tasks) => {
+const deleteCategory = (id: number, title: string, subs: Array<number>, tasks: Array<number>) => {
 	return {
 		type: CategoryActions[CategoryActions.DELETE_CATEGORY],
 		id,
@@ -36,28 +37,26 @@ const deleteCategory = (id, title, subs, tasks) => {
 	};
 };
 
-const changeTitle = (id, title) => {
+const editCategory = (id: number, title: string) => {
 	return {
-		type: CategoryActions[CategoryActions.CHANGE_CATEGORY_TITLE],
+		type: CategoryActions[CategoryActions.EDIT_CATEGORY],
 		id,
 		title
 	};
 };
 
-const chooseCategory = (id, title, tasks) => {
-	return {
-		type: CategoryActions[CategoryActions.CHOOSE_CATEGORY],
-		id,
-		title,
-		tasks
-	};
-};
-
-const nestCategory = (id) => {
+const nestCategory = (id: number) => {
 	return {
 		type: CategoryActions[CategoryActions.NEST_CATEGORY],
 		id
 	};
 };
 
-export { addSubcategory, changeTitle, editCategory, nestCategory, toggleCategory, chooseCategory, deleteCategory };
+const toggleCategory = (id: number) => {
+	return {
+		type: CategoryActions[CategoryActions.TOGGLE_CATEGORY],
+		id
+	};
+};
+
+export { addCategory, addSubcategory, chooseCategory, deleteCategory, editCategory, nestCategory, toggleCategory };

@@ -1,4 +1,4 @@
-import { CategoryActions } from '../actions/action.types';
+import { CategoryActions, TaskActions } from '../actions/action.types';
 import { browserHistory } from 'react-router/lib';
 
 const initialState = {
@@ -16,16 +16,29 @@ const initialState = {
 
 const categoryReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case TaskActions[TaskActions.ADD_TASK]:
+			if (!action.activeCategoryId) {
+				return state;
+			} else {
+				return {
+					list: state.list.map(c => c.id !== action.activeCategoryId ? c : { ...c, tasks: [...c.tasks, action.taskId] }),
+					activeCategory: state.activeCategory
+				};
+			}
 
-		// case CategoryActions[CategoryActions.ADD_CATEGORY]:
-		// 	return state;
-		//DELETE
-		// case CategoryActions[CategoryActions.CHANGE_CATEGORY_TITLE]:
-		// 	return state;
+		case CategoryActions[CategoryActions.ADD_CATEGORY]:
+			let nextId = state.list.filter(t => String(t.id).length === 1).length + 1;
+
+			return {
+				list: [
+					...state.list,
+					{ id: nextId, title: action.title, subs: [], tasks: [], parentId: null, expanded: false, level: null, edit: false }
+				],
+				activeCategory: state.activeCategory
+			};
 
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
-			// browserHistory.push(`${action.title.split(' ').join('')}`);
-			browserHistory.push(`${action.id}`);
+			browserHistory.push(`${action.title.split(' ').join('')}`);
 
 			return {
 				list: state.list,
@@ -46,6 +59,7 @@ const categoryReducer = (state = initialState, action) => {
 
 		case CategoryActions[CategoryActions.NEST_CATEGORY]:
 			let newId;
+
 			return {
 				list: state.list.map(c => {
 					let parentNode;
@@ -54,7 +68,7 @@ const categoryReducer = (state = initialState, action) => {
 
 					if (String(c.parentId).length === 1) {
 						parentNode = null;
-						newId = state.list.filter(c => String(c.id).length === 1).length + 1; //GLOBAL 
+						newId = state.list.filter(c => String(c.id).length === 1).length + 1;
 					} else {
 						parentNode = Number(String(action.id).slice(0, -2));
 						newId = Number(String(parentNode) + String(state.list.find(c => c.id === parentNode).subs.length + 1));
@@ -72,7 +86,6 @@ const categoryReducer = (state = initialState, action) => {
 			if (!confirm(`Do you really want to delete ${action.title}?`)) return state;
 
 			subIdSet = new Set(action.subs);
-
 			state.list.forEach(c => {
 				if (subIdSet.has(c.id) && c.subs.length) {
 					c.subs.forEach(s => subIdSet.add(s));
@@ -97,7 +110,7 @@ const categoryReducer = (state = initialState, action) => {
 					}
 				],
 				activeCategory: state.activeCategory
-			}
+			};
 
 		default:
 			return state;

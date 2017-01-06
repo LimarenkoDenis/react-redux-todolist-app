@@ -6,23 +6,23 @@ import { Glyphicon, ListGroupItem } from 'react-bootstrap';
 
 interface ITask {
 	title: string,
-	completed: boolean,
+	active: boolean,
 	onLIClick: Function,
-	onEditClick:Function,
+	onEditClick: Function,
 	onCheckClick: Function,
 }
 
-const TaskLink = ({title, completed, onLIClick, onEditClick, onCheckClick}: ITask) => {
+const TaskLink = ({title, active, onLIClick, onEditClick, onCheckClick}: ITask) => {
 	return (
 		<ListGroupItem
-			className={`${completed ? 'task-item item-checked' : 'task-item'}`}
+			className={`${active ? 'task-item' : 'task-item item-checked'}`}
 			onClick={onLIClick}
 			>
 			<Glyphicon
-				glyph={`${completed ? 'check' : 'unchecked'}`}
+				glyph={`${active ? 'unchecked' : 'check'}`}
 				onClick={onCheckClick}
 				/>
-			<input type='text' value={title} size={title.length} disabled maxLength={30}/>
+			<input type='text' value={title} size={title.length} disabled maxLength={30} />
 			<Glyphicon
 				glyph='edit'
 				onClick={onEditClick}

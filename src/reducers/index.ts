@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 import taskReducer from './task.reducer';
 import categoryReducer from './category.reducer';
@@ -10,8 +9,7 @@ const reducer = combineReducers({
 	tasks: taskReducer,
 	categories: categoryReducer,
 	filterState: filterReducer,
-	editState: editReducer,
-	form: formReducer
+	editState: editReducer
 });
 
 export default reducer;

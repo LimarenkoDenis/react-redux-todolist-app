@@ -1,16 +1,4 @@
-.form-row
+.control-label
 {
-	margin: .3em;
-}
-.form-row div
-{
-	display: inline-block;
-}
-.form-row label
-{
-	margin: .3em;
-}
-textarea
-{
-	display: block;
+	margin: 1em 0;
 }

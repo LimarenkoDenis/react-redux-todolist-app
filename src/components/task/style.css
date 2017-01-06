@@ -23,7 +23,8 @@ button
 {
     padding: 1.5em 1em;
     border-radius: 0;
-    border: 2px solid #000;    
+    border-color: #000;    
+    color : #000;
 }
 .list-group-item.task-item.item-checked input
 {
@@ -46,7 +47,6 @@ button.list-group-item.task-item:hover span.icon-right-align
 
 .list-group-item.task-item input
 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     border: none;
     background-color: inherit;

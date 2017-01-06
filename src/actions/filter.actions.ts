@@ -1,17 +1,18 @@
 import { FilterActions } from '../actions/action.types';
 
-const toggleActiveFilter = (active) => {
-	return {
-		type: FilterActions[FilterActions.TOGGLE_ACTIVE_FILTER],
-		active
-	};
-};
-
-const setSearchTemplate = (template) => {
+const setSearchTemplate = (template: string) => {
 	return {
 		type: FilterActions[FilterActions.SET_SEARCH_TEMPLATE],
 		template
 	};
 };
 
-export { toggleActiveFilter, setSearchTemplate };
+const toggleActiveFilter = (active: boolean) => {
+	return {
+		type: FilterActions[FilterActions.TOGGLE_ACTIVE_FILTER],
+		active
+	};
+};
+
+
+export { setSearchTemplate, toggleActiveFilter };

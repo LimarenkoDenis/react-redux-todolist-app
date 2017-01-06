@@ -8,18 +8,13 @@ const CategoryList = (props) => {
 		<ListGroup>
 			{props.categories.map(c =>
 				<CategoryLink
-					editState={props.editState}
-					level={c.level}
 					key={c.id}
-					title={c.title}
-					edit={c.edit}
-					subs={c.subs}
-					expand={c.expanded}
+					editState={props.editState}
+					category={c}
 					onAddClick={(id, subSize) => props.onAddClick(c.id, c.subs.length)}
 					onArrowClick={(id) => props.onArrowClick(c.id)}
 					onExpandClick={id => props.onExpandClick(c.id)}
-					onTitleChange={(id, title) => props.onTitleChange}
-					onEditClick={(id, title) => props.onEditClick(c.id, c.title)}
+					onEditClick={props.onEditClick}
 					onLIClick={(id, title, tasks) => props.onLIClick(c.id, c.title, c.tasks)}
 					onDeleteClick={(id, title, subs, tasks) => props.onDeleteClick(c.id, c.title, c.subs, c.tasks)}
 					/>

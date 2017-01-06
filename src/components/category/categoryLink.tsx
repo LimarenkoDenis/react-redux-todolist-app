@@ -2,55 +2,66 @@ import * as React from 'react';
 
 import { ListGroupItem, Glyphicon } from 'react-bootstrap';
 
-const CategoryLink = ({ title, edit, subs, expand, editState, onTitleChange, onArrowClick, onAddClick, onExpandClick, onEditClick, onLIClick, onDeleteClick, level }) => {
-	return (
-		<ListGroupItem
-			className='category-item'
-			onClick={onLIClick}
-			style={{
-				marginLeft: `${level * 5}%`,
-				width: `${100 - level * 5}%`
-			}}>
-			{!editState.active &&
-				<Glyphicon
-					className='bind-icon'
-					style={{ visibility: `${subs.length ? 'visible' : 'hidden'}` }}
-					glyph={expand ? 'collapse-down' : 'expand'}
-					onClick={onExpandClick}
+class CategoryLink extends React.Component<any, any> {
+	private titleInput;
+
+	_handleEditClick() {
+		this.props.onEditClick(this.props.category.id, this.titleInput.value);
+	}
+
+	render() {
+		const { editState, category, onArrowClick, onAddClick, onExpandClick, onLIClick, onDeleteClick } = this.props;
+
+		return (
+			<ListGroupItem
+				className='category-item'
+				onClick={onLIClick}
+				style={{
+					marginLeft: `${category.level * 5}%`,
+					width: `${100 - category.level * 5}%`
+				}}>
+				{!editState.active &&
+					<Glyphicon
+						className='bind-icon'
+						style={{ visibility: `${category.subs.length ? 'visible' : 'hidden'}` }}
+						glyph={category.expand ? 'collapse-down' : 'expand'}
+						onClick={onExpandClick}
+						/>
+				}
+				<input type='text'
+					defaultValue={category.title}
+					size={category.title.length}
+					disabled={!category.edit}
+					className={category.edit ? 'active' : 'disabled'}
+					ref={input => this.titleInput = input}
 					/>
-			}
-			<input type='text'
-				value={title}
-				size={title.length}
-				disabled={!edit}
-				className={edit ? 'active' : 'disabled'}
-				onChange={(e) => onTitleChange()}
-				/>
-			{!editState.active ? (
-				<span>
-					<Glyphicon
-						glyph='edit'
-						onClick={onEditClick}
-						/>
-					<Glyphicon
-						glyph='plus-sign'
-						onClick={onAddClick}
-						className='icon-right-align' />
-					<Glyphicon
-						glyph='trash'
-						onClick={onDeleteClick}
-						className='icon-right-align'
-						/>
-				</span>
-			) : (
-					<Glyphicon
-						glyph='share-alt'
-						onClick={onArrowClick}
-						className='icon-right-align'
-						/>
-				)}
-		</ListGroupItem>
-	);
-};
+				{!editState.active ? (
+					<span>
+						<Glyphicon
+							glyph='edit'
+							onClick={() => this._handleEditClick()}
+							/>
+						<Glyphicon
+							glyph='plus-sign'
+							onClick={onAddClick}
+							className='icon-right-align' />
+						<Glyphicon
+							glyph='trash'
+							onClick={onDeleteClick}
+							className='icon-right-align'
+							/>
+					</span>
+				) : (
+						<Glyphicon
+							glyph='share-alt'
+							onClick={onArrowClick}
+							className='icon-right-align'
+							/>
+					)}
+			</ListGroupItem>
+		);
+	};
+}
+
 
 export default CategoryLink;

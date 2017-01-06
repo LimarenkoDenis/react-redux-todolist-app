@@ -1,20 +1,20 @@
-import { TaskActions, FormActions, CategoryActions } from '../actions/action.types';
+import { TaskActions, CategoryActions } from '../actions/action.types';
 // import { browserHistory } from 'react-router/lib';
 
 const initialState = {
 	listById: {
-		1: { id: 1, title: 'make coffee', completed: true, description: 'huhuhue' },
-		2: { id: 2, title: 'drink coffee', completed: false, description: '' },
-		3: { id: 3, title: 'do it again', completed: false, description: '' },
-		4: { id: 4, title: 'make coffee', completed: true, description: '' },
-		5: { id: 5, title: 'drink coffee', completed: false, description: '' },
-		6: { id: 6, title: 'do it again', completed: false, description: '' },
-		7: { id: 7, title: 'make coffee', completed: true, description: '' },
-		8: { id: 8, title: 'drink coffee', completed: false, description: '' },
-		9: { id: 9, title: 'do it again', completed: false, description: '' },
-		10: { id: 10, title: 'make coffee', completed: true, description: '' },
-		11: { id: 11, title: 'drink coffee', completed: false, description: '' },
-		12: { id: 12, title: 'do it again', completed: false, description: '' }
+		1: { id: 1, title: 'make coffee', active: false, description: 'huhuhue' },
+		2: { id: 2, title: 'drink coffee', active: true, description: '' },
+		3: { id: 3, title: 'do it again', active: true, description: '' },
+		4: { id: 4, title: 'make coffee', active: false, description: '' },
+		5: { id: 5, title: 'drink coffee', active: true, description: '' },
+		6: { id: 6, title: 'do it again', active: true, description: '' },
+		7: { id: 7, title: 'make coffee', active: false, description: '' },
+		8: { id: 8, title: 'drink coffee', active: true, description: '' },
+		9: { id: 9, title: 'do it again', active: true, description: '' },
+		10: { id: 10, title: 'make coffee', active: false, description: '' },
+		11: { id: 11, title: 'drink coffee', active: true, description: '' },
+		12: { id: 12, title: 'do it again', active: true, description: '' }
 	},
 	visibleList: []
 };
@@ -22,15 +22,21 @@ const initialState = {
 const taskReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case TaskActions[TaskActions.ADD_TASK]:
-			let id = action.id;
+			let id = action.taskId;
 
-			return {
-				listById: {
-					...state.listById,
-					[id]: { id: id, title: action.text, completed: false, description: '' }
-				},
-				visibleList: state.visibleList
-			};
+			if (!action.activeCategoryId) {
+				alert('You need to a choose category to add a task!');
+				return state;
+			} else {
+				return {
+					listById: {
+						...state.listById,
+						[id]: { id: id, title: action.taskTitle, active: true, description: '' }
+					},
+					visibleList: [...state.visibleList, id]
+				};
+			}
+
 
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
 			return {
@@ -50,7 +56,7 @@ const taskReducer = (state = initialState, action) => {
 		case TaskActions[TaskActions.TOGGLE_TASK]:
 			return {
 				listById: {
-					...Object.values(state.listById).map(t => t.id !== action.id ? t : { ...t, completed: !t.completed })
+					...Object.values(state.listById).map(t => t.id !== action.id ? t : { ...t, active: !t.active })
 				},
 				visibleList: state.visibleList
 			};
@@ -59,13 +65,15 @@ const taskReducer = (state = initialState, action) => {
 			//TODO
 			// browserHistory.push(`${action.title.split(' ').join('')}`);
 			return state;
-		// case TaskActions[TaskActions.EDIT_TASK]:
-		// 	break;
-		case FormActions[FormActions.SAVE_TASK]:
-			console.log(action);
-			return state;
-		// case TaskActions[TaskActions.CANCEL_EDIT_TASK]:
-		// 	break;
+
+		case TaskActions[TaskActions.SAVE_TASK]:
+			return {
+				listById: {
+					...Object.values(state.listById).map(t => t.id !== action.task.id ? t : action.task)
+				},
+				visibleList: state.visibleList
+			};
+
 		default:
 			return state;
 	}

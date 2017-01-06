@@ -17,6 +17,7 @@ body
     position: relative;
     top: -2em;
     overflow-y: hidden;
+    text-align: right;
 }
 .todo-progressbar
 {
@@ -49,14 +50,14 @@ button
 }
 .list-group-item.category-item input
 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     border: none;
     border-radius: 5px;
     background-color: inherit;
+    cursor: pointer;
 }
 input.active,
-button.list-group-item.category-item:hover span + input.active
+button.list-group-item.category-item span + input.active
 {
     background-color: #f37;
     font-style: italic;

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { addSubcategory, nestCategory, changeTitle, toggleCategory, editCategory, chooseCategory, deleteCategory } from '../../actions/category.actions';
+import { addSubcategory, nestCategory, toggleCategory, editCategory, chooseCategory, deleteCategory } from '../../actions/category.actions';
 import CategoryList from '../../components/category/categoryList';
 
 const getSubCategories = (category, storeList) => {
@@ -52,10 +52,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onAddClick: (parentId, parentSubSize) => dispatch(addSubcategory(parentId, parentSubSize)),
 		onExpandClick: (id) => dispatch(toggleCategory(id)),
-		onEditClick: (id, title) => dispatch(editCategory(id, title)),
+		onEditClick: (id, title) => { console.log(id, title); dispatch(editCategory(id, title)) },
 		onLIClick: (id, title, tasks) => dispatch(chooseCategory(id, title, tasks)),
 		onDeleteClick: (id, title, subs, tasks) => dispatch(deleteCategory(id, title, subs, tasks)),
-		onTitleChange: (id, title) => dispatch(changeTitle(id, title)),
 		onArrowClick: (id) => dispatch(nestCategory(id))
 	}
 };

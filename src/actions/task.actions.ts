@@ -1,33 +1,30 @@
 import { TaskActions } from './action.types';
 
-let nextTodoID = 0;
+interface ITask {
+	id: number;
+	title: string;
+	active: boolean;
+	description: string;
+}
 
-const addTask = (title) => {
+let NEXT_ROOT_TASK_ID = 13;
+
+const addTask = (title: string, category: number) => {
 	return {
 		type: TaskActions[TaskActions.ADD_TASK],
-		id: nextTodoID,
-		title
+		taskId: NEXT_ROOT_TASK_ID++,
+		taskTitle: title,
+		activeCategoryId: category
 	};
 };
 
-const editTask = (id, title, completed, description) => {
+const cancelTaskEdit = () => {
 	return {
-		type: TaskActions[TaskActions.EDIT_TASK],
-		id,
-		title,
-		completed,
-		description
+		type: TaskActions[TaskActions.CANCEL_TASK_EDIT],
 	};
 };
 
-const toggleTask = (id) => {
-	return {
-		type: TaskActions[TaskActions.TOGGLE_TASK],
-		id
-	};
-};
-
-const chooseTask = (id, title) => {
+const chooseTask = (id: number, title: string) => {
 	return {
 		type: TaskActions[TaskActions.CHOOSE_TASK],
 		id,
@@ -35,16 +32,25 @@ const chooseTask = (id, title) => {
 	};
 };
 
-const saveTask = () => {
+const editTask = (task: ITask) => {
+	return {
+		type: TaskActions[TaskActions.EDIT_TASK],
+		...task
+	};
+};
+
+const saveTask = (task: ITask) => {
 	return {
 		type: TaskActions[TaskActions.SAVE_TASK],
+		task: { ...task }
 	};
 };
 
-const cancelEdit = () => {
+const toggleTask = (id: number) => {
 	return {
-		type: TaskActions[TaskActions.CANCEL_EDIT_TASK],
+		type: TaskActions[TaskActions.TOGGLE_TASK],
+		id
 	};
 };
 
-export { addTask, chooseTask, editTask, toggleTask, saveTask, cancelEdit };
+export { addTask, cancelTaskEdit, chooseTask, editTask, saveTask, toggleTask };

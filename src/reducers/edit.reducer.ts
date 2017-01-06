@@ -1,5 +1,4 @@
-import { TaskActions, CategoryActions } from '../actions/action.types';
-
+import { TaskActions } from '../actions/action.types';
 import { browserHistory } from 'react-router/lib';
 
 const initialState = {
@@ -10,14 +9,20 @@ const initialState = {
 const editReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case TaskActions[TaskActions.EDIT_TASK]:
-			let {id, title, completed, description} = action;
-			browserHistory.push(`edit${id}`);
-			return { active: true, task: { id, title, completed, description } };
+			let {id, title, active, description} = action;
+			browserHistory.push(`edit_${title.split(' ').join('_')}`);
+			return { active: true, task: { id, title, active, description } };
 
-		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
+		case TaskActions[TaskActions.CANCEL_TASK_EDIT]:
+			if (confirm(`Do you really want to cancel editing?`)) {
+				return { active: false, task: null };
+			} else
+				return state;
+
+		case TaskActions[TaskActions.SAVE_TASK]:
+			alert(`Task "${action.task.title}" has been saved successfully!`);
 			return { active: false, task: null };
-		// case CategoryActions[CategoryActions.EDIT_CATEGORY]:
-		// 	break;
+
 		default:
 			return state;
 	}

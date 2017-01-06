@@ -14,7 +14,8 @@ class CategoryAddForm extends React.Component<any, any> {
 	}
 
 	_handleChange(e) {
-		this.setState({ title: e.target.value });
+		let title = e.target.value.replace(/[^(?!' )a-zA-z0-9]+/g, '').replace(/\s{2,}/, ' ').toLowerCase();
+		this.setState({ title });
 	}
 
 	_handleSubmit(e) {
@@ -32,6 +33,7 @@ class CategoryAddForm extends React.Component<any, any> {
 						onChange={e => this._handleChange(e)}
 						value={this.state.title}
 						placeholder='Enter category title'
+						required
 						/>
 				</FormGroup>
 				<Button type='submit'>Add</Button>

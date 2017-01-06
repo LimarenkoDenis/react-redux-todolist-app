@@ -19,6 +19,12 @@ body
     overflow-y: hidden;
     text-align: right;
 }
+.search-icon
+{
+    position: relative;
+    left: -35px;
+    top: 5px;
+}
 .todo-progressbar
 {
     margin: 0 .5em;
@@ -69,7 +75,6 @@ input[type='text']:focus
 button.list-group-item.category-item:hover
 {
     transition: background-color .5s cubic-bezier(.19, 1, .22, 1);
-    /*background-color: #c0e0ff;*/
 }
 .glyphicon
 {

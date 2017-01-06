@@ -22,7 +22,9 @@ class EditForm extends React.Component<any, any>{
 	}
 
 	_handleTitleChange(e) {
-		this.setState({ title: e.target.value });
+		let title = e.target.value.replace(/[^(?!' )a-zA-z0-9]+/g, '').replace(/\s{2,}/, ' ').toLowerCase();
+
+		this.setState({ title });
 	}
 
 	_handleActiveToggle(e) {

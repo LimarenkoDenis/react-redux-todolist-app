@@ -6,6 +6,8 @@ class CategoryLink extends React.Component<any, any> {
 	private titleInput;
 
 	_handleEditClick() {
+		if (!this.titleInput.value) return;
+
 		this.props.onEditClick(this.props.category.id, this.titleInput.value);
 	}
 

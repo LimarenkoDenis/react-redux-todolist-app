@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onAddClick: (parentId, parentSubSize) => dispatch(addSubcategory(parentId, parentSubSize)),
 		onExpandClick: (id) => dispatch(toggleCategory(id)),
-		onEditClick: (id, title) => { console.log(id, title); dispatch(editCategory(id, title)) },
+		onEditClick: (id, title) => dispatch(editCategory(id, title)),
 		onLIClick: (id, title, tasks) => dispatch(chooseCategory(id, title, tasks)),
 		onDeleteClick: (id, title, subs, tasks) => dispatch(deleteCategory(id, title, subs, tasks)),
 		onArrowClick: (id) => dispatch(nestCategory(id))

@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 
 import { toggleTask, editTask, chooseTask } from '../../actions/task.actions';
-import taskList from '../../components/task/taskList';
+import { IFilterState, ITask, ITaskListById } from '../../interfaces';
 
-const getFilteredTasks = (taskListById, visibleTaskArray, filter) => {
-	let taskSet = new Set(visibleTaskArray);
-	let visibleList = [...Object.values(taskListById).filter(t => taskSet.has(t.id))];
-	let filteredList;
+import TaskList from '../../components/task/list/tasks';
+
+const getFilteredTasks = (taskListById: Array<ITaskListById>, visibleTaskArray: Array<number>, filter: IFilterState) => {
+	let visibleList: Array<ITask> = [...Object.values(taskListById).filter(t => visibleTaskArray.indexOf(t.id) !== -1)];
+	let filteredList: Array<ITask>;
 
 	if (filter.searchTemplate) {
 		filteredList = visibleList.filter(t => t.title.toLowerCase().match(filter.searchTemplate));
@@ -17,19 +18,18 @@ const getFilteredTasks = (taskListById, visibleTaskArray, filter) => {
 	return filter.active ? filteredList.filter(t => t.active) : filteredList;
 };
 
-
-const mapStateToProps = (store) => {
+const mapStateToProps = (store: any) => {
 	return {
 		tasks: getFilteredTasks(store.tasks.listById, store.tasks.visibleList, store.filterState)
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
 	return {
 		onLIClick: (id, title) => dispatch(chooseTask(id, title)),
 		onCheckClick: (id) => dispatch(toggleTask(id)),
 		onEditClick: (task) => dispatch(editTask(task))
-	}
+	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(taskList);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

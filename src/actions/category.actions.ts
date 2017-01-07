@@ -1,6 +1,6 @@
 import { CategoryActions } from './action.types';
 
-let NEXT_TODO_ID = 4;
+let NEXT_CATEGORY_ID = 2;
 
 const addCategory = (title: string) => {
 	return {
@@ -12,7 +12,7 @@ const addCategory = (title: string) => {
 const addSubcategory = (parentId: number, parentSubSize: number) => {
 	return {
 		type: CategoryActions[CategoryActions.ADD_SUBCATEGORY],
-		id: NEXT_TODO_ID++,
+		id: NEXT_CATEGORY_ID++,
 		parentSubSize,
 		parentId,
 	};

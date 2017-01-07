@@ -1,9 +1,13 @@
 import * as React from 'react';
 
-import { ListGroupItem, Glyphicon } from 'react-bootstrap';
+import { ICategoryItemProps } from '../../../interfaces';
 
-class CategoryLink extends React.Component<any, any> {
-	private titleInput;
+import { Glyphicon, ListGroupItem } from 'react-bootstrap';
+
+import './category.css';
+
+class Category extends React.Component<ICategoryItemProps, any> {
+	private titleInput: HTMLElement | any;
 
 	_handleEditClick() {
 		if (!this.titleInput.value) return;
@@ -11,8 +15,16 @@ class CategoryLink extends React.Component<any, any> {
 		this.props.onEditClick(this.props.category.id, this.titleInput.value);
 	}
 
+	_handleDeleteClick() {
+		const {id, title, subs, tasks } = this.props.category;
+
+		if (confirm(`Do you really want to delete ${title}?`)) {
+			this.props.onDeleteClick(id, title, subs, tasks);
+		}
+	}
+
 	render() {
-		const { editState, category, onArrowClick, onAddClick, onExpandClick, onLIClick, onDeleteClick } = this.props;
+		const { editState, category, onArrowClick, onAddClick, onExpandClick, onLIClick } = this.props;
 
 		return (
 			<ListGroupItem
@@ -26,7 +38,7 @@ class CategoryLink extends React.Component<any, any> {
 					<Glyphicon
 						className='bind-icon'
 						style={{ visibility: `${category.subs.length ? 'visible' : 'hidden'}` }}
-						glyph={category.expand ? 'collapse-down' : 'expand'}
+						glyph={category.expanded ? 'collapse-down' : 'expand'}
 						onClick={onExpandClick}
 						/>
 				}
@@ -49,7 +61,7 @@ class CategoryLink extends React.Component<any, any> {
 							className='icon-right-align' />
 						<Glyphicon
 							glyph='trash'
-							onClick={onDeleteClick}
+							onClick={() => this._handleDeleteClick()}
 							className='icon-right-align'
 							/>
 					</span>
@@ -65,5 +77,4 @@ class CategoryLink extends React.Component<any, any> {
 	};
 }
 
-
-export default CategoryLink;
+export default Category;

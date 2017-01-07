@@ -1,18 +1,14 @@
 import * as React from 'react';
 
-// import { Link } from 'react-router/lib';
-// <Link to={`/${title}`}>{title}</Link>
+import { ITaskItemProps } from '../../../interfaces';
+
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
 
-interface ITask {
-	title: string,
-	active: boolean,
-	onLIClick: Function,
-	onEditClick: Function,
-	onCheckClick: Function,
-}
+import './task.css';
 
-const TaskLink = ({title, active, onLIClick, onEditClick, onCheckClick}: ITask) => {
+const Task = (props: ITaskItemProps) => {
+	const {title, active, onLIClick, onEditClick, onCheckClick} = props;
+
 	return (
 		<ListGroupItem
 			className={`${active ? 'task-item' : 'task-item item-checked'}`}
@@ -22,7 +18,13 @@ const TaskLink = ({title, active, onLIClick, onEditClick, onCheckClick}: ITask) 
 				glyph={`${active ? 'unchecked' : 'check'}`}
 				onClick={onCheckClick}
 				/>
-			<input type='text' value={title} size={title.length} disabled maxLength={30} />
+			<input
+				type='text'
+				value={title}
+				size={title.length}
+				maxLength={30}
+				disabled
+				/>
 			<Glyphicon
 				glyph='edit'
 				onClick={onEditClick}
@@ -30,6 +32,6 @@ const TaskLink = ({title, active, onLIClick, onEditClick, onCheckClick}: ITask) 
 				/>
 		</ListGroupItem>
 	);
-}
+};
 
-export default TaskLink; 
+export default Task; 

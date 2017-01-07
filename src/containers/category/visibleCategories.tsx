@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
 
-import { addSubcategory, nestCategory, toggleCategory, editCategory, chooseCategory, deleteCategory } from '../../actions/category.actions';
-import CategoryList from '../../components/category/categoryList';
+import { ICategory } from '../../interfaces';
 
-const getSubCategories = (category, storeList) => {
-	let subSet = new Set(category.subs);
-	let subs = [];
+import { addSubcategory, nestCategory, toggleCategory, editCategory, chooseCategory, deleteCategory } from '../../actions/category.actions';
+import CategoryList from '../../components/category/list/categories';
+
+const getSubCategories = (category: ICategory, storeList: Array<ICategory>) => {
+	let subs: Array<ICategory> = [];
 
 	storeList.forEach(c => {
-		if (subSet.has(c.id)) {
+		if (category.subs.indexOf(c.id) !== -1) {
 			subs = [...subs, c];
 		}
 	});
@@ -16,8 +17,8 @@ const getSubCategories = (category, storeList) => {
 	return subs;
 };
 
-const getCategoryList = (currentCategories, inputCategories, depth, storeCategories) => {
-	let categories = inputCategories;
+const getCategoryList = (currentCategories: Array<ICategory>, inputCategories: Array<ICategory>, depth: number, storeCategories: Array<ICategory>) => {
+	let categories: Array<ICategory> = inputCategories;
 
 	for (let i = 0; i < currentCategories.length; i++) {
 
@@ -32,7 +33,7 @@ const getCategoryList = (currentCategories, inputCategories, depth, storeCategor
 		}
 
 		if (currentCategories[i].subs.length > 0 && currentCategories[i].expanded) {
-			let subs = getSubCategories(currentCategories[i], storeCategories);
+			let subs: Array<ICategory> = getSubCategories(currentCategories[i], storeCategories);
 
 			getCategoryList(subs, categories, depth + 1, storeCategories);
 		}
@@ -41,14 +42,14 @@ const getCategoryList = (currentCategories, inputCategories, depth, storeCategor
 	return categories;
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (store: any) => {
 	return {
 		categories: getCategoryList(store.categories.list, [], 0, store.categories.list),
 		editState: store.editState
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
 	return {
 		onAddClick: (parentId, parentSubSize) => dispatch(addSubcategory(parentId, parentSubSize)),
 		onExpandClick: (id) => dispatch(toggleCategory(id)),
@@ -56,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
 		onLIClick: (id, title, tasks) => dispatch(chooseCategory(id, title, tasks)),
 		onDeleteClick: (id, title, subs, tasks) => dispatch(deleteCategory(id, title, subs, tasks)),
 		onArrowClick: (id) => dispatch(nestCategory(id))
-	}
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);

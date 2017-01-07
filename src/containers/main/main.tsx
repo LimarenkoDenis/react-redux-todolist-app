@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import { MainLayout } from '../components';
+import { MainLayout } from '../../components/layout';
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (store: any) => {
 	return {
 		editState: store.editState
-	}
+	};
 };
 
 export default connect(mapStateToProps)(MainLayout);

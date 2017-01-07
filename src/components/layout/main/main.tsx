@@ -1,14 +1,14 @@
 import * as React from 'react';
+
+import { IMainLayoutProps } from '../../../interfaces';
+
+import { Aside, Header, WidgetsLayout, WorkspaceLayout } from '../index';
+
 import { Row, Grid } from 'react-bootstrap';
 
-import Header from '../header/header';
-import Aside from './aside.layout';
-import { WidgetsLayout } from './widgets.layout';
-import { WorkspaceLayout } from './workspace.layout';
-
-export class MainLayout extends React.Component<any, any> {
+export class MainLayout extends React.Component<IMainLayoutProps, any> {
 	render() {
-		let {editState, children} = this.props;
+		const {editState, children} = this.props;
 
 		return (
 			<Grid fluid>

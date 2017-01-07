@@ -1,20 +1,11 @@
 import { TaskActions, CategoryActions } from '../actions/action.types';
-// import { browserHistory } from 'react-router/lib';
+import { ITasksState } from '../interfaces';
 
-const initialState = {
+const initialState: ITasksState = {
 	listById: {
-		1: { id: 1, title: 'make coffee', active: false, description: 'huhuhue' },
-		2: { id: 2, title: 'drink coffee', active: true, description: '' },
-		3: { id: 3, title: 'do it again', active: true, description: '' },
-		4: { id: 4, title: 'make coffee', active: false, description: '' },
-		5: { id: 5, title: 'drink coffee', active: true, description: '' },
-		6: { id: 6, title: 'do it again', active: true, description: '' },
-		7: { id: 7, title: 'make coffee', active: false, description: '' },
-		8: { id: 8, title: 'drink coffee', active: true, description: '' },
-		9: { id: 9, title: 'do it again', active: true, description: '' },
-		10: { id: 10, title: 'make coffee', active: false, description: '' },
-		11: { id: 11, title: 'drink coffee', active: true, description: '' },
-		12: { id: 12, title: 'do it again', active: true, description: '' }
+		1: { id: 1, title: 'make coffee', active: false, description: 'Huhuhue' },
+		2: { id: 2, title: 'drink coffee', active: true, description: 'Glug, glug, glug' },
+		3: { id: 3, title: 'do it again', active: true, description: '' }
 	},
 	visibleList: []
 };
@@ -22,21 +13,15 @@ const initialState = {
 const taskReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case TaskActions[TaskActions.ADD_TASK]:
-			let id = action.taskId;
+			const id: number = action.taskId;
 
-			if (!action.activeCategoryId) {
-				alert('You need to a choose category to add a task!');
-				return state;
-			} else {
-				return {
-					listById: {
-						...state.listById,
-						[id]: { id: id, title: action.taskTitle, active: true, description: '' }
-					},
-					visibleList: [...state.visibleList, id]
-				};
-			}
-
+			return {
+				listById: {
+					...state.listById,
+					[id]: { id: id, title: action.taskTitle, active: true, description: '' }
+				},
+				visibleList: [...state.visibleList, id]
+			};
 
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
 			return {
@@ -45,10 +30,9 @@ const taskReducer = (state = initialState, action) => {
 			};
 
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
-			let tasks = new Set(action.tasks || []);
 			return {
 				listById: {
-					...Object.values(state.listById).filter(t => !tasks.has(t.id))
+					...Object.values(state.listById).filter(t => action.tasks.indexOf(t.id) === -1)
 				},
 				visibleList: state.visibleList
 			};
@@ -61,12 +45,9 @@ const taskReducer = (state = initialState, action) => {
 				visibleList: state.visibleList
 			};
 
-		case TaskActions[TaskActions.CHOOSE_TASK]:
-			//TODO
-			// browserHistory.push(`${action.title.split(' ').join('')}`);
-			return state;
-
 		case TaskActions[TaskActions.SAVE_TASK]:
+			alert(`Task "${action.task.title}" has been saved successfully!`);
+
 			return {
 				listById: {
 					...Object.values(state.listById).map(t => t.id !== action.task.id ? t : action.task)

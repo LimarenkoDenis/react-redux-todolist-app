@@ -1,31 +1,34 @@
-import { TaskActions } from '../actions/action.types';
 import { browserHistory } from 'react-router/lib';
 
-const initialState = {
+import { TaskActions } from '../actions/action.types';
+import { IEditState, ITask } from '../interfaces';
+
+const initialState: IEditState = {
 	active: false,
 	task: null
 };
 
-const editReducer = (state = initialState, action) => {
+const editReducer = (state: any = initialState, action: any) => {
 	switch (action.type) {
 		case TaskActions[TaskActions.EDIT_TASK]:
-			let {id, title, active, description} = action;
+			const {id, title, active, description}: ITask = action;
+
 			browserHistory.push(`edit_${title.split(' ').join('_')}`);
-			return { active: true, task: { id, title, active, description } };
+
+			return {
+				active: true,
+				task: { id, title, active, description }
+			};
 
 		case TaskActions[TaskActions.CANCEL_TASK_EDIT]:
-			if (confirm(`Do you really want to cancel editing?`)) {
-				return { active: false, task: null };
-			} else
-				return state;
+			return { active: false, task: null };
 
 		case TaskActions[TaskActions.SAVE_TASK]:
-			alert(`Task "${action.task.title}" has been saved successfully!`);
 			return { active: false, task: null };
 
 		default:
 			return state;
 	}
-}
+};
 
 export default editReducer;

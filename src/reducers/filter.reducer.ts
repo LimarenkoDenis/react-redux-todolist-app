@@ -1,12 +1,14 @@
-import { FilterActions } from '../actions/action.types';
 import { browserHistory } from 'react-router/lib';
 
-const initialState = {
+import { FilterActions } from '../actions/action.types';
+import { IFilterState } from '../interfaces';
+
+const initialState: IFilterState = {
 	active: false,
 	searchTemplate: ''
 };
 
-const filterReducer = (state = initialState, action) => {
+const filterReducer = (state: any = initialState, action: any) => {
 	switch (action.type) {
 		case FilterActions[FilterActions.TOGGLE_ACTIVE_FILTER]:
 			if (action.active) {

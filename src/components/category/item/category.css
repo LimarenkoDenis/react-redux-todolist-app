@@ -1,0 +1,31 @@
+.category-item
+{
+    min-width: 50%;
+    padding: 5px 15px;
+}
+.category-item:hover
+{
+    transition: background-color .5s cubic-bezier(.19, 1, .22, 1);
+}
+input.active,
+.category-item span + input.active
+{
+    font-style: italic;
+    background-color: #f37;
+}
+.category-item input
+{
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    background-color: inherit;
+}
+.category-item input:hover{
+    cursor: pointer;
+}
+.glyphicon-share-alt
+{
+    -webkit-transform: rotate(-180deg);
+       -moz-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+}

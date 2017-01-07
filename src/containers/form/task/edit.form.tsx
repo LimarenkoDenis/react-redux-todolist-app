@@ -1,24 +1,31 @@
 import * as React from 'react';
-
-import { Button, Col, Checkbox, FormGroup, ControlLabel, FormControl, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { saveTask, cancelTaskEdit } from '../../actions/task.actions';
+import { saveTask, cancelTaskEdit } from '../../../actions/task.actions';
+import { IEditFormProps, ITask } from '../../../interfaces';
 
-import './style.css';
+import { Button, Col, Checkbox, FormGroup, ControlLabel, FormControl, Form } from 'react-bootstrap';
 
-class EditForm extends React.Component<any, any>{
+const labelStyle: Object = { margin: '1em 0' };
 
-	constructor(props) {
+class TaskEditForm extends React.Component<IEditFormProps, ITask> {
+
+	constructor(props: IEditFormProps) {
 		super(props);
 
 		this.state = { ...props.task };
 	}
 
-	_handleSubmit(e) {
+	_handleSubmit(e: Event) {
 		e.preventDefault();
 
 		this.props.handleSubmit(this.state);
+	}
+
+	_handleCancel() {
+		if (confirm(`Do you really want to cancel editing?`)) {
+			this.props.handleCancel();
+		}
 	}
 
 	_handleTitleChange(e) {
@@ -29,7 +36,6 @@ class EditForm extends React.Component<any, any>{
 
 	_handleActiveToggle(e) {
 		this.setState({ active: e.target.checked });
-
 	}
 
 	_handleDescriptionChange(e) {
@@ -42,11 +48,11 @@ class EditForm extends React.Component<any, any>{
 				<Col mdOffset={8}>
 					<Button type='submit'>Save changes</Button>
 					{' '}
-					<Button onClick={this.props.handleCancel}>Cancel</Button>
+					<Button onClick={() => this._handleCancel()}>Cancel</Button>
 				</Col>
 				<Col md={10}>
 					<FormGroup controlId='formHorizontalEmail'>
-						<ControlLabel>Title</ControlLabel>
+						<ControlLabel style={labelStyle}>Title</ControlLabel>
 						<FormControl type='text' placeholder='Title' value={this.state.title} onChange={e => this._handleTitleChange(e)} required />
 					</FormGroup>
 				</Col>
@@ -55,7 +61,7 @@ class EditForm extends React.Component<any, any>{
 				</Col>
 				<Col md={10}>
 					<FormGroup controlId='formControlsTextarea' >
-						<ControlLabel>Description</ControlLabel>
+						<ControlLabel style={labelStyle}>Description</ControlLabel>
 						<FormControl componentClass='textarea' placeholder='Description' value={this.state.description} onChange={e => this._handleDescriptionChange(e)} />
 					</FormGroup>
 				</Col>
@@ -65,19 +71,19 @@ class EditForm extends React.Component<any, any>{
 
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (store: any) => {
 	let task = store.editState.task;
 
 	return { task: { ...task } };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
 	return {
 		handleSubmit: (task) => dispatch(saveTask(task)),
 		handleCancel: () => dispatch(cancelTaskEdit())
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditForm);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskEditForm);
 
 

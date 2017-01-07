@@ -1,0 +1,33 @@
+.todo-search
+{
+    position: relative;
+    top: -2em;
+    overflow-y: hidden;
+    text-align: right;
+}
+.search-icon
+{
+    position: relative;
+    top: 5px;
+    left: -35px;
+}
+.todo-progressbar
+{
+    margin: 0 .5em;
+}
+.todo-form-container
+{
+    margin: 0 2em 1em 2em;
+}
+.form-container__add-form
+{
+    text-align: center;
+}
+.todo-content-container
+{
+    margin: 1.2em 0;
+}
+.content-container__category
+{
+    margin-left: -15px;
+}

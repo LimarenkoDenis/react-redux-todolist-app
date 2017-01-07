@@ -30,48 +30,48 @@ var common = {
 				exclude: 'node_modules'
 			},
 			{
-				test: /\.(jpe?g|png|gif|svg)$/i,
-				loaders: 'file-loader'
+				test: /\.(jpe?g|png|woff|woff2|eot|ttf|svg)$/,
+				loader: 'url-loader?limit=100000'
 			}
 		]
 	}
 };
 
 if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
-    module.exports = merge(common, {
-        devServer: {
-            inline: true,
-            hot: true,
+	module.exports = merge(common, {
+		devServer: {
+			inline: true,
+			hot: true,
 			contentBase: '.',
 			historyApiFallback: true
-        },
-        plugins: [
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.DefinePlugin({
-                'process.env': {
-                    'NODE_ENV': JSON.stringify('development')
-                }
-            })
-        ]
-    });
+		},
+		plugins: [
+			new webpack.HotModuleReplacementPlugin(),
+			new webpack.DefinePlugin({
+				'process.env': {
+					'NODE_ENV': JSON.stringify('development')
+				}
+			})
+		]
+	});
 }
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports = merge(common, {
-        plugins: [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false
-                }
-            }),
-            new webpack.DefinePlugin({
-                'process.env': {
-                    'NODE_ENV': JSON.stringify('production')
-                }
-            }),
-            new webpack.optimize.OccurrenceOrderPlugin(true),
-            new webpack.optimize.DedupePlugin(),
-        ]
-    })
+	module.exports = merge(common, {
+		plugins: [
+			new webpack.optimize.UglifyJsPlugin({
+				compress: {
+					warnings: false
+				}
+			}),
+			new webpack.DefinePlugin({
+				'process.env': {
+					'NODE_ENV': JSON.stringify('production')
+				}
+			}),
+			new webpack.optimize.OccurrenceOrderPlugin(true),
+			new webpack.optimize.DedupePlugin()
+		]
+	})
 }
 

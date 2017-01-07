@@ -1,20 +1,17 @@
-import { CategoryActions, TaskActions } from '../actions/action.types';
 import { browserHistory } from 'react-router/lib';
 
-const initialState = {
+import { CategoryActions, TaskActions } from '../actions/action.types';
+import { ICategoriesState } from '../interfaces';
+
+const initialState: ICategoriesState = {
 	list: [
-		{ id: 1, title: 'category 1', subs: [11, 12], tasks: [1, 2, 3], parentId: null, expanded: true, level: null, edit: false },
-		{ id: 2, title: 'category 2', subs: [21], tasks: [4, 5, 6], parentId: null, expanded: false, level: null, edit: false },
-		{ id: 3, title: 'category 3', subs: [], tasks: [7, 8, 9], parentId: null, expanded: false, level: null, edit: false },
-		{ id: 11, title: 'category 1_1', subs: [111], tasks: [10], parentId: 1, expanded: false, level: null, edit: false },
-		{ id: 12, title: 'category 1_2', subs: [], tasks: [], parentId: 1, expanded: false, level: null, edit: false },
-		{ id: 111, title: 'category 1_1_1', subs: [], tasks: [11], parentId: 11, expanded: false, level: null, edit: false },
-		{ id: 21, title: 'category 2_1', subs: [], tasks: [12], parentId: 2, expanded: false, level: null, edit: false }
+		{ id: 1, title: 'Day tasks', subs: [11], tasks: [1, 2], parentId: null, expanded: true, level: null, edit: false },
+		{ id: 11, title: 'Sub tasks', subs: [], tasks: [3], parentId: 1, expanded: false, level: null, edit: false }
 	],
 	activeCategory: null
 };
 
-const categoryReducer = (state = initialState, action) => {
+const categoryReducer = (state: any = initialState, action: any) => {
 	switch (action.type) {
 		case TaskActions[TaskActions.ADD_TASK]:
 			if (!action.activeCategoryId) {
@@ -27,7 +24,7 @@ const categoryReducer = (state = initialState, action) => {
 			}
 
 		case CategoryActions[CategoryActions.ADD_CATEGORY]:
-			let nextId = state.list.filter(t => String(t.id).length === 1).length + 1;
+			const nextId: number = state.list.filter(t => String(t.id).length === 1).length + 1;
 
 			return {
 				list: [
@@ -40,10 +37,7 @@ const categoryReducer = (state = initialState, action) => {
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
 			browserHistory.push(`${action.title.split(' ').join('')}`);
 
-			return {
-				list: state.list,
-				activeCategory: action.id
-			};
+			return { list: state.list, activeCategory: action.id };
 
 		case CategoryActions[CategoryActions.EDIT_CATEGORY]:
 			return {
@@ -58,11 +52,15 @@ const categoryReducer = (state = initialState, action) => {
 			};
 
 		case CategoryActions[CategoryActions.NEST_CATEGORY]:
-			let newId;
+			let newId: number;
 
 			return {
 				list: state.list.map(c => {
-					let parentNode;
+					let parentNode: number;
+
+					if (c.subs.indexOf(action.id) !== -1) {
+						return { ...c, subs: c.subs.filter(id => id !== action.id) };
+					}
 
 					if (c.id !== action.id || !c.parentId) return c;
 
@@ -81,32 +79,32 @@ const categoryReducer = (state = initialState, action) => {
 			};
 
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
-			let subIdSet;
+			const id = action.id;
+			let subsById: Array<number> = action.subs;
 
-			if (!confirm(`Do you really want to delete ${action.title}?`)) return state;
-
-			subIdSet = new Set(action.subs);
 			state.list.forEach(c => {
-				if (subIdSet.has(c.id) && c.subs.length) {
-					c.subs.forEach(s => subIdSet.add(s));
+				if (subsById.indexOf(c.id) !== -1 && c.subs.length) {
+					c.subs.forEach(s => subsById.push(s));
 				}
 			});
 
 			return {
-				list: state.list.filter(c => (c.id !== action.id && !subIdSet.has(c.id))),
-				activeCategory: null
+				list: state.list
+					.filter(c => c.id !== id && subsById.indexOf(c.id) === -1)
+					.map(c => c.subs.indexOf(id) !== -1 ? { ...c, subs: c.subs.filter(s => s !== id) } : c),
+				activeCategory: state.activeCategory.id === id ? null : state.activeCategory
 			};
 
 		case CategoryActions[CategoryActions.ADD_SUBCATEGORY]:
-			let newCategoryId = Number(`${action.parentId}${action.parentSubSize + 1}`);
-			let newCategoryTitle = String(newCategoryId).split('').join('_');
+			const newCategoryId: number = Number(`${action.parentId}${action.parentSubSize + 1}`);
+			const newCategoryTitle: string = String(newCategoryId).split('').join('_');
 
 			return {
 				list: [
 					...state.list.map(c => c.id !== action.parentId ? c : { ...c, subs: [...c.subs, newCategoryId], expanded: true }),
 					{
 						id: newCategoryId, title: `category ${newCategoryTitle}`,
-						subs: [], tasks: [], expanded: true, root: false, level: null, parentId: action.parentId
+						subs: [], tasks: [], expanded: true, level: null, edit: false, parentId: action.parentId
 					}
 				],
 				activeCategory: state.activeCategory

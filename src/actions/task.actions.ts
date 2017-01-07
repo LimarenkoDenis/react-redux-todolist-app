@@ -1,13 +1,7 @@
 import { TaskActions } from './action.types';
+import { ITask } from '../interfaces';
 
-interface ITask {
-	id: number;
-	title: string;
-	active: boolean;
-	description: string;
-}
-
-let NEXT_ROOT_TASK_ID = 13;
+let NEXT_ROOT_TASK_ID = 4;
 
 const addTask = (title: string, category: number) => {
 	return {

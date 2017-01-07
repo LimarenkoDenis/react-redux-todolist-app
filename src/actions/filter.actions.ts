@@ -14,5 +14,4 @@ const toggleActiveFilter = (active: boolean) => {
 	};
 };
 
-
 export { setSearchTemplate, toggleActiveFilter };

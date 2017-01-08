@@ -52,7 +52,7 @@ class TaskAddForm extends React.Component<IAddFormProps, IAddFormState> {
 
 const mapStateToProps = (store: any) => {
 	return {
-		activeCategory: store.categories.activeCategory
+		activeCategory: store.present.categories.activeCategory
 	};
 };
 

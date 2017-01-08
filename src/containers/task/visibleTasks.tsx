@@ -20,7 +20,7 @@ const getFilteredTasks = (taskListById: Array<ITaskListById>, visibleTaskArray: 
 
 const mapStateToProps = (store: any) => {
 	return {
-		tasks: getFilteredTasks(store.tasks.listById, store.tasks.visibleList, store.filterState)
+		tasks: getFilteredTasks(store.present.tasks.listById, store.present.tasks.visibleList, store.present.filterState)
 	};
 };
 

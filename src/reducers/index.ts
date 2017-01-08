@@ -1,3 +1,4 @@
+import undoable, { distinctState } from 'redux-undo';
 import { combineReducers } from 'redux';
 
 import taskReducer from './task.reducer';
@@ -12,4 +13,8 @@ const reducer = combineReducers({
 	editState: editReducer
 });
 
-export default reducer;
+const undoableStore = undoable(reducer, {
+	filter: distinctState()
+});
+
+export default undoableStore;

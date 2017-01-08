@@ -4,7 +4,7 @@ import { MainLayout } from '../../components/layout';
 
 const mapStateToProps = (store: any) => {
 	return {
-		editState: store.editState
+		editState: store.present.editState
 	};
 };
 

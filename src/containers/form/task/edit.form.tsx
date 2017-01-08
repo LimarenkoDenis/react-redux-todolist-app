@@ -72,7 +72,7 @@ class TaskEditForm extends React.Component<IEditFormProps, ITask> {
 }
 
 const mapStateToProps = (store: any) => {
-	let task = store.editState.task;
+	let task = store.present.editState.task;
 
 	return { task: { ...task } };
 };

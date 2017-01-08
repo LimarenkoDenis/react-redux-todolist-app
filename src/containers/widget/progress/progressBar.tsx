@@ -16,7 +16,7 @@ const getAppProgress = (list: Array<ITask>) => {
 
 const mapStateToProps = (store: any) => {
 	return {
-		progress: getAppProgress(store.tasks.listById),
+		progress: getAppProgress(store.present.tasks.listById),
 	};
 };
 

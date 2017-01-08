@@ -31,3 +31,9 @@
 {
     margin-left: -15px;
 }
+.btn-toolbar
+{
+    position: fixed;
+    top: 2%;
+    left: 45%;
+}

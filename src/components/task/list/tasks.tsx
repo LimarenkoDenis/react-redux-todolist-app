@@ -6,7 +6,7 @@ import { ListGroup } from 'react-bootstrap';
 
 const TaskList = (props) => {
 	return (
-		<ListGroup>
+		<ListGroup style={{ heigth: `${props.tasks.length}px` }}>
 			{props.tasks.map(t =>
 				<Task
 					key={t.id}

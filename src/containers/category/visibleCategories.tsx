@@ -44,8 +44,8 @@ const getCategoryList = (currentCategories: Array<ICategory>, inputCategories: A
 
 const mapStateToProps = (store: any) => {
 	return {
-		categories: getCategoryList(store.categories.list, [], 0, store.categories.list),
-		editState: store.editState
+		categories: getCategoryList(store.present.categories.list, [], 0, store.present.categories.list),
+		editState: store.present.editState
 	};
 };
 

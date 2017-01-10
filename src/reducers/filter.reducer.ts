@@ -1,7 +1,11 @@
 import { browserHistory } from 'react-router/lib';
 
 import { FilterActions } from '../actions/action.types';
-import { IFilterState } from '../interfaces';
+
+export interface IFilterState {
+	active?: boolean;
+	searchTemplate: string;
+}
 
 const initialState: IFilterState = {
 	active: false,

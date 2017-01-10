@@ -2,9 +2,17 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { addTask } from '../../../actions/task.actions';
-import { IAddFormProps, IAddFormState } from '../../../interfaces';
 
 import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+
+interface IAddFormProps {
+	activeCategory?: number;
+	handleSubmit: (title: string, category?: number) => void;
+}
+
+interface IAddFormState {
+	title: string;
+}
 
 const CHOOSE_CATEGORY_WARNING: string = 'You need to a choose category to add a task!';
 

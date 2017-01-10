@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 
-import { ICategory } from '../../interfaces';
+import { CategoryModel } from '../../model/category.model';
 
 import { addSubcategory, nestCategory, toggleCategory, editCategory, chooseCategory, deleteCategory } from '../../actions/category.actions';
 import CategoryList from '../../components/category/list/categories';
 
-const getSubCategories = (category: ICategory, storeList: Array<ICategory>): Array<ICategory> => {
-	let subs: Array<ICategory> = [];
+const getSubCategories = (category: CategoryModel, storeList: Array<CategoryModel>): Array<CategoryModel> => {
+	let subs: Array<CategoryModel> = [];
 
 	storeList.forEach(c => {
 		if (category.subs.indexOf(c.id) !== -1) {
@@ -17,8 +17,8 @@ const getSubCategories = (category: ICategory, storeList: Array<ICategory>): Arr
 	return subs;
 };
 
-const getCategoryList = (currentCategories: Array<ICategory>, inputCategories: Array<ICategory>, depth: number, storeCategories: Array<ICategory>): Array<ICategory> => {
-	let categories: Array<ICategory> = inputCategories;
+const getCategoryList = (currentCategories: Array<CategoryModel>, inputCategories: Array<CategoryModel>, depth: number, storeCategories: Array<CategoryModel>): Array<CategoryModel> => {
+	let categories: Array<CategoryModel> = inputCategories;
 
 	for (let i = 0; i < currentCategories.length; i++) {
 
@@ -33,7 +33,7 @@ const getCategoryList = (currentCategories: Array<ICategory>, inputCategories: A
 		}
 
 		if (currentCategories[i].subs.length > 0 && currentCategories[i].expanded) {
-			let subs: Array<ICategory> = getSubCategories(currentCategories[i], storeCategories);
+			let subs: Array<CategoryModel> = getSubCategories(currentCategories[i], storeCategories);
 
 			getCategoryList(subs, categories, depth + 1, storeCategories);
 		}

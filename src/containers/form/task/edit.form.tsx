@@ -2,15 +2,21 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { saveTask, cancelTaskEdit } from '../../../actions/task.actions';
-import { IEditFormProps, ITask } from '../../../interfaces';
+import { TaskModel } from '../../../model/task.model';
 
 import { Button, Col, Checkbox, FormGroup, ControlLabel, FormControl, Form } from 'react-bootstrap';
+
+interface IEditFormProps {
+	task: TaskModel;
+	handleSubmit: (task: TaskModel) => void;
+	handleCancel: () => void;
+}
 
 const labelStyle: Object = { margin: '1em 0' };
 
 const TASK_EDIT_QUESTION = 'Do you really want to cancel editing?';
 
-class TaskEditForm extends React.Component<IEditFormProps, ITask> {
+class TaskEditForm extends React.Component<IEditFormProps, TaskModel> {
 
 	constructor(props: IEditFormProps) {
 		super(props);

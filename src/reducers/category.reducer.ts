@@ -1,7 +1,12 @@
 import { browserHistory } from 'react-router/lib';
 
 import { CategoryActions, TaskActions } from '../actions/action.types';
-import { ICategory, ICategoriesState } from '../interfaces';
+import { CategoryModel } from '../model/category.model';
+
+export interface ICategoriesState {
+	list: Array<CategoryModel>;
+	activeCategory: number;
+}
 
 const initialState: ICategoriesState = {
 	list: [
@@ -11,7 +16,7 @@ const initialState: ICategoriesState = {
 	activeCategory: null
 };
 
-const getParentsCategories = (currentId: number, categories: Array<ICategory>, resultIds: Array<number> = []): Array<number> => {
+const getParentsCategories = (currentId: number, categories: Array<CategoryModel>, resultIds: Array<number> = []): Array<number> => {
 
 	categories.forEach((c) => {
 		if (c.subs.indexOf(currentId) !== -1) {

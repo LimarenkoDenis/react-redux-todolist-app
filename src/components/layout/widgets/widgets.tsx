@@ -6,7 +6,6 @@ import TaskAddForm from '../../../containers/form/task/add.form';
 import CategoryAddForm from '../../../containers/form/category/add.form';
 
 import { Col, Row } from 'react-bootstrap';
-
 import './widgets.css';
 
 export const WidgetsLayout = (): JSX.Element => {

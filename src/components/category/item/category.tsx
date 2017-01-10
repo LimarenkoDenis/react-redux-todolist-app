@@ -1,10 +1,21 @@
 import * as React from 'react';
 
-import { ICategoryItemProps } from '../../../interfaces';
+import { CategoryModel } from '../../../model/category.model';
+import { IEditState } from '../../../reducers/edit.reducer';
 
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
-
 import './category.css';
+
+interface ICategoryItemProps {
+	category: CategoryModel;
+	editState: IEditState;
+	onAddClick: (id: number, subs: Array<number>) => void;
+	onArrowClick: (id: number) => void;
+	onDeleteClick: (id: number, title: string, subs: Array<number>, tasks: Array<number>) => void;
+	onEditClick: (id: number, title: string) => void;
+	onExpandClick: (id: number) => void;
+	onLIClick: (id: number, title: string, tasks: Array<number>) => void;
+}
 
 const CATEGORY_DELETE_QUESTION = (title: string): string => `Do you really want to delete ${title}?`;
 
@@ -49,7 +60,7 @@ class Category extends React.Component<ICategoryItemProps, any> {
 					size={category.title.length}
 					disabled={!category.edit}
 					className={category.edit ? 'active' : 'disabled'}
-					ref={input => this.titleInput = input}
+					ref={(input: HTMLElement) => this.titleInput = input}
 					/>
 				{!editState.active ? (
 					<span>

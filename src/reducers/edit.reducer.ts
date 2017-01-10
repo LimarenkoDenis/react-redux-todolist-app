@@ -1,7 +1,12 @@
 import { browserHistory } from 'react-router/lib';
 
 import { TaskActions } from '../actions/action.types';
-import { IEditState, ITask } from '../interfaces';
+import { TaskModel } from '../model/task.model';
+
+export interface IEditState {
+	active: boolean;
+	task: TaskModel;
+}
 
 const initialState: IEditState = {
 	active: false,
@@ -11,7 +16,7 @@ const initialState: IEditState = {
 const editReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
 		case TaskActions[TaskActions.EDIT_TASK]:
-			const {id, title, active, description}: ITask = action;
+			const {id, title, active, description}: TaskModel = action;
 
 			browserHistory.push(`edit_${title.split(' ').join('_')}`);
 

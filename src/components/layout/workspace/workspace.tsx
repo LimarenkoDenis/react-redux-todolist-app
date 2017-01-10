@@ -1,10 +1,14 @@
 import * as React from 'react';
 
-import { IWorkspaceLayoutProps } from '../../../interfaces';
+import { IEditState } from '../../../reducers/edit.reducer';
 
 import TaskEditForm from '../../../containers/form/task/edit.form';
 
 import { Col } from 'react-bootstrap';
+
+interface IWorkspaceLayoutProps {
+	editState: IEditState;
+}
 
 export class WorkspaceLayout extends React.Component<IWorkspaceLayoutProps, any> {
 	public render() {

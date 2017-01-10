@@ -2,9 +2,17 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { addCategory } from '../../../actions/category.actions';
-import { IAddFormProps, IAddFormState } from '../../../interfaces';
 
 import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+
+interface IAddFormProps {
+	activeCategory?: number;
+	handleSubmit: (title: string, category?: number) => void;
+}
+
+interface IAddFormState {
+	title: string;
+}
 
 class CategoryAddForm extends React.Component<IAddFormProps, IAddFormState> {
 

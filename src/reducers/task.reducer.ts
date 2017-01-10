@@ -1,5 +1,14 @@
 import { TaskActions, CategoryActions } from '../actions/action.types';
-import { ITasksState } from '../interfaces';
+import { TaskModel } from '../model/task.model';
+
+export interface ITaskListById {
+	[id: number]: TaskModel;
+}
+
+export interface ITasksState {
+	listById: ITaskListById;
+	visibleList: Array<TaskModel>;
+}
 
 const initialState: ITasksState = {
 	listById: {

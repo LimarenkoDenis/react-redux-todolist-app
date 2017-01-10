@@ -1,10 +1,17 @@
 import * as React from 'react';
 
-import { ITaskItemProps } from '../../../interfaces';
+import { TaskModel } from '../../../model/task.model';
 
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
-
 import './task.css';
+
+interface ITaskItemProps {
+	title: string;
+	active: boolean;
+	onLIClick: (id: number, title: string) => void;
+	onEditClick: (task: TaskModel) => void;
+	onCheckClick: (id) => void;
+}
 
 const Task = (props: ITaskItemProps): JSX.Element => {
 	const {title, active, onLIClick, onEditClick, onCheckClick} = props;

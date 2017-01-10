@@ -1,5 +1,5 @@
 import { TaskActions } from './action.types';
-import { ITask } from '../interfaces';
+import { TaskModel } from '../model/task.model';
 
 let NEXT_ROOT_TASK_ID = 4;
 
@@ -26,14 +26,14 @@ const chooseTask = (id: number, title: string): Object => {
 	};
 };
 
-const editTask = (task: ITask): Object => {
+const editTask = (task: TaskModel): Object => {
 	return {
 		type: TaskActions[TaskActions.EDIT_TASK],
 		...task
 	};
 };
 
-const saveTask = (task: ITask): Object => {
+const saveTask = (task: TaskModel): Object => {
 	return {
 		type: TaskActions[TaskActions.SAVE_TASK],
 		task: { ...task }

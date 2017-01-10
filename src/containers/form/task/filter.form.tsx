@@ -2,9 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { setSearchTemplate, toggleActiveFilter } from '../../../actions/filter.actions';
-import { IFilterFormProps, IFilterState } from '../../../interfaces';
+import { IFilterState } from '../../../reducers/filter.reducer';
 
 import { Form, FormGroup, FormControl, Checkbox, Glyphicon } from 'react-bootstrap';
+
+interface IFilterFormProps {
+	onFilterInput: (template: string) => void;
+	onActiveToggle: (active: boolean) => void;
+}
 
 class Filter extends React.Component<IFilterFormProps, IFilterState> {
 	private visible: boolean = false;

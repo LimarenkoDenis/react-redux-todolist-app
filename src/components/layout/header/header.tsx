@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import './header.css';
 
-export const Header = ({title}) => (
+export const Header = ({title}): JSX.Element => (
 	<Row>
 		<Col xs={6} md={4}>
 			<h1 className='todo-header'>{title}</h1>

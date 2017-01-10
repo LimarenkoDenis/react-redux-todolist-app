@@ -4,7 +4,7 @@ import Task from '../item/task';
 
 import { ListGroup } from 'react-bootstrap';
 
-const TaskList = (props) => {
+const TaskList = (props: any): JSX.Element => {
 	return (
 		<ListGroup style={{ heigth: `${props.tasks.length}px` }}>
 			{props.tasks.map(t =>

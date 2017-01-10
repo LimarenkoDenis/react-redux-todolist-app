@@ -2,14 +2,14 @@ import { CategoryActions } from './action.types';
 
 let NEXT_CATEGORY_ID = 2;
 
-const addCategory = (title: string) => {
+const addCategory = (title: string): Object => {
 	return {
 		type: CategoryActions[CategoryActions.ADD_CATEGORY],
 		title
 	};
 };
 
-const addSubcategory = (parentId: number, parentSubSize: number) => {
+const addSubcategory = (parentId: number, parentSubSize: number): Object => {
 	return {
 		type: CategoryActions[CategoryActions.ADD_SUBCATEGORY],
 		id: NEXT_CATEGORY_ID++,
@@ -18,7 +18,7 @@ const addSubcategory = (parentId: number, parentSubSize: number) => {
 	};
 };
 
-const chooseCategory = (id: number, title: string, tasks: Array<number>) => {
+const chooseCategory = (id: number, title: string, tasks: Array<number>): Object => {
 	return {
 		type: CategoryActions[CategoryActions.CHOOSE_CATEGORY],
 		id,
@@ -27,7 +27,7 @@ const chooseCategory = (id: number, title: string, tasks: Array<number>) => {
 	};
 };
 
-const deleteCategory = (id: number, title: string, subs: Array<number>, tasks: Array<number>) => {
+const deleteCategory = (id: number, title: string, subs: Array<number>, tasks: Array<number>): Object => {
 	return {
 		type: CategoryActions[CategoryActions.DELETE_CATEGORY],
 		id,
@@ -37,7 +37,7 @@ const deleteCategory = (id: number, title: string, subs: Array<number>, tasks: A
 	};
 };
 
-const editCategory = (id: number, title: string) => {
+const editCategory = (id: number, title: string): Object => {
 	return {
 		type: CategoryActions[CategoryActions.EDIT_CATEGORY],
 		id,
@@ -45,14 +45,14 @@ const editCategory = (id: number, title: string) => {
 	};
 };
 
-const nestCategory = (id: number) => {
+const nestCategory = (id: number): Object => {
 	return {
 		type: CategoryActions[CategoryActions.NEST_CATEGORY],
 		id
 	};
 };
 
-const toggleCategory = (id: number) => {
+const toggleCategory = (id: number): Object => {
 	return {
 		type: CategoryActions[CategoryActions.TOGGLE_CATEGORY],
 		id

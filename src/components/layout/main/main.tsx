@@ -8,7 +8,7 @@ import UndoRedo from '../../../containers/widget/undoredo/undoredo';
 import { Row, Grid } from 'react-bootstrap';
 
 export class MainLayout extends React.Component<IMainLayoutProps, any> {
-	render() {
+	public render() {
 		const {editState, children} = this.props;
 
 		return (

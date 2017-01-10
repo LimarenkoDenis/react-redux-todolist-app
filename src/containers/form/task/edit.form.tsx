@@ -8,6 +8,8 @@ import { Button, Col, Checkbox, FormGroup, ControlLabel, FormControl, Form } fro
 
 const labelStyle: Object = { margin: '1em 0' };
 
+const TASK_EDIT_QUESTION = 'Do you really want to cancel editing?';
+
 class TaskEditForm extends React.Component<IEditFormProps, ITask> {
 
 	constructor(props: IEditFormProps) {
@@ -16,53 +18,53 @@ class TaskEditForm extends React.Component<IEditFormProps, ITask> {
 		this.state = { ...props.task };
 	}
 
-	_handleSubmit(e: Event) {
+	private handleSubmit(e: Event): void {
 		e.preventDefault();
 
 		this.props.handleSubmit(this.state);
 	}
 
-	_handleCancel() {
-		if (confirm(`Do you really want to cancel editing?`)) {
+	private handleCancel(): void {
+		if (confirm(TASK_EDIT_QUESTION)) {
 			this.props.handleCancel();
 		}
 	}
 
-	_handleTitleChange(e) {
-		let title = e.target.value.replace(/[^(?!' )a-zA-z0-9]+/g, '').replace(/\s{2,}/, ' ').toLowerCase();
+	private handleTitleChange(e: Event | any): void {
+		let title: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
 
 		this.setState({ title });
 	}
 
-	_handleActiveToggle(e) {
+	private handleActiveToggle(e: Event | any): void {
 		this.setState({ active: e.target.checked });
 	}
 
-	_handleDescriptionChange(e) {
+	private handleDescriptionChange(e: Event | any): void {
 		this.setState({ description: e.target.value });
 	}
 
-	render() {
+	public render() {
 		return (
-			<Form onSubmit={e => this._handleSubmit(e)}>
+			<Form onSubmit={e => this.handleSubmit(e)}>
 				<Col mdOffset={8}>
 					<Button type='submit'>Save changes</Button>
 					{' '}
-					<Button onClick={() => this._handleCancel()}>Cancel</Button>
+					<Button onClick={() => this.handleCancel()}>Cancel</Button>
 				</Col>
 				<Col md={10}>
 					<FormGroup controlId='formHorizontalEmail'>
 						<ControlLabel style={labelStyle}>Title</ControlLabel>
-						<FormControl type='text' placeholder='Title' value={this.state.title} onChange={e => this._handleTitleChange(e)} required />
+						<FormControl type='text' placeholder='Title' value={this.state.title} onChange={e => this.handleTitleChange(e)} required />
 					</FormGroup>
 				</Col>
 				<Col md={10}>
-					<Checkbox checked={this.state.active} onChange={e => this._handleActiveToggle(e)}>Active</Checkbox>
+					<Checkbox checked={this.state.active} onChange={e => this.handleActiveToggle(e)}>Active</Checkbox>
 				</Col>
 				<Col md={10}>
 					<FormGroup controlId='formControlsTextarea' >
 						<ControlLabel style={labelStyle}>Description</ControlLabel>
-						<FormControl componentClass='textarea' placeholder='Description' value={this.state.description} onChange={e => this._handleDescriptionChange(e)} />
+						<FormControl componentClass='textarea' placeholder='Description' value={this.state.description} onChange={e => this.handleDescriptionChange(e)} />
 					</FormGroup>
 				</Col>
 			</Form>
@@ -71,13 +73,13 @@ class TaskEditForm extends React.Component<IEditFormProps, ITask> {
 
 }
 
-const mapStateToProps = (store: any) => {
+const mapStateToProps = (store: any): Object => {
 	let task = store.present.editState.task;
 
 	return { task: { ...task } };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: any): Object => {
 	return {
 		handleSubmit: (task) => dispatch(saveTask(task)),
 		handleCancel: () => dispatch(cancelTaskEdit())

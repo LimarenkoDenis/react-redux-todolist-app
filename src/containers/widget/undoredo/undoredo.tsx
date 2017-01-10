@@ -5,21 +5,21 @@ import { connect } from 'react-redux';
 
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
-const UndoRedo = ({ canUndo, canRedo, onUndo, onRedo }: any) => (
+const UndoRedo = ({ canUndo, canRedo, onUndo, onRedo }: any): JSX.Element => (
 	<ButtonToolbar>
 		<Button onClick={onUndo} disabled={!canUndo}>Undo</Button>
 		<Button onClick={onRedo} disabled={!canRedo}>Redo</Button>
 	</ButtonToolbar>
 );
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any): Object => {
 	return {
 		canUndo: state.past.length > 0,
 		canRedo: state.future.length > 0
 	};
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: any): Object => {
 	return {
 		onUndo: () => dispatch(UndoActionCreators.undo()),
 		onRedo: () => dispatch(UndoActionCreators.redo())

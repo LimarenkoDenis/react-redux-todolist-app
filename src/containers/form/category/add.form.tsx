@@ -14,25 +14,25 @@ class CategoryAddForm extends React.Component<IAddFormProps, IAddFormState> {
 		this.state = { title: '' };
 	}
 
-	_handleChange(e) {
-		let title: string = e.target.value.replace(/[^(?!' )a-zA-z0-9]+/g, '').replace(/\s{2,}/, ' ').toLowerCase();
+	private handleChange(e: Event | any): void {
+		let title: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
 		this.setState({ title });
 	}
 
-	_handleSubmit(e: Event) {
+	private handleSubmit(e: Event): void {
 		e.preventDefault();
 
 		this.props.handleSubmit(this.state.title);
 		this.setState({ title: '' });
 	}
 
-	render() {
+	public render() {
 		return (
-			<Form onSubmit={e => this._handleSubmit(e)} inline>
+			<Form onSubmit={e => this.handleSubmit(e)} inline>
 				<FormGroup >
 					<FormControl
 						type='text'
-						onChange={e => this._handleChange(e)}
+						onChange={e => this.handleChange(e)}
 						value={this.state.title}
 						placeholder='Enter category title'
 						required
@@ -45,7 +45,7 @@ class CategoryAddForm extends React.Component<IAddFormProps, IAddFormState> {
 	}
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any): Object => {
 	return {
 		handleSubmit: (title) => dispatch(addCategory(title)),
 	};

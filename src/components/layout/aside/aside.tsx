@@ -4,7 +4,7 @@ import VisibleCategoryList from '../../../containers/category/visibleCategories'
 
 import { Col } from 'react-bootstrap';
 
-export const Aside = () => {
+export const Aside = (): JSX.Element => {
 	return (
 		<Col xs={6} xsOffset={3} md={5} mdOffset={0} className='content-container__category'>
 			<VisibleCategoryList />

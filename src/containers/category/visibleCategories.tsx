@@ -5,7 +5,7 @@ import { ICategory } from '../../interfaces';
 import { addSubcategory, nestCategory, toggleCategory, editCategory, chooseCategory, deleteCategory } from '../../actions/category.actions';
 import CategoryList from '../../components/category/list/categories';
 
-const getSubCategories = (category: ICategory, storeList: Array<ICategory>) => {
+const getSubCategories = (category: ICategory, storeList: Array<ICategory>): Array<ICategory> => {
 	let subs: Array<ICategory> = [];
 
 	storeList.forEach(c => {
@@ -17,7 +17,7 @@ const getSubCategories = (category: ICategory, storeList: Array<ICategory>) => {
 	return subs;
 };
 
-const getCategoryList = (currentCategories: Array<ICategory>, inputCategories: Array<ICategory>, depth: number, storeCategories: Array<ICategory>) => {
+const getCategoryList = (currentCategories: Array<ICategory>, inputCategories: Array<ICategory>, depth: number, storeCategories: Array<ICategory>): Array<ICategory> => {
 	let categories: Array<ICategory> = inputCategories;
 
 	for (let i = 0; i < currentCategories.length; i++) {
@@ -40,16 +40,16 @@ const getCategoryList = (currentCategories: Array<ICategory>, inputCategories: A
 	}
 
 	return categories;
-}
+};
 
-const mapStateToProps = (store: any) => {
+const mapStateToProps = (store: any): Object => {
 	return {
 		categories: getCategoryList(store.present.categories.list, [], 0, store.present.categories.list),
 		editState: store.present.editState
 	};
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: any): Object => {
 	return {
 		onAddClick: (parentId, parentSubSize) => dispatch(addSubcategory(parentId, parentSubSize)),
 		onExpandClick: (id) => dispatch(toggleCategory(id)),

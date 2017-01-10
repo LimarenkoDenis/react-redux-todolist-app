@@ -6,7 +6,7 @@ import { Glyphicon, ListGroupItem } from 'react-bootstrap';
 
 import './task.css';
 
-const Task = (props: ITaskItemProps) => {
+const Task = (props: ITaskItemProps): JSX.Element => {
 	const {title, active, onLIClick, onEditClick, onCheckClick} = props;
 
 	return (

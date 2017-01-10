@@ -8,7 +8,7 @@ const initialState: IEditState = {
 	task: null
 };
 
-const editReducer = (state: any = initialState, action: any) => {
+const editReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
 		case TaskActions[TaskActions.EDIT_TASK]:
 			const {id, title, active, description}: ITask = action;

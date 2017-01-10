@@ -5,16 +5,16 @@ import { IProgressBarProps, ITask } from '../../../interfaces';
 
 import { ProgressBar as Bar } from 'react-bootstrap';
 
-const ProgressBar = (props: IProgressBarProps) => <Bar style={{ width: '100%' }} active now={props.progress} />;
+const ProgressBar = (props: IProgressBarProps): JSX.Element => <Bar style={{ width: '100%' }} active now={props.progress} />;
 
-const getAppProgress = (list: Array<ITask>) => {
+const getAppProgress = (list: Array<ITask>): number => {
 	let completed: number = Object.values(list).filter(t => !t.active).length;
 	let all: number = Object.keys(list).length;
 
 	return Math.round(completed / all * 100);
 };
 
-const mapStateToProps = (store: any) => {
+const mapStateToProps = (store: any): Object => {
 	return {
 		progress: getAppProgress(store.present.tasks.listById),
 	};

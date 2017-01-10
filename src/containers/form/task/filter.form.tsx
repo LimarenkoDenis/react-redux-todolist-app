@@ -19,14 +19,14 @@ class Filter extends React.Component<IFilterFormProps, IFilterState> {
 		};
 	}
 
-	_handleSubmit(e: Event) { e.preventDefault(); };
+	private handleSubmit(e: Event) { e.preventDefault(); };
 
-	_handleToggle(e) {
+	private handleToggle(e) {
 		this.props.onActiveToggle(e.target.checked);
 	};
 
-	_handleFilter(e) {
-		let searchTemplate: string = e.target.value.replace(/[^(?!' )a-zA-z0-9]+/g, '').replace(/\s{2,}/, ' ').toLowerCase();
+	private handleFilter(e) {
+		let searchTemplate: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
 
 		this.setState({ searchTemplate });
 
@@ -34,28 +34,28 @@ class Filter extends React.Component<IFilterFormProps, IFilterState> {
 		this.props.onFilterInput(searchTemplate);
 	}
 
-	_handleClear() {
+	private handleClear() {
 		this.setState({ searchTemplate: '' });
 		this.props.onFilterInput('');
 	}
 
-	render() {
+	public render() {
 		return (
-			<Form onSubmit={e => this._handleSubmit(e)} inline>
-				<Checkbox onChange={e => this._handleToggle(e)} value={this.state.active}>{' '}Show active</Checkbox>
+			<Form onSubmit={e => this.handleSubmit(e)} inline>
+				<Checkbox onChange={e => this.handleToggle(e)} value={this.state.active}>{' '}Show active</Checkbox>
 				{' '}
 				<FormGroup>
 					<FormControl
 						className='search-input'
 						type='search'
-						onChange={e => this._handleFilter(e)}
+						onChange={e => this.handleFilter(e)}
 						value={this.state.searchTemplate}
 						placeholder='Search'
 						/>
 					<Glyphicon
 						glyph='remove-circle'
 						style={{ visibility: this.visible ? 'visible' : 'hidden' }}
-						onClick={e => this._handleClear()}
+						onClick={e => this.handleClear()}
 						className='search-icon'
 						/>
 				</FormGroup>
@@ -65,7 +65,7 @@ class Filter extends React.Component<IFilterFormProps, IFilterState> {
 
 }
 
-const mapDispatchToProps = (dispath) => {
+const mapDispatchToProps = (dispath): Object => {
 	return {
 		onFilterInput: (template) => dispath(setSearchTemplate(template)),
 		onActiveToggle: (active) => dispath(toggleActiveFilter(active))

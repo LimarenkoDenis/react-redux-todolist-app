@@ -6,24 +6,26 @@ import { Glyphicon, ListGroupItem } from 'react-bootstrap';
 
 import './category.css';
 
+const CATEGORY_DELETE_QUESTION = (title: string): string => `Do you really want to delete ${title}?`;
+
 class Category extends React.Component<ICategoryItemProps, any> {
 	private titleInput: HTMLElement | any;
 
-	_handleEditClick() {
+	private handleEditClick(): void {
 		if (!this.titleInput.value) return;
 
 		this.props.onEditClick(this.props.category.id, this.titleInput.value);
 	}
 
-	_handleDeleteClick() {
+	private handleDeleteClick(): void {
 		const {id, title, subs, tasks } = this.props.category;
 
-		if (confirm(`Do you really want to delete ${title}?`)) {
+		if (confirm(CATEGORY_DELETE_QUESTION(title))) {
 			this.props.onDeleteClick(id, title, subs, tasks);
 		}
 	}
 
-	render() {
+	public render() {
 		const { editState, category, onArrowClick, onAddClick, onExpandClick, onLIClick } = this.props;
 
 		return (
@@ -53,7 +55,7 @@ class Category extends React.Component<ICategoryItemProps, any> {
 					<span>
 						<Glyphicon
 							glyph='edit'
-							onClick={() => this._handleEditClick()}
+							onClick={() => this.handleEditClick()}
 							/>
 						<Glyphicon
 							glyph='plus-sign'
@@ -61,7 +63,7 @@ class Category extends React.Component<ICategoryItemProps, any> {
 							className='icon-right-align' />
 						<Glyphicon
 							glyph='trash'
-							onClick={() => this._handleDeleteClick()}
+							onClick={() => this.handleDeleteClick()}
 							className='icon-right-align'
 							/>
 					</span>

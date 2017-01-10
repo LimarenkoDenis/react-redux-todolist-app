@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { MainLayout } from '../../components/layout';
 
-const mapStateToProps = (store: any) => {
+const mapStateToProps = (store: any): Object => {
 	return {
 		editState: store.present.editState
 	};

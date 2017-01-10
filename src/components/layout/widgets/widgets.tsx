@@ -9,7 +9,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import './widgets.css';
 
-export const WidgetsLayout = () => {
+export const WidgetsLayout = (): JSX.Element => {
 	return (
 		<Row>
 			<Col xs={6} xsOffset={6} md={4} mdOffset={8} className='todo-search'>

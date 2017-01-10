@@ -4,7 +4,7 @@ import CategoryItem from '../item/category';
 
 import { ListGroup } from 'react-bootstrap';
 
-const CategoryList = (props) => {
+const CategoryList = (props: any): JSX.Element => {
 	return (
 		<ListGroup>
 			{props.categories.map(c =>

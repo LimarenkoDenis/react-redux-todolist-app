@@ -8,7 +8,7 @@ const initialState: IFilterState = {
 	searchTemplate: ''
 };
 
-const filterReducer = (state: any = initialState, action: any) => {
+const filterReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
 		case FilterActions[FilterActions.TOGGLE_ACTIVE_FILTER]:
 			if (action.active) {

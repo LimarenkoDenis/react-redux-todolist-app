@@ -10,7 +10,9 @@ const initialState: ITasksState = {
 	visibleList: []
 };
 
-const taskReducer = (state = initialState, action) => {
+const TASK_SAVE_INFORMATION = (title: string): string => `Task "${title}" has been saved successfully!`;
+
+const taskReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
 		case TaskActions[TaskActions.ADD_TASK]:
 			const id: number = action.taskId;
@@ -46,7 +48,7 @@ const taskReducer = (state = initialState, action) => {
 			};
 
 		case TaskActions[TaskActions.SAVE_TASK]:
-			alert(`Task "${action.task.title}" has been saved successfully!`);
+			alert(TASK_SAVE_INFORMATION(action.task.title));
 
 			return {
 				listById: {

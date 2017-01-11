@@ -1,5 +1,5 @@
 import { TaskActions, CategoryActions } from '../actions/action.types';
-import { TaskModel } from '../model/task.model';
+import { TaskModel } from '../models/task.model';
 
 export interface ITaskListById {
 	[id: number]: TaskModel;
@@ -7,7 +7,7 @@ export interface ITaskListById {
 
 export interface ITasksState {
 	listById: ITaskListById;
-	visibleList: Array<TaskModel>;
+	visibleList: Array<number>;
 }
 
 const initialState: ITasksState = {

@@ -1,16 +1,36 @@
 import * as React from 'react';
-
-import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { connect } from 'react-redux';
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
+
+import store from '../../../store';
 
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
-const UndoRedo = ({ canUndo, canRedo, onUndo, onRedo }: any): JSX.Element => (
-	<ButtonToolbar>
-		<Button onClick={onUndo} disabled={!canUndo}>Undo</Button>
-		<Button onClick={onRedo} disabled={!canRedo}>Redo</Button>
-	</ButtonToolbar>
-);
+interface IUndoRedoProps {
+	canUndo: boolean;
+	canRedo: boolean;
+}
+
+class UndoRedo extends React.Component<IUndoRedoProps, any>{
+	public render(): JSX.Element {
+		const {canUndo, canRedo} = this.props;
+
+		return (
+			<ButtonToolbar>
+				<Button onClick={this.onUndo} disabled={!canUndo}>Undo</Button>
+				<Button onClick={this.onRedo} disabled={!canRedo}>Redo</Button>
+			</ButtonToolbar>
+		);
+	}
+
+	private onUndo(): void {
+		store.dispatch(UndoActionCreators.undo());
+	}
+
+	private onRedo(): void {
+		store.dispatch(UndoActionCreators.redo());
+	}
+}
 
 const mapStateToProps = (state: any): Object => {
 	return {
@@ -19,11 +39,4 @@ const mapStateToProps = (state: any): Object => {
 	};
 };
 
-const mapDispatchToProps = (dispatch: any): Object => {
-	return {
-		onUndo: () => dispatch(UndoActionCreators.undo()),
-		onRedo: () => dispatch(UndoActionCreators.redo())
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UndoRedo);
+export default connect(mapStateToProps)(UndoRedo);

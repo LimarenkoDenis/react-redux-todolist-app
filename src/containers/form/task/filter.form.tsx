@@ -1,17 +1,13 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+
+import store from '../../../store';
 
 import { setSearchTemplate, toggleActiveFilter } from '../../../actions/filter.actions';
-import { IFilterState } from '../../../reducers/filter.reducer';
+import { IFilterState } from '../../../reducers';
 
 import { Form, FormGroup, FormControl, Checkbox, Glyphicon } from 'react-bootstrap';
 
-interface IFilterFormProps {
-	onFilterInput: (template: string) => void;
-	onActiveToggle: (active: boolean) => void;
-}
-
-class Filter extends React.Component<IFilterFormProps, IFilterState> {
+class Filter extends React.Component<any, IFilterState> {
 	private visible: boolean = false;
 
 	constructor() {
@@ -24,27 +20,7 @@ class Filter extends React.Component<IFilterFormProps, IFilterState> {
 		};
 	}
 
-	private handleSubmit(e: Event) { e.preventDefault(); };
-
-	private handleToggle(e) {
-		this.props.onActiveToggle(e.target.checked);
-	};
-
-	private handleFilter(e) {
-		let searchTemplate: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
-
-		this.setState({ searchTemplate });
-
-		this.visible = Boolean(searchTemplate);
-		this.props.onFilterInput(searchTemplate);
-	}
-
-	private handleClear() {
-		this.setState({ searchTemplate: '' });
-		this.props.onFilterInput('');
-	}
-
-	public render() {
+	public render(): JSX.Element {
 		return (
 			<Form onSubmit={e => this.handleSubmit(e)} inline>
 				<Checkbox onChange={e => this.handleToggle(e)} value={this.state.active}>{' '}Show active</Checkbox>
@@ -68,13 +44,27 @@ class Filter extends React.Component<IFilterFormProps, IFilterState> {
 		);
 	}
 
+	private handleSubmit(e: Event): void {
+		e.preventDefault();
+	}
+
+	private handleToggle(e: Event | any): void {
+		store.dispatch(toggleActiveFilter(e.target.checked));
+	}
+
+	private handleFilter(e: Event | any): void {
+		let searchTemplate: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
+
+		this.setState({ searchTemplate });
+		this.visible = Boolean(searchTemplate);
+
+		store.dispatch(setSearchTemplate(searchTemplate));
+	}
+
+	private handleClear(): void {
+		this.setState({ searchTemplate: '' });
+		store.dispatch(setSearchTemplate(''));
+	}
 }
 
-const mapDispatchToProps = (dispath): Object => {
-	return {
-		onFilterInput: (template) => dispath(setSearchTemplate(template)),
-		onActiveToggle: (active) => dispath(toggleActiveFilter(active))
-	};
-};
-
-export default connect(null, mapDispatchToProps)(Filter);
+export default Filter;

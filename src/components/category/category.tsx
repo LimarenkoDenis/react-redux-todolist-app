@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { CategoryModel } from '../../../model/category.model';
-import { IEditState } from '../../../reducers/edit.reducer';
+import { CategoryModel } from '../../models/category.model';
+import { IEditState } from '../../reducers';
 
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
 import './category.css';
@@ -19,24 +19,10 @@ interface ICategoryItemProps {
 
 const CATEGORY_DELETE_QUESTION = (title: string): string => `Do you really want to delete ${title}?`;
 
-class Category extends React.Component<ICategoryItemProps, any> {
+export class Category extends React.Component<ICategoryItemProps, any> {
 	private titleInput: HTMLElement | any;
 
-	private handleEditClick(): void {
-		if (!this.titleInput.value) return;
-
-		this.props.onEditClick(this.props.category.id, this.titleInput.value);
-	}
-
-	private handleDeleteClick(): void {
-		const {id, title, subs, tasks } = this.props.category;
-
-		if (confirm(CATEGORY_DELETE_QUESTION(title))) {
-			this.props.onDeleteClick(id, title, subs, tasks);
-		}
-	}
-
-	public render() {
+	public render(): JSX.Element {
 		const { editState, category, onArrowClick, onAddClick, onExpandClick, onLIClick } = this.props;
 
 		return (
@@ -87,7 +73,19 @@ class Category extends React.Component<ICategoryItemProps, any> {
 					)}
 			</ListGroupItem>
 		);
-	};
-}
+	}
 
-export default Category;
+	private handleEditClick(): void {
+		if (!this.titleInput.value) return;
+
+		this.props.onEditClick(this.props.category.id, this.titleInput.value);
+	}
+
+	private handleDeleteClick(): void {
+		const {id, title, subs, tasks } = this.props.category;
+
+		if (confirm(CATEGORY_DELETE_QUESTION(title))) {
+			this.props.onDeleteClick(id, title, subs, tasks);
+		}
+	}
+}

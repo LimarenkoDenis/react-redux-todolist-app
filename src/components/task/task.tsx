@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TaskModel } from '../../../model/task.model';
+import { TaskModel } from '../../models/task.model';
 
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
 import './task.css';
@@ -13,7 +13,7 @@ interface ITaskItemProps {
 	onCheckClick: (id) => void;
 }
 
-const Task = (props: ITaskItemProps): JSX.Element => {
+export const Task = (props: ITaskItemProps): JSX.Element => {
 	const {title, active, onLIClick, onEditClick, onCheckClick} = props;
 
 	return (
@@ -40,5 +40,3 @@ const Task = (props: ITaskItemProps): JSX.Element => {
 		</ListGroupItem>
 	);
 };
-
-export default Task; 

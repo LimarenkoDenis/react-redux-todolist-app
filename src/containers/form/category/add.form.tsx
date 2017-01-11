@@ -1,20 +1,16 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+
+import store from '../../../store';
 
 import { addCategory } from '../../../actions/category.actions';
 
 import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
 
-interface IAddFormProps {
-	activeCategory?: number;
-	handleSubmit: (title: string, category?: number) => void;
-}
-
 interface IAddFormState {
 	title: string;
 }
 
-class CategoryAddForm extends React.Component<IAddFormProps, IAddFormState> {
+class CategoryAddForm extends React.Component<any, IAddFormState> {
 
 	constructor() {
 		super();
@@ -22,19 +18,7 @@ class CategoryAddForm extends React.Component<IAddFormProps, IAddFormState> {
 		this.state = { title: '' };
 	}
 
-	private handleChange(e: Event | any): void {
-		let title: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
-		this.setState({ title });
-	}
-
-	private handleSubmit(e: Event): void {
-		e.preventDefault();
-
-		this.props.handleSubmit(this.state.title);
-		this.setState({ title: '' });
-	}
-
-	public render() {
+	public render(): JSX.Element {
 		return (
 			<Form onSubmit={e => this.handleSubmit(e)} inline>
 				<FormGroup >
@@ -51,12 +35,18 @@ class CategoryAddForm extends React.Component<IAddFormProps, IAddFormState> {
 			</Form>
 		);
 	}
-};
 
-const mapDispatchToProps = (dispatch: any): Object => {
-	return {
-		handleSubmit: (title) => dispatch(addCategory(title)),
-	};
-};
+	private handleChange(e: Event | any): void {
+		let title: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
+		this.setState({ title });
+	}
 
-export default connect(null, mapDispatchToProps)(CategoryAddForm);
+	private handleSubmit(e: Event): void {
+		e.preventDefault();
+
+		store.dispatch(addCategory(this.state.title));
+		this.setState({ title: '' });
+	}
+}
+
+export default CategoryAddForm;

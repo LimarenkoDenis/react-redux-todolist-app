@@ -1,7 +1,7 @@
 import { browserHistory } from 'react-router/lib';
 
 import { CategoryActions, TaskActions } from '../actions/action.types';
-import { CategoryModel } from '../model/category.model';
+import { CategoryModel } from '../models/category.model';
 
 export interface ICategoriesState {
 	list: Array<CategoryModel>;
@@ -31,17 +31,16 @@ const getParentsCategories = (currentId: number, categories: Array<CategoryModel
 const categoryReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
 		case TaskActions[TaskActions.ADD_TASK]:
-			const actId = action.activeCategoryId;
-			const dependCategories = getParentsCategories(actId, state.list);
+			const actId: number = action.activeCategoryId;
+			let dependCategories: Array<number> = getParentsCategories(actId, state.list).concat(actId);
 
-			if (!actId) {
-				return state;
-			} else {
+			if (actId) {
 				return {
 					list: state.list.map(c => dependCategories.indexOf(c.id) !== -1 ? { ...c, tasks: [...c.tasks, action.taskId] } : c),
 					activeCategory: state.activeCategory
 				};
-			}
+			} else
+				return state;
 
 		case CategoryActions[CategoryActions.ADD_CATEGORY]:
 			const nextId: number = state.list.filter(t => String(t.id).length === 1).length + 1;
@@ -72,7 +71,7 @@ const categoryReducer = (state: any = initialState, action: any): Object => {
 			};
 
 		case CategoryActions[CategoryActions.NEST_CATEGORY]:
-			const currentCategory = state.list.find(c => c.id === action.id);
+			const currentCategory: CategoryModel = state.list.find(c => c.id === action.id);
 			let newId: number;
 
 			return {
@@ -100,7 +99,7 @@ const categoryReducer = (state: any = initialState, action: any): Object => {
 			};
 
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
-			const id = action.id;
+			const id: number = action.id;
 			let subsById: Array<number> = action.subs;
 
 			state.list.forEach(c => {

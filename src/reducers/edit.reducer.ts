@@ -1,7 +1,7 @@
 import { browserHistory } from 'react-router/lib';
 
 import { TaskActions } from '../actions/action.types';
-import { TaskModel } from '../model/task.model';
+import { TaskModel } from '../models/task.model';
 
 export interface IEditState {
 	active: boolean;

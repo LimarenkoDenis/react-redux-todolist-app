@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import store from '../../../store';
+
 import { addTask } from '../../../actions/task.actions';
 
 import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
 
 interface IAddFormProps {
-	activeCategory?: number;
-	handleSubmit: (title: string, category?: number) => void;
+	activeCategory: number;
 }
 
 interface IAddFormState {
@@ -17,31 +18,19 @@ interface IAddFormState {
 const CHOOSE_CATEGORY_WARNING: string = 'You need to a choose category to add a task!';
 
 class TaskAddForm extends React.Component<IAddFormProps, IAddFormState> {
+	private activeCategory: number;
 
-	constructor() {
-		super();
+	constructor(props: IAddFormProps) {
+		super(props);
 
 		this.state = { title: '' };
 	}
 
-	private handleChange(e: Event | any): void {
-		let title: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
-
-		this.setState({ title });
+	public componentWillReceiveProps(nextProps: IAddFormProps): void {
+		this.activeCategory = nextProps.activeCategory;
 	}
 
-	private handleSubmit(e: Event): void {
-		e.preventDefault();
-
-		if (this.props.activeCategory) {
-			this.props.handleSubmit(this.state.title, this.props.activeCategory);
-			this.setState({ title: '' });
-		} else {
-			alert(CHOOSE_CATEGORY_WARNING);
-		}
-	}
-
-	public render() {
+	public render(): JSX.Element {
 		return (
 			<Form onSubmit={e => this.handleSubmit(e)} inline>
 				<FormGroup >
@@ -58,6 +47,23 @@ class TaskAddForm extends React.Component<IAddFormProps, IAddFormState> {
 			</Form>
 		);
 	}
+
+	private handleChange(e: Event | any): void {
+		let title: string = e.target.value.replace(/[^(?!' )a-zA-zА-яа-я0-9]+/g, '').replace(/\s{2,}/, ' ');
+
+		this.setState({ title });
+	}
+
+	private handleSubmit(e: Event): void {
+		e.preventDefault();
+
+		if (this.activeCategory) {
+			store.dispatch(addTask(this.state.title, this.activeCategory));
+			this.setState({ title: '' });
+		} else {
+			alert(CHOOSE_CATEGORY_WARNING);
+		}
+	}
 };
 
 const mapStateToProps = (store: any): Object => {
@@ -66,10 +72,4 @@ const mapStateToProps = (store: any): Object => {
 	};
 };
 
-const mapDispatchToProps = (dispatch: any): Object => {
-	return {
-		handleSubmit: (title, category) => dispatch(addTask(title, category)),
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskAddForm);
+export default connect(mapStateToProps)(TaskAddForm);

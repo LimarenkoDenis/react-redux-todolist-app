@@ -39,7 +39,7 @@ export const taskReducer = (state: any = initialState, action: any): Object => {
 
 			return {
 				listById: {
-					...Object.values(state.listById).map(t => t.id !== action.data.id ? t : action.data)
+					...Object.keys(state.listById).map(key => state.listById[key].id !== action.data.id ? state.listById[key] : action.data)
 				},
 				visibleList: state.visibleList
 			};
@@ -47,7 +47,7 @@ export const taskReducer = (state: any = initialState, action: any): Object => {
 		case TaskActions[TaskActions.TOGGLE_TASK]:
 			return {
 				listById: {
-					...Object.values(state.listById).map(t => t.id !== action.data ? t : { ...t, active: !t.active })
+					...Object.keys(state.listById).map(key => state.listById[key].id !== action.data ? state.listById[key] : { ...state.listById[key], active: !state.listById[key].active })
 				},
 				visibleList: state.visibleList
 			};
@@ -61,7 +61,7 @@ export const taskReducer = (state: any = initialState, action: any): Object => {
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
 			return {
 				listById: {
-					...Object.values(state.listById).filter(t => action.data.tasks.indexOf(t.id) === -1)
+					...Object.keys(state.listById).filter(key => action.data.tasks.indexOf(state.listById[key].id) === -1)
 				},
 				visibleList: state.visibleList
 			};

@@ -13,20 +13,18 @@ const initialState: IEditState = {
 	task: null
 };
 
-const editReducer = (state: any = initialState, action: any): Object => {
+export const editReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
-		case TaskActions[TaskActions.EDIT_TASK]:
-			const {id, title, active, description}: TaskModel = action;
-
-			browserHistory.push(`edit_${title.split(' ').join('_')}`);
-
-			return {
-				active: true,
-				task: { id, title, active, description }
-			};
-
 		case TaskActions[TaskActions.CANCEL_TASK_EDIT]:
 			return { active: false, task: null };
+
+		case TaskActions[TaskActions.EDIT_TASK]:
+			//for jest tests
+			try {
+				browserHistory.push(`edit_${action.data.title.split(' ').join('_')}`);
+			} catch (err) { }
+
+			return { active: true, task: action.data };
 
 		case TaskActions[TaskActions.SAVE_TASK]:
 			return { active: false, task: null };

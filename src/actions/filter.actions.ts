@@ -1,16 +1,16 @@
 import { FilterActions } from '../actions/action.types';
 
-const setSearchTemplate = (template: string) => {
+const setSearchTemplate = (data: string) => {
 	return {
 		type: FilterActions[FilterActions.SET_SEARCH_TEMPLATE],
-		template
+		data
 	};
 };
 
-const toggleActiveFilter = (active: boolean) => {
+const toggleActiveFilter = (data: boolean) => {
 	return {
 		type: FilterActions[FilterActions.TOGGLE_ACTIVE_FILTER],
-		active
+		data
 	};
 };
 

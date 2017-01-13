@@ -17,8 +17,7 @@ const initialState: ICategoriesState = {
 };
 
 const getParentsCategories = (currentId: number, categories: Array<CategoryModel>, resultIds: Array<number> = []): Array<number> => {
-
-	categories.forEach((c) => {
+	categories.forEach(c => {
 		if (c.subs.indexOf(currentId) !== -1) {
 			resultIds.push(c.id);
 			getParentsCategories(c.id, categories, resultIds);
@@ -28,79 +27,43 @@ const getParentsCategories = (currentId: number, categories: Array<CategoryModel
 	return resultIds;
 };
 
-const categoryReducer = (state: any = initialState, action: any): Object => {
+export const categoryReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
-		case TaskActions[TaskActions.ADD_TASK]:
-			const actId: number = action.activeCategoryId;
-			let dependCategories: Array<number> = getParentsCategories(actId, state.list).concat(actId);
-
-			if (actId) {
-				return {
-					list: state.list.map(c => dependCategories.indexOf(c.id) !== -1 ? { ...c, tasks: [...c.tasks, action.taskId] } : c),
-					activeCategory: state.activeCategory
-				};
-			} else
-				return state;
-
 		case CategoryActions[CategoryActions.ADD_CATEGORY]:
-			const nextId: number = state.list.filter(t => String(t.id).length === 1).length + 1;
-
 			return {
 				list: [
 					...state.list,
-					{ id: nextId, title: action.title, subs: [], tasks: [], parentId: null, expanded: false, level: null, edit: false }
+					{ id: action.data.id, title: action.data.title, subs: [], tasks: [], parentId: null, expanded: false, level: null, edit: false }
+				],
+				activeCategory: state.activeCategory
+			};
+
+		case CategoryActions[CategoryActions.ADD_SUBCATEGORY]:
+			const newCategoryId: number = Number(`${action.data.parentId}${action.data.parentSubSize + 1}`);
+			const newCategoryTitle: string = String(newCategoryId).split('').join('_');
+
+			return {
+				list: [
+					...state.list.map(c => c.id !== action.data.parentId ? c : { ...c, subs: [...c.subs, newCategoryId], expanded: true }),
+					{
+						id: newCategoryId, title: `category ${newCategoryTitle}`,
+						subs: [], tasks: [], expanded: true, level: null, edit: false, parentId: action.data.parentId
+					}
 				],
 				activeCategory: state.activeCategory
 			};
 
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
-			browserHistory.push(`${action.title.split(' ').join('')}`);
+			//for jest tests
+			try {
+				browserHistory.push(`${action.data.title.split(' ').join('')}`);
+			} catch (err) { }
 
-			return { list: state.list, activeCategory: action.id };
-
-		case CategoryActions[CategoryActions.EDIT_CATEGORY]:
-			return {
-				list: state.list.map(c => c.id !== action.id ? c : c.edit ? { ...c, edit: !c.edit, title: action.title } : { ...c, edit: !c.edit }),
-				activeCategory: state.activeCategory
-			};
-
-		case CategoryActions[CategoryActions.TOGGLE_CATEGORY]:
-			return {
-				list: state.list.map(c => c.id !== action.id ? c : { ...c, expanded: !c.expanded }),
-				activeCategory: state.activeCategory
-			};
-
-		case CategoryActions[CategoryActions.NEST_CATEGORY]:
-			const currentCategory: CategoryModel = state.list.find(c => c.id === action.id);
-			let newId: number;
-
-			return {
-				list: state.list.map(c => {
-					let parentNode: number;
-
-					if (c.subs.indexOf(action.id) !== -1) {
-						return { ...c, subs: c.subs.filter(id => id !== action.id), tasks: c.tasks.filter(id => currentCategory.tasks.indexOf(id) === -1) };
-					}
-
-					if (c.id !== action.id || !c.parentId) return c;
-
-					if (String(c.parentId).length === 1) {
-						parentNode = null;
-						newId = state.list.filter(c => String(c.id).length === 1).length + 1;
-					} else {
-						parentNode = Number(String(action.id).slice(0, -2));
-						newId = Number(String(parentNode) + String(state.list.find(c => c.id === parentNode).subs.length + 1));
-						state.list.find(c => c.id === parentNode).subs.push(newId);
-					}
-
-					return { ...c, parentId: parentNode, id: newId };
-				}),
-				activeCategory: newId
-			};
+			return { list: state.list, activeCategory: action.data.id };
 
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
-			const id: number = action.id;
-			let subsById: Array<number> = action.subs;
+			const deleteId: number = action.data.id;
+			let subsById: Array<number> = action.data.subs;
 
 			state.list.forEach(c => {
 				if (subsById.indexOf(c.id) !== -1 && c.subs.length) {
@@ -110,25 +73,63 @@ const categoryReducer = (state: any = initialState, action: any): Object => {
 
 			return {
 				list: state.list
-					.filter(c => c.id !== id && subsById.indexOf(c.id) === -1)
-					.map(c => c.subs.indexOf(id) !== -1 ? { ...c, subs: c.subs.filter(s => s !== id) } : c),
-				activeCategory: state.activeCategory ? state.activeCategory : state.activeCategory.id === id ? null : state.activeCategory
+					.filter(c => c.id !== deleteId && subsById.indexOf(c.id) === -1)
+					.map(c => c.subs.indexOf(deleteId) !== -1 ? { ...c, subs: c.subs.filter(s => s !== deleteId) } : c),
+				activeCategory: state.activeCategory ? state.activeCategory : state.activeCategory.id === deleteId ? null : state.activeCategory
 			};
 
-		case CategoryActions[CategoryActions.ADD_SUBCATEGORY]:
-			const newCategoryId: number = Number(`${action.parentId}${action.parentSubSize + 1}`);
-			const newCategoryTitle: string = String(newCategoryId).split('').join('_');
-
+		case CategoryActions[CategoryActions.EDIT_CATEGORY]:
 			return {
-				list: [
-					...state.list.map(c => c.id !== action.parentId ? c : { ...c, subs: [...c.subs, newCategoryId], expanded: true }),
-					{
-						id: newCategoryId, title: `category ${newCategoryTitle}`,
-						subs: [], tasks: [], expanded: true, level: null, edit: false, parentId: action.parentId
-					}
-				],
+				list: state.list.map(c => c.id !== action.data.id ? c : c.edit ? { ...c, edit: !c.edit, title: action.data.title } : { ...c, edit: !c.edit }),
 				activeCategory: state.activeCategory
 			};
+
+		case CategoryActions[CategoryActions.NEST_CATEGORY]:
+			const nestId = action.data;
+			const currentCategory: CategoryModel = state.list.find(c => c.id === nestId);
+			let newId: number;
+
+			return {
+				list: state.list.map(c => {
+					let parentNode: number;
+
+					if (c.subs.indexOf(nestId) !== -1) {
+						return { ...c, subs: c.subs.filter(id => id !== nestId), tasks: c.tasks.filter(id => currentCategory.tasks.indexOf(id) === -1) };
+					}
+
+					if (c.id !== nestId || !c.parentId) return c;
+
+					if (String(c.parentId).length === 1) {
+						parentNode = null;
+						newId = state.list.filter(c => String(c.id).length === 1).length + 1000;
+					} else {
+						parentNode = Number(String(nestId).slice(0, -2));
+						newId = Number(String(parentNode) + String(state.list.find(c => c.id === parentNode).subs.length + 1));
+						state.list.find(c => c.id === parentNode).subs.push(newId);
+					}
+
+					return { ...c, parentId: parentNode, id: newId };
+				}),
+				activeCategory: newId
+			};
+
+		case CategoryActions[CategoryActions.TOGGLE_CATEGORY]:
+			return {
+				list: state.list.map(c => c.id !== action.data ? c : { ...c, expanded: !c.expanded }),
+				activeCategory: state.activeCategory
+			};
+
+		case TaskActions[TaskActions.ADD_TASK]:
+			const addActId: number = action.data.categoryId;
+			let dependCategories: Array<number> = getParentsCategories(addActId, state.list).concat(addActId);
+
+			if (addActId) {
+				return {
+					list: state.list.map(c => dependCategories.indexOf(c.id) !== -1 ? { ...c, tasks: [...c.tasks, action.data.taskId] } : c),
+					activeCategory: state.activeCategory
+				};
+			} else
+				return state;
 
 		default:
 			return state;

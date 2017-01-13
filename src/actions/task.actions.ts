@@ -1,14 +1,16 @@
 import { TaskActions } from './action.types';
 import { TaskModel } from '../models/task.model';
 
-let NEXT_ROOT_TASK_ID = 4;
+export let NEXT_ROOT_TASK_ID: number = 4;
 
-const addTask = (title: string, category: number) => {
+const addTask = (taskTitle: string, categoryId: number) => {
 	return {
 		type: TaskActions[TaskActions.ADD_TASK],
-		taskId: NEXT_ROOT_TASK_ID++,
-		taskTitle: title,
-		activeCategoryId: category
+		data: {
+			taskId: NEXT_ROOT_TASK_ID++,
+			taskTitle,
+			categoryId
+		}
 	};
 };
 
@@ -21,29 +23,31 @@ const cancelTaskEdit = () => {
 const chooseTask = (id: number, title: string) => {
 	return {
 		type: TaskActions[TaskActions.CHOOSE_TASK],
-		id,
-		title
+		data: {
+			id,
+			title
+		}
 	};
 };
 
-const editTask = (task: TaskModel) => {
+const editTask = (data: TaskModel) => {
 	return {
 		type: TaskActions[TaskActions.EDIT_TASK],
-		...task
+		data
 	};
 };
 
-const saveTask = (task: TaskModel) => {
+const saveTask = (data: TaskModel) => {
 	return {
 		type: TaskActions[TaskActions.SAVE_TASK],
-		task: { ...task }
+		data
 	};
 };
 
 const toggleTask = (id: number) => {
 	return {
 		type: TaskActions[TaskActions.TOGGLE_TASK],
-		id
+		data: id
 	};
 };
 

@@ -11,7 +11,7 @@ interface ICategoryItemProps {
 	editState: IEditState;
 	onAddClick: (id: number, subs: Array<number>) => void;
 	onArrowClick: (id: number) => void;
-	onDeleteClick: (id: number, title: string, subs: Array<number>, tasks: Array<number>) => void;
+	onDeleteClick: (data: CategoryModel) => void;
 	onEditClick: (id: number, title: string) => void;
 	onExpandClick: (id: number) => void;
 	onLIClick: (id: number, title: string, tasks: Array<number>) => void;
@@ -82,10 +82,10 @@ export class Category extends React.Component<ICategoryItemProps, any> {
 	}
 
 	private handleDeleteClick(): void {
-		const {id, title, subs, tasks } = this.props.category;
+		const category = this.props.category;
 
-		if (confirm(CATEGORY_DELETE_QUESTION(title))) {
-			this.props.onDeleteClick(id, title, subs, tasks);
+		if (confirm(CATEGORY_DELETE_QUESTION(category.title))) {
+			this.props.onDeleteClick(category);
 		}
 	}
 }

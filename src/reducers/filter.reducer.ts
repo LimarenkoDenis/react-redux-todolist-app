@@ -12,21 +12,24 @@ const initialState: IFilterState = {
 	searchTemplate: ''
 };
 
-const filterReducer = (state: any = initialState, action: any): Object => {
+export const filterReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
 		case FilterActions[FilterActions.TOGGLE_ACTIVE_FILTER]:
-			if (action.active) {
-				browserHistory.push('active');
-			} else {
-				browserHistory.push('all');
-			}
+			//for jest tests
+			try {
+				if (action.data) {
+					browserHistory.push('active');
+				} else {
+					browserHistory.push('all');
+				}
+			} catch (err) { }
 
-			return { ...state, active: action.active };
+			return { ...state, active: action.data };
 
 		case FilterActions[FilterActions.SET_SEARCH_TEMPLATE]:
 			return {
 				...state,
-				searchTemplate: action.template
+				searchTemplate: action.data
 			};
 
 		default:

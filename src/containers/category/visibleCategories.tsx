@@ -38,7 +38,7 @@ class VisibleCategories extends React.Component<IVisibleCategoriesProps, any> {
 		);
 
 		return (
-			<ListGroup>
+			<ListGroup style={{ overflowY: 'auto', height: '370px' }}>
 				{categories}
 			</ListGroup>
 		);
@@ -95,8 +95,8 @@ class VisibleCategories extends React.Component<IVisibleCategoriesProps, any> {
 		store.dispatch(chooseCategory(id, title, tasks));
 	}
 
-	private onDeleteClick(id: number, title: string, subs: Array<number>, tasks: Array<number>): void {
-		store.dispatch(deleteCategory(id, title, subs, tasks));
+	private onDeleteClick(category: CategoryModel): void {
+		store.dispatch(deleteCategory(category));
 	}
 
 	private onArrowClick(id: number): void {

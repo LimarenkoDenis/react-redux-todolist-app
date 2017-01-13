@@ -35,7 +35,7 @@ class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 		);
 
 		return (
-			<ListGroup style={{ heigth: `${filteredTasks.length}px` }}>
+			<ListGroup style={{ overflowY: 'auto', height: '370px' }}>
 				{tasks}
 			</ListGroup>
 		);

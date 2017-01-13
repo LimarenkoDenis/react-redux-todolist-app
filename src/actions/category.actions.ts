@@ -1,61 +1,67 @@
 import { CategoryActions } from './action.types';
+import { CategoryModel } from '../models/category.model';
 
-let NEXT_CATEGORY_ID = 2;
+export let NEXT_ROOT_CATEGORY_ID: number = 2;
 
 const addCategory = (title: string) => {
 	return {
 		type: CategoryActions[CategoryActions.ADD_CATEGORY],
-		title
+		data: {
+			id: NEXT_ROOT_CATEGORY_ID++,
+			title
+		}
 	};
 };
 
 const addSubcategory = (parentId: number, parentSubSize: number) => {
 	return {
 		type: CategoryActions[CategoryActions.ADD_SUBCATEGORY],
-		id: NEXT_CATEGORY_ID++,
-		parentSubSize,
-		parentId,
+		data: {
+			parentId,
+			parentSubSize
+		}
 	};
 };
 
 const chooseCategory = (id: number, title: string, tasks: Array<number>) => {
 	return {
 		type: CategoryActions[CategoryActions.CHOOSE_CATEGORY],
-		id,
-		title,
-		tasks
+		data: {
+			id,
+			title,
+			tasks
+		}
 	};
 };
 
-const deleteCategory = (id: number, title: string, subs: Array<number>, tasks: Array<number>) => {
+const deleteCategory = (data: CategoryModel) => {
 	return {
 		type: CategoryActions[CategoryActions.DELETE_CATEGORY],
-		id,
-		title,
-		subs,
-		tasks
+		data
 	};
 };
 
 const editCategory = (id: number, title: string) => {
 	return {
 		type: CategoryActions[CategoryActions.EDIT_CATEGORY],
-		id,
-		title
+		data: {
+			id,
+			title
+		}
 	};
 };
 
 const nestCategory = (id: number) => {
 	return {
 		type: CategoryActions[CategoryActions.NEST_CATEGORY],
-		id
+		data: id
 	};
 };
 
 const toggleCategory = (id: number) => {
 	return {
 		type: CategoryActions[CategoryActions.TOGGLE_CATEGORY],
-		id
+		data: id
 	};
 };
 

@@ -21,29 +21,25 @@ const initialState: ITasksState = {
 
 const TASK_SAVE_INFORMATION = (title: string): string => `Task "${title}" has been saved successfully!`;
 
-const taskReducer = (state: any = initialState, action: any): Object => {
+export const taskReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
 		case TaskActions[TaskActions.ADD_TASK]:
-			const id: number = action.taskId;
+			const addId: number = action.data.taskId;
 
 			return {
 				listById: {
 					...state.listById,
-					[id]: { id: id, title: action.taskTitle, active: true, description: '' }
+					[addId]: { id: addId, title: action.data.taskTitle, active: true, description: '' }
 				},
-				visibleList: [...state.visibleList, id]
+				visibleList: [...state.visibleList, addId]
 			};
 
-		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
-			return {
-				listById: state.listById,
-				visibleList: [...action.tasks]
-			};
+		case TaskActions[TaskActions.SAVE_TASK]:
+			alert(TASK_SAVE_INFORMATION(action.data.title));
 
-		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
 			return {
 				listById: {
-					...Object.values(state.listById).filter(t => action.tasks.indexOf(t.id) === -1)
+					...Object.values(state.listById).map(t => t.id !== action.data.id ? t : action.data)
 				},
 				visibleList: state.visibleList
 			};
@@ -51,17 +47,21 @@ const taskReducer = (state: any = initialState, action: any): Object => {
 		case TaskActions[TaskActions.TOGGLE_TASK]:
 			return {
 				listById: {
-					...Object.values(state.listById).map(t => t.id !== action.id ? t : { ...t, active: !t.active })
+					...Object.values(state.listById).map(t => t.id !== action.data ? t : { ...t, active: !t.active })
 				},
 				visibleList: state.visibleList
 			};
 
-		case TaskActions[TaskActions.SAVE_TASK]:
-			alert(TASK_SAVE_INFORMATION(action.task.title));
+		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
+			return {
+				listById: state.listById,
+				visibleList: [...action.data.tasks]
+			};
 
+		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
 			return {
 				listById: {
-					...Object.values(state.listById).map(t => t.id !== action.task.id ? t : action.task)
+					...Object.values(state.listById).filter(t => action.data.tasks.indexOf(t.id) === -1)
 				},
 				visibleList: state.visibleList
 			};

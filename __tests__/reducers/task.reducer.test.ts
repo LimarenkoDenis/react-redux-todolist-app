@@ -4,9 +4,9 @@ import { CategoryActions, TaskActions } from '../../src/actions/action.types';
 
 describe('Task reducer tests', () => {
 	const initialState: ITasksState = {
-		listById: {
-			1: { id: 1, title: 'task 1', active: false, description: 'description...' }
-		},
+		list: [
+			{ id: 1, title: 'task 1', active: false, description: 'description...' }
+		],
 		visibleList: []
 	};
 
@@ -25,10 +25,10 @@ describe('Task reducer tests', () => {
 				}
 			})
 		).toEqual({
-			listById: {
-				1: { id: 1, title: 'task 1', active: false, description: 'description...' },
-				2: { id: 2, title: 'task 2', active: true, description: '' }
-			},
+			list: [
+				{ id: 1, title: 'task 1', active: false, description: 'description...' },
+				{ id: 2, title: 'task 2', active: true, description: '' }
+			],
 			visibleList: [2]
 		});
 	});
@@ -37,27 +37,26 @@ describe('Task reducer tests', () => {
 		expect(
 			taskReducer(initialState, {
 				type: TaskActions[TaskActions.SAVE_TASK],
-				data: { id: 2, title: 'my task', active: false, description: 'lalala' }
+				data: { id: 1, title: 'new task 1', active: false, description: 'new description...' }
 			})
 		).toEqual({
-			listById: {
-				1: { id: 1, title: 'task 1', active: false, description: 'description...' },
-				2: { id: 2, title: 'my task', active: false, description: 'lalala' }
-			},
-			visibleList: [2]
+			list: [
+				{ id: 1, title: 'new task 1', active: false, description: 'new description...' }
+			],
+			visibleList: []
 		});
 	});
 
-	it('Should set active state of chosen task to true', () => {
+	it('Should set active state of chosen task to reverse value', () => {
 		expect(
 			taskReducer(initialState, {
 				type: TaskActions[TaskActions.TOGGLE_TASK],
 				data: 1
 			})
 		).toEqual({
-			listById: {
-				1: { id: 1, title: 'task 1', active: true, description: 'description...' }
-			},
+			list: [
+				{ id: 1, title: 'task 1', active: true, description: 'description...' }
+			],
 			visibleList: []
 		});
 	});
@@ -73,9 +72,9 @@ describe('Task reducer tests', () => {
 				}
 			})
 		).toEqual({
-			listById: {
-				1: { id: 1, title: 'task 1', active: false, description: 'description...' }
-			},
+			list: [
+				{ id: 1, title: 'task 1', active: false, description: 'description...' }
+			],
 			visibleList: [1]
 		});
 	});
@@ -89,9 +88,8 @@ describe('Task reducer tests', () => {
 				}
 			})
 		).toEqual({
-			listById: {},
+			list: [],
 			visibleList: []
 		});
 	});
-
 });

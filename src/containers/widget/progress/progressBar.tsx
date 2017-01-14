@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { ITaskListById } from '../../../reducers';
+import { TaskModel } from '../../../models/task.model';
 
 import { ProgressBar as Bar } from 'react-bootstrap';
 
 interface IProgressBarProps {
-	tasks: ITaskListById;
+	tasks: Array<TaskModel>;
 }
 
 class ProgressBar extends React.Component<IProgressBarProps, any> {
-	private getAppProgress(list: ITaskListById): number {
-		let completed: number = Object.values(list).filter(t => !t.active).length;
-		let all: number = Object.keys(list).length;
+	private getAppProgress(list: Array<TaskModel>): number {
+		let completed: number = list.filter(t => !t.active).length;
+		let all: number = list.length;
 
 		return Math.round(completed / all * 100);
 	}
@@ -28,7 +28,7 @@ class ProgressBar extends React.Component<IProgressBarProps, any> {
 
 const mapStateToProps = (store: any): Object => {
 	return {
-		tasks: store.present.tasks.listById,
+		tasks: store.present.tasks.list,
 	};
 };
 

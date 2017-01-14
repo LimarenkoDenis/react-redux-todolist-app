@@ -1,21 +1,17 @@
 import { TaskActions, CategoryActions } from '../actions/action.types';
 import { TaskModel } from '../models/task.model';
 
-export interface ITaskListById {
-	[id: number]: TaskModel;
-}
-
 export interface ITasksState {
-	listById: ITaskListById;
+	list: Array<TaskModel>;
 	visibleList: Array<number>;
 }
 
 const initialState: ITasksState = {
-	listById: {
-		1: { id: 1, title: 'make coffee', active: false, description: 'Huhuhue' },
-		2: { id: 2, title: 'drink coffee', active: true, description: 'Glug, glug, glug' },
-		3: { id: 3, title: 'do it again', active: true, description: '' }
-	},
+	list: [
+		{ id: 1, title: 'make coffee', active: false, description: 'Huhuhue' },
+		{ id: 2, title: 'drink coffee', active: true, description: 'Glug, glug, glug' },
+		{ id: 3, title: 'do it again', active: true, description: '' }
+	],
 	visibleList: []
 };
 
@@ -27,10 +23,10 @@ export const taskReducer = (state: any = initialState, action: any): Object => {
 			const addId: number = action.data.taskId;
 
 			return {
-				listById: {
-					...state.listById,
-					[addId]: { id: addId, title: action.data.taskTitle, active: true, description: '' }
-				},
+				list: [
+					...state.list,
+					{ id: addId, title: action.data.taskTitle, active: true, description: '' }
+				],
 				visibleList: [...state.visibleList, addId]
 			};
 
@@ -38,31 +34,31 @@ export const taskReducer = (state: any = initialState, action: any): Object => {
 			alert(TASK_SAVE_INFORMATION(action.data.title));
 
 			return {
-				listById: {
-					...Object.keys(state.listById).map(key => state.listById[key].id !== action.data.id ? state.listById[key] : action.data)
-				},
+				list: [
+					...state.list.map(t => t.id !== action.data.id ? t : action.data)
+				],
 				visibleList: state.visibleList
 			};
 
 		case TaskActions[TaskActions.TOGGLE_TASK]:
 			return {
-				listById: {
-					...Object.keys(state.listById).map(key => state.listById[key].id !== action.data ? state.listById[key] : { ...state.listById[key], active: !state.listById[key].active })
-				},
+				list: [
+					...state.list.map(t => t.id !== action.data ? t : { ...t, active: !t.active })
+				],
 				visibleList: state.visibleList
 			};
 
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
 			return {
-				listById: state.listById,
+				list: state.list,
 				visibleList: [...action.data.tasks]
 			};
 
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
 			return {
-				listById: {
-					...Object.keys(state.listById).filter(key => action.data.tasks.indexOf(state.listById[key].id) === -1)
-				},
+				list: [
+					...state.list.filter(t => action.data.tasks.indexOf(t.id) === -1)
+				],
 				visibleList: state.visibleList
 			};
 

@@ -8,7 +8,7 @@ import { TaskModel } from '../../models/task.model';
 
 import { Task } from '../../components';
 
-import { IFilterState, ITaskListById, ITasksState } from '../../reducers';
+import { IFilterState, ITasksState } from '../../reducers';
 
 import { ListGroup } from 'react-bootstrap';
 
@@ -19,9 +19,9 @@ interface IVisibleTasksProps {
 
 class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 	public render(): JSX.Element {
-		const { tasks: {listById, visibleList}, filterState} = this.props;
+		const { tasks: {list, visibleList}, filterState} = this.props;
 
-		let filteredTasks: Array<TaskModel> = this.getFilteredTasks(listById, visibleList, filterState);
+		let filteredTasks: Array<TaskModel> = this.getFilteredTasks(list, visibleList, filterState);
 
 		let tasks: Array<JSX.Element> = filteredTasks.map(t =>
 			<Task
@@ -41,8 +41,8 @@ class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 		);
 	}
 
-	private getFilteredTasks(taskListById: ITaskListById, visibleTaskArray: Array<number>, filter: IFilterState): Array<TaskModel> {
-		let visibleList: Array<TaskModel> = [...Object.values(taskListById).filter(t => visibleTaskArray.indexOf(t.id) !== -1)];
+	private getFilteredTasks(taskList: Array<TaskModel>, visibleTaskArray: Array<number>, filter: IFilterState): Array<TaskModel> {
+		let visibleList: Array<TaskModel> = [...taskList.filter(t => visibleTaskArray.indexOf(t.id) !== -1)];
 		let filteredList: Array<TaskModel>;
 
 		if (filter.searchTemplate) {
@@ -71,7 +71,7 @@ class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 const mapStateToProps = (store: any): Object => {
 	return {
 		tasks: {
-			listById: store.present.tasks.listById,
+			list: store.present.tasks.list,
 			visibleList: store.present.tasks.visibleList
 		},
 		filterState: store.present.filterState

@@ -151,5 +151,4 @@ describe('Category reducer tests', () => {
 			activeCategory: 1
 		});
 	});
-
 });

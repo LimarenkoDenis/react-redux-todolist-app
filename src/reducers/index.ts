@@ -6,7 +6,7 @@ import categoryReducer from './category.reducer';
 import filterReducer from './filter.reducer';
 import editReducer from './edit.reducer';
 
-export { ITasksState, ITaskListById } from './task.reducer';
+export { ITasksState } from './task.reducer';
 export { ICategoriesState } from './category.reducer';
 export { IFilterState } from './filter.reducer';
 export { IEditState } from './edit.reducer';

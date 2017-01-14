@@ -12,3 +12,7 @@ npm-debug.log
 
 # lint
 /tslint.json
+
+# test
+coverage
+.coveralls.yml

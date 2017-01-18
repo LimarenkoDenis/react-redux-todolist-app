@@ -6,8 +6,9 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "test": "jest --coverage",
-    "test:watch": "jest --watch --coverage",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
   "jest": {
@@ -16,6 +17,9 @@
       "tsx",
       "js"
     ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
@@ -33,11 +37,15 @@
   },
   "homepage": "https://github.com/rodinwow/react-redux-todolist-app#readme",
   "devDependencies": {
+    "@types/enzyme": "^2.7.1",
     "@types/jest": "^16.0.4",
     "coveralls": "^2.11.15",
     "css-loader": "^0.26.1",
+    "enzyme": "^2.7.0",
     "file-loader": "^0.9.0",
     "jest": "^18.1.0",
+    "react-addons-test-utils": "^15.4.2",
+    "sinon": "^1.17.7",
     "style-loader": "^0.13.1",
     "ts-jest": "^18.0.1",
     "ts-loader": "^1.3.3",

@@ -6,7 +6,7 @@ import { IEditState } from '../../reducers';
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
 import './category.css';
 
-interface ICategoryItemProps {
+export interface ICategoryItemProps {
 	category: CategoryModel;
 	editState: IEditState;
 	onAddClick: (id: number, subs: Array<number>) => void;

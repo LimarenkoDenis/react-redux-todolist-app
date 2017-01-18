@@ -17,7 +17,7 @@ interface IVisibleTasksProps {
 	filterState: IFilterState;
 }
 
-class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
+export class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 	public render(): JSX.Element {
 		const { tasks: {list, visibleList}, filterState} = this.props;
 
@@ -31,7 +31,7 @@ class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 				onLIClick={(id, title) => this.onLIClick(t.id, t.title)}
 				onCheckClick={id => this.onCheckClick(t.id)}
 				onEditClick={task => this.onEditClick(t)}
-				/>
+			/>
 		);
 
 		return (

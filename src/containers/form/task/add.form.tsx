@@ -17,7 +17,7 @@ interface IAddFormState {
 
 const CHOOSE_CATEGORY_WARNING: string = 'You need to a choose category to add a task!';
 
-class TaskAddForm extends React.Component<IAddFormProps, IAddFormState> {
+export class TaskAddForm extends React.Component<IAddFormProps, IAddFormState> {
 	private activeCategory: number;
 
 	constructor(props: IAddFormProps) {

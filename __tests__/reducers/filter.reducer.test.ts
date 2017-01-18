@@ -4,7 +4,7 @@ import { FilterActions } from '../../src/actions/action.types';
 
 describe('Filter reducer tests', () => {
 	const initialState: IFilterState = {
-		active: null,
+		active: false,
 		searchTemplate: ''
 	};
 
@@ -19,7 +19,7 @@ describe('Filter reducer tests', () => {
 				data: 'templ'
 			})
 		).toEqual({
-			active: null,
+			active: false,
 			searchTemplate: 'templ'
 		});
 	});

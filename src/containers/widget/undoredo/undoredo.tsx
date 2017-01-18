@@ -11,7 +11,7 @@ interface IUndoRedoProps {
 	canRedo: boolean;
 }
 
-class UndoRedo extends React.Component<IUndoRedoProps, any>{
+export class UndoRedo extends React.Component<IUndoRedoProps, any>{
 	public render(): JSX.Element {
 		const {canUndo, canRedo} = this.props;
 

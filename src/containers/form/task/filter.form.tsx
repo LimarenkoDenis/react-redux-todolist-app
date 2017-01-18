@@ -7,7 +7,7 @@ import { IFilterState } from '../../../reducers';
 
 import { Form, FormGroup, FormControl, Checkbox, Glyphicon } from 'react-bootstrap';
 
-class Filter extends React.Component<any, IFilterState> {
+export class Filter extends React.Component<any, IFilterState> {
 	private visible: boolean = false;
 
 	constructor() {
@@ -32,13 +32,13 @@ class Filter extends React.Component<any, IFilterState> {
 						onChange={e => this.handleFilter(e)}
 						value={this.state.searchTemplate}
 						placeholder='Search'
-						/>
+					/>
 					<Glyphicon
 						glyph='remove-circle'
 						style={{ visibility: this.visible ? 'visible' : 'hidden' }}
 						onClick={e => this.handleClear()}
 						className='search-icon'
-						/>
+					/>
 				</FormGroup>
 			</Form >
 		);

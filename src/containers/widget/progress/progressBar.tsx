@@ -9,7 +9,7 @@ interface IProgressBarProps {
 	tasks: Array<TaskModel>;
 }
 
-class ProgressBar extends React.Component<IProgressBarProps, any> {
+export class ProgressBar extends React.Component<IProgressBarProps, any> {
 	private getAppProgress(list: Array<TaskModel>): number {
 		let completed: number = list.filter(t => !t.active).length;
 		let all: number = list.length;

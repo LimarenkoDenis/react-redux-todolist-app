@@ -5,7 +5,7 @@ import { TaskModel } from '../../models/task.model';
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
 import './task.css';
 
-interface ITaskItemProps {
+export interface ITaskItemProps {
 	title: string;
 	active: boolean;
 	onLIClick: (id: number, title: string) => void;

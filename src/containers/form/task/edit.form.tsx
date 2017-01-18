@@ -16,7 +16,7 @@ interface ITaskEditFormProps {
 	task: TaskModel;
 }
 
-class TaskEditForm extends React.Component<ITaskEditFormProps, TaskModel> {
+export class TaskEditForm extends React.Component<ITaskEditFormProps, TaskModel> {
 
 	constructor(props: ITaskEditFormProps) {
 		super(props);

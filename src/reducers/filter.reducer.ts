@@ -1,6 +1,6 @@
 import { browserHistory } from 'react-router/lib';
 
-import { FilterActions } from '../actions/action.types';
+import { FilterActions } from '../../src/actions/action.types';
 
 export interface IFilterState {
 	active?: boolean;

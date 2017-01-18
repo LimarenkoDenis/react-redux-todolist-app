@@ -10,7 +10,7 @@ interface IAddFormState {
 	title: string;
 }
 
-class CategoryAddForm extends React.Component<any, IAddFormState> {
+export class CategoryAddForm extends React.Component<any, IAddFormState> {
 
 	constructor() {
 		super();
@@ -28,7 +28,7 @@ class CategoryAddForm extends React.Component<any, IAddFormState> {
 						value={this.state.title}
 						placeholder='Enter category title'
 						required
-						/>
+					/>
 				</FormGroup>
 				{' '}
 				<Button type='submit'>Add</Button>

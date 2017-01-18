@@ -1,9 +1,8 @@
 language: node_js
 node_js: 
-- '6.1'
+- '6.2'
 script:
-- npm install cross-env -global
 - npm install
-- npm run test
+- npm run test:coverage
 - npm run build
 after_success: 'npm run coveralls'

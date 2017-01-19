@@ -12,17 +12,16 @@ import { IEditState } from '../../reducers';
 
 import { ListGroup } from 'react-bootstrap';
 
-interface IVisibleCategoriesProps {
+export interface IVisibleCategoriesProps {
 	storedCategories: Array<CategoryModel>;
 	editState: IEditState;
 }
 
-class VisibleCategories extends React.Component<IVisibleCategoriesProps, any> {
+export class VisibleCategories extends React.Component<IVisibleCategoriesProps, any> {
 	public render(): JSX.Element {
 		const {storedCategories, editState} = this.props;
 
 		let visibleCategories = this.getCategoryList(storedCategories, [], 0, storedCategories);
-
 		let categories = visibleCategories.map(c =>
 			<Category
 				key={c.id}
@@ -34,7 +33,7 @@ class VisibleCategories extends React.Component<IVisibleCategoriesProps, any> {
 				onEditClick={this.onEditClick}
 				onLIClick={(id, title, tasks) => this.onLIClick(c.id, c.title, c.tasks)}
 				onDeleteClick={this.onDeleteClick}
-				/>
+			/>
 		);
 
 		return (
@@ -102,7 +101,6 @@ class VisibleCategories extends React.Component<IVisibleCategoriesProps, any> {
 	private onArrowClick(id: number): void {
 		store.dispatch(nestCategory(id));
 	}
-
 }
 
 const mapStateToProps = (store: any): Object => {

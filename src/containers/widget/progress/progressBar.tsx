@@ -5,7 +5,7 @@ import { TaskModel } from '../../../models/task.model';
 
 import { ProgressBar as Bar } from 'react-bootstrap';
 
-interface IProgressBarProps {
+export interface IProgressBarProps {
 	tasks: Array<TaskModel>;
 }
 

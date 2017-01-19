@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import * as sinon from 'sinon';
 
 import { Category } from '../../../src/components';
@@ -18,18 +18,22 @@ describe('Category component tests', () => {
 	const onLIClick: any = jest.fn();
 	const onDeleteClick: any = jest.fn();
 
-	const wrapper: any = mount(
-		<Category
-			editState={editState}
-			category={category}
-			onAddClick={onAddClick}
-			onArrowClick={onArrowClick}
-			onExpandClick={onExpandClick}
-			onEditClick={onEditClick}
-			onLIClick={onLIClick}
-			onDeleteClick={onDeleteClick}
-		/>
-	);
+	let wrapper: any;
+
+	beforeAll(() => {
+		wrapper = mount(
+			<Category
+				editState={editState}
+				category={category}
+				onAddClick={onAddClick}
+				onArrowClick={onArrowClick}
+				onExpandClick={onExpandClick}
+				onEditClick={onEditClick}
+				onLIClick={onLIClick}
+				onDeleteClick={onDeleteClick}
+			/>
+		);
+	});
 
 	it('Should receive category props', () => {
 		expect(wrapper.prop('editState')).toEqual(editState);

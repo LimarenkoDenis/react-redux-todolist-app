@@ -12,7 +12,7 @@ const labelStyle: Object = { margin: '1em 0' };
 
 const TASK_EDIT_QUESTION = 'Do you really want to cancel editing?';
 
-interface ITaskEditFormProps {
+export interface ITaskEditFormProps {
 	task: TaskModel;
 }
 
@@ -24,7 +24,6 @@ export class TaskEditForm extends React.Component<ITaskEditFormProps, TaskModel>
 	}
 
 	public render(): JSX.Element {
-
 		return (
 			<Form onSubmit={e => this.handleSubmit(e)}>
 				<Col mdOffset={8}>
@@ -33,7 +32,7 @@ export class TaskEditForm extends React.Component<ITaskEditFormProps, TaskModel>
 					<Button onClick={() => this.handleCancel()}>Cancel</Button>
 				</Col>
 				<Col md={10}>
-					<FormGroup controlId='formHorizontalEmail'>
+					<FormGroup controlId='formTaskTitle'>
 						<ControlLabel style={labelStyle}>Title</ControlLabel>
 						<FormControl type='text' placeholder='Title' value={this.state.title} onChange={e => this.handleTitleChange(e)} required />
 					</FormGroup>
@@ -42,7 +41,7 @@ export class TaskEditForm extends React.Component<ITaskEditFormProps, TaskModel>
 					<Checkbox checked={this.state.active} onChange={e => this.handleActiveToggle(e)}>Active</Checkbox>
 				</Col>
 				<Col md={10}>
-					<FormGroup controlId='formControlsTextarea' >
+					<FormGroup controlId='formTaskDescription' >
 						<ControlLabel style={labelStyle}>Description</ControlLabel>
 						<FormControl componentClass='textarea' placeholder='Description' value={this.state.description} onChange={e => this.handleDescriptionChange(e)} />
 					</FormGroup>

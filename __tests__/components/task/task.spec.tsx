@@ -11,15 +11,19 @@ describe('Task component tests', () => {
 	const onCheckClick: any = jest.fn();
 	const onEditClick: any = jest.fn();
 
-	const wrapper: any = mount(
-		<Task
-			title={task.title}
-			active={task.active}
-			onLIClick={onLIClick}
-			onCheckClick={onCheckClick}
-			onEditClick={onEditClick}
-		/>
-	);
+	let wrapper: any;
+
+	beforeAll(() => {
+		wrapper = mount(
+			<Task
+				title={task.title}
+				active={task.active}
+				onLIClick={onLIClick}
+				onCheckClick={onCheckClick}
+				onEditClick={onEditClick}
+			/>
+		);
+	});
 
 	it('Should receive task props', () => {
 		expect(wrapper.prop('title')).toBe(task.title);

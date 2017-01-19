@@ -12,7 +12,7 @@ import { IFilterState, ITasksState } from '../../reducers';
 
 import { ListGroup } from 'react-bootstrap';
 
-interface IVisibleTasksProps {
+export interface IVisibleTasksProps {
 	tasks: ITasksState;
 	filterState: IFilterState;
 }
@@ -65,7 +65,6 @@ export class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 	private onEditClick(task: TaskModel): void {
 		store.dispatch(editTask(task));
 	}
-
 }
 
 const mapStateToProps = (store: any): Object => {

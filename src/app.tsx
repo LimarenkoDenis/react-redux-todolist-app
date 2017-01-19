@@ -19,7 +19,9 @@ interface ITodoAppProps {
 export class TodoApp extends React.Component<ITodoAppProps, any> {
 	public render(): JSX.Element {
 		const {children, editState} = this.props;
+
 		let widgets = this.displayWidgets(editState);
+		let tasks = this.displayTasks(editState, children);
 
 		return (
 			<Grid fluid>
@@ -31,7 +33,7 @@ export class TodoApp extends React.Component<ITodoAppProps, any> {
 						<VisibleCategoryList />
 					</Col>
 					<Col xs={7} xsOffset={3} md={7} mdOffset={0}  >
-						{editState.active ? (<TaskEditForm />) : children}
+						{tasks}
 					</Col>
 				</Row>
 			</Grid>
@@ -41,9 +43,13 @@ export class TodoApp extends React.Component<ITodoAppProps, any> {
 	private displayWidgets(editState): JSX.Element {
 		return !editState.active && (<Widgets />);
 	}
+
+	private displayTasks(editState, children): JSX.Element {
+		return !editState.active ? children : (<TaskEditForm />);
+	}
 }
 
-const mapStateToProps = (store: any): Object => {
+export const mapStateToProps = (store: any): Object => {
 	return {
 		editState: store.present.editState
 	};

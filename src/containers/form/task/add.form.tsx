@@ -7,7 +7,7 @@ import { addTask } from '../../../actions/task.actions';
 
 import { Form, FormGroup, FormControl, Button } from 'react-bootstrap';
 
-interface IAddFormProps {
+export interface IAddFormProps {
 	activeCategory: number;
 }
 

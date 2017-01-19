@@ -6,7 +6,7 @@ import store from '../../../store';
 
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
-interface IUndoRedoProps {
+export interface IUndoRedoProps {
 	canUndo: boolean;
 	canRedo: boolean;
 }

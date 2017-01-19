@@ -24,8 +24,4 @@ describe('Edit form tests', () => {
 		expect(descriptionInput.length).toBe(1);
 		expect(activeCheckbox.length).toBe(1);
 	});
-
-	it('Should component render the task correctly', () => {
-		expect(editForm).toMatchSnapshot();
-	});
 });

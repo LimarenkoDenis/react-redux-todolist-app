@@ -12,3 +12,7 @@ React-Redux-Todolist-App
 - [x] Filter and selected task must be in URL
 - [x] Add Undo/Redo
 - [x] Add tests
+
+### Preview:
+
+![app pic](https://github.com/rodinwow/screenshots/blob/master/react-redux-todolist-app.png)

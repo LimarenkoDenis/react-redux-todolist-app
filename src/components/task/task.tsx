@@ -3,7 +3,7 @@ import * as React from 'react';
 import { TaskModel } from '../../models/task.model';
 
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
-import './task.css';
+import './task.less';
 
 export interface ITaskItemProps {
 	title: string;

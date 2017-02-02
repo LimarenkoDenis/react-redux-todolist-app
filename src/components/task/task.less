@@ -1,0 +1,32 @@
+@borderColor: #000;
+@textColor: #000;
+
+@rightAlignedIcon: 'span.icon-right-align';
+
+button.task-item {
+	padding: 1.5em 1em;
+	color: @textColor;
+	border-color: @borderColor;
+	border-radius: 0;
+	input {
+		text-align: center;
+		border: none;
+		background-color: inherit;
+	}
+	&.item-checked input {
+		text-decoration: line-through;
+		opacity: .3;
+	}
+	&:hover {
+		transition: background-color .5s cubic-bezier(.19, 1, .22, 1);
+		@{rightAlignedIcon} {
+			visibility: visible;
+		}
+		span + input {
+			cursor: pointer;
+		}
+	}
+	@{rightAlignedIcon} {
+		visibility: hidden;
+	}
+}

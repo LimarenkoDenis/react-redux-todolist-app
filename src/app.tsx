@@ -10,7 +10,7 @@ import UndoRedo from './containers/widget/undoredo/undoredo';
 import { IEditState } from './reducers';
 
 import { Col, Row, Grid } from 'react-bootstrap';
-import './styles.css';
+import './styles.less';
 
 interface ITodoAppProps {
 	editState: IEditState;
@@ -29,7 +29,7 @@ export class TodoApp extends React.Component<ITodoAppProps, any> {
 				<UndoRedo />
 				{widgets}
 				<Row className='todo-content-container'>
-					<Col xs={6} xsOffset={3} md={5} mdOffset={0} className='content-container__category'>
+					<Col xs={6} xsOffset={3} md={5} mdOffset={0} className='category'>
 						<VisibleCategoryList />
 					</Col>
 					<Col xs={7} xsOffset={3} md={7} mdOffset={0}  >

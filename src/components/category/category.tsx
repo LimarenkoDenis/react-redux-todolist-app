@@ -4,7 +4,7 @@ import { CategoryModel } from '../../models/category.model';
 import { IEditState } from '../../reducers';
 
 import { Glyphicon, ListGroupItem } from 'react-bootstrap';
-import './category.css';
+import './category.less';
 
 export interface ICategoryItemProps {
 	category: CategoryModel;

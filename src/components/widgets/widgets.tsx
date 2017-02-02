@@ -6,7 +6,7 @@ import TaskAddForm from '../../containers/form/task/add.form';
 import CategoryAddForm from '../../containers/form/category/add.form';
 
 import { Col, Row } from 'react-bootstrap';
-import './widgets.css';
+import './widgets.less';
 
 export const Widgets = (): JSX.Element => {
 	return (
@@ -20,10 +20,10 @@ export const Widgets = (): JSX.Element => {
 				</Col>
 			</Row>
 			<Row className='todo-form-container'>
-				<Col md={4} className='form-container__add-form'>
+				<Col md={4} className='add-form'>
 					<CategoryAddForm />
 				</Col>
-				<Col mdOffset={8} className='form-container__add-form'>
+				<Col mdOffset={8} className='add-form'>
 					<TaskAddForm />
 				</Col>
 			</Row>

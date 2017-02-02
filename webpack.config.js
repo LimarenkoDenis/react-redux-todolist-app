@@ -20,13 +20,13 @@ var common = {
 				loader: 'ts-loader'
 			},
 			{
-				test: /\.css$/,
+				test: /\.(css|less)$/,
 				exclude: /node_modules/,
-				loader: 'style-loader!css-loader'
+				loader: 'style-loader!css-loader!less-loader'
 			},
 			{
 				test: /\.(son)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-				loader: 'file-loader',
+				loader: 'file-loader	',
 				exclude: 'node_modules'
 			},
 			{

@@ -15,4 +15,4 @@ React-Redux-Todolist-App
 
 ### Preview:
 
-![app pic](https://github.com/rodinwow/screenshots/blob/master/react-redux-todolist-app.png)
+![app pic](https://github.com/rodinwow/screenshots/blob/master/react-redux-todolist-app.gif)

@@ -38,7 +38,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 				activeCategory: state.activeCategory
 			};
 
-		case CategoryActions[CategoryActions.ADD_SUBCATEGORY]:
+		case CategoryActions[CategoryActions.ADD_SUBCATEGORY]: {
 			const newCategoryId: number = Number(`${action.data.parentId}${action.data.parentSubSize + 1}`);
 			const newCategoryTitle: string = String(newCategoryId).split('').join('_');
 
@@ -52,8 +52,9 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 				],
 				activeCategory: state.activeCategory
 			};
+		}
 
-		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]:
+		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]: {
 			//for jest tests
 			try {
 				browserHistory.push(`${action.data.title.split(' ').join('')}`);
@@ -61,7 +62,8 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 
 			return { list: state.list, activeCategory: action.data.id };
 
-		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
+		}
+		case CategoryActions[CategoryActions.DELETE_CATEGORY]: {
 			const deleteId: number = action.data.id;
 			let subsById: Array<number> = action.data.subs;
 
@@ -77,6 +79,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 					.map(c => c.subs.indexOf(deleteId) !== -1 ? { ...c, subs: c.subs.filter(s => s !== deleteId) } : c),
 				activeCategory: state.activeCategory ? state.activeCategory : state.activeCategory.id === deleteId ? null : state.activeCategory
 			};
+		}
 
 		case CategoryActions[CategoryActions.EDIT_CATEGORY]:
 			return {
@@ -84,7 +87,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 				activeCategory: state.activeCategory
 			};
 
-		case CategoryActions[CategoryActions.NEST_CATEGORY]:
+		case CategoryActions[CategoryActions.NEST_CATEGORY]: {
 			const nestId = action.data;
 			const currentCategory: CategoryModel = state.list.find(c => c.id === nestId);
 			let newId: number;
@@ -112,6 +115,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 				}),
 				activeCategory: newId
 			};
+		}
 
 		case CategoryActions[CategoryActions.TOGGLE_CATEGORY]:
 			return {
@@ -119,7 +123,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 				activeCategory: state.activeCategory
 			};
 
-		case TaskActions[TaskActions.ADD_TASK]:
+		case TaskActions[TaskActions.ADD_TASK]: {
 			const addActId: number = action.data.categoryId;
 			let dependCategories: Array<number> = getParentsCategories(addActId, state.list).concat(addActId);
 
@@ -130,6 +134,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 				};
 			} else
 				return state;
+		}
 
 		default:
 			return state;

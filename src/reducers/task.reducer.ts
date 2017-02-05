@@ -19,7 +19,7 @@ const TASK_SAVE_INFORMATION = (title: string): string => `Task "${title}" has be
 
 export const taskReducer = (state: any = initialState, action: any): Object => {
 	switch (action.type) {
-		case TaskActions[TaskActions.ADD_TASK]:
+		case TaskActions[TaskActions.ADD_TASK]: {
 			const addId: number = action.data.taskId;
 
 			return {
@@ -29,6 +29,7 @@ export const taskReducer = (state: any = initialState, action: any): Object => {
 				],
 				visibleList: [...state.visibleList, addId]
 			};
+		}
 
 		case TaskActions[TaskActions.SAVE_TASK]:
 			alert(TASK_SAVE_INFORMATION(action.data.title));

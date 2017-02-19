@@ -11,6 +11,8 @@ describe('Category reducer tests', () => {
 		activeCategory: 1
 	};
 
+	Object.freeze(initialState);
+
 	it('Should return the initial state', () => {
 		expect(categoryReducer(initialState, {})).toEqual(initialState);
 	});

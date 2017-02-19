@@ -21,7 +21,7 @@ describe('UndoRedo container tests', () => {
 
 	it('canUndo and canRedo methods must exists', () => {
 		const canUndo: any = jest.fn(undoredo.instance().onUndo);
-		const canRedo: any = jest.fn(undoredo.instance().onRedo());
+		const canRedo: any = jest.fn(undoredo.instance().onRedo);
 
 		expect(canUndo).toBeDefined();
 		expect(canRedo).toBeDefined();

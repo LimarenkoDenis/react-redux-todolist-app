@@ -14,6 +14,8 @@ describe('Edit reducer tests', () => {
 		{ type: TaskActions[TaskActions.EDIT_TASK], data: { id: 2, title: 'my task', active: false, description: 'lalala' } }
 	];
 
+	Object.freeze(initialState);
+
 	it('Should return the initial state', () => {
 		expect(editReducer(initialState, {})).toEqual(initialState);
 	});

@@ -8,6 +8,8 @@ describe('Filter reducer tests', () => {
 		searchTemplate: ''
 	};
 
+	Object.freeze(initialState);
+
 	it('Should return the initial state', () => {
 		expect(filterReducer(initialState, {})).toEqual(initialState);
 	});

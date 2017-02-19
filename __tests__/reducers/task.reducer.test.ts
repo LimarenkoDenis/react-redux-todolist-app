@@ -10,6 +10,8 @@ describe('Task reducer tests', () => {
 		visibleList: []
 	};
 
+	Object.freeze(initialState);
+
 	it('Should return the initial state', () => {
 		expect(taskReducer(initialState, {})).toEqual(initialState);
 	});

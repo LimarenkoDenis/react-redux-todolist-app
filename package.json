@@ -27,15 +27,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rodinwow/react-redux-todolist-app.git"
+    "url": "git+https://github.com/eugrdn/react-redux-todolist-app.git"
   },
   "keywords": [],
   "author": "Eugene Rodin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rodinwow/react-redux-todolist-app/issues"
+    "url": "https://github.com/eugrdn/react-redux-todolist-app/issues"
   },
-  "homepage": "https://github.com/rodinwow/react-redux-todolist-app#readme",
+  "homepage": "https://github.com/eugrdn/react-redux-todolist-app#readme",
   "devDependencies": {
     "@types/enzyme": "^2.7.1",
     "@types/jest": "^18.1.1",

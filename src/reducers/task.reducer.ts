@@ -58,7 +58,7 @@ export const taskReducer = (state: any = initialState, action: any): Object => {
 		case CategoryActions[CategoryActions.DELETE_CATEGORY]:
 			return {
 				list: [
-					...state.list.filter(t => action.data.tasks.indexOf(t.id) === -1)
+					...state.list.filter(t => action.data.tasks.includes(t.id))
 				],
 				visibleList: state.visibleList
 			};

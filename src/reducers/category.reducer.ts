@@ -18,7 +18,7 @@ const initialState: ICategoriesState = {
 
 const getParentsCategories = (currentId: number, categories: Array<CategoryModel>, resultIds: Array<number> = []): Array<number> => {
 	categories.forEach(c => {
-		if (c.subs.indexOf(currentId) !== -1) {
+		if (c.subs.includes(currentId)) {
 			resultIds.push(c.id);
 			getParentsCategories(c.id, categories, resultIds);
 		}
@@ -68,15 +68,15 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 			let subsById: Array<number> = action.data.subs;
 
 			state.list.forEach(c => {
-				if (subsById.indexOf(c.id) !== -1 && c.subs.length) {
+				if (subsById.includes(c.id) && c.subs.length) {
 					c.subs.forEach(s => subsById.push(s));
 				}
 			});
 
 			return {
 				list: state.list
-					.filter(c => c.id !== deleteId && subsById.indexOf(c.id) === -1)
-					.map(c => c.subs.indexOf(deleteId) !== -1 ? { ...c, subs: c.subs.filter(s => s !== deleteId) } : c),
+					.filter(c => c.id !== deleteId && subsById.includes(c.id))
+					.map(c => c.subs.includes(deleteId) ? { ...c, subs: c.subs.filter(s => s !== deleteId) } : c),
 				activeCategory: state.activeCategory ? state.activeCategory : state.activeCategory.id === deleteId ? null : state.activeCategory
 			};
 		}
@@ -96,8 +96,8 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 				list: state.list.map(c => {
 					let parentNode: number;
 
-					if (c.subs.indexOf(nestId) !== -1) {
-						return { ...c, subs: c.subs.filter(id => id !== nestId), tasks: c.tasks.filter(id => currentCategory.tasks.indexOf(id) === -1) };
+					if (c.subs.includes(nestId)) {
+						return { ...c, subs: c.subs.filter(id => id !== nestId), tasks: c.tasks.filter(id => currentCategory.tasks.includes(id)) };
 					}
 
 					if (c.id !== nestId || !c.parentId) return c;
@@ -129,7 +129,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 
 			if (addActId) {
 				return {
-					list: state.list.map(c => dependCategories.indexOf(c.id) !== -1 ? { ...c, tasks: [...c.tasks, action.data.taskId] } : c),
+					list: state.list.map(c => dependCategories.includes(c.id) ? { ...c, tasks: [...c.tasks, action.data.taskId] } : c),
 					activeCategory: state.activeCategory
 				};
 			} else

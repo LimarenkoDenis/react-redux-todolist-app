@@ -47,7 +47,7 @@ export class VisibleCategories extends React.Component<IVisibleCategoriesProps, 
 		let subs: Array<CategoryModel> = [];
 
 		storeList.forEach(c => {
-			if (category.subs.indexOf(c.id) !== -1) {
+			if (category.subs.includes(c.id)) {
 				subs = [...subs, c];
 			}
 		});

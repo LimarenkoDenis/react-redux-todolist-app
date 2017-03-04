@@ -19,7 +19,7 @@ export interface IVisibleTasksProps {
 
 export class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 	public render(): JSX.Element {
-		const { tasks: {list, visibleList}, filterState} = this.props;
+		const { tasks: { list, visibleList }, filterState } = this.props;
 
 		let filteredTasks: Array<TaskModel> = this.getFilteredTasks(list, visibleList, filterState);
 
@@ -42,7 +42,7 @@ export class VisibleTasks extends React.Component<IVisibleTasksProps, any> {
 	}
 
 	private getFilteredTasks(taskList: Array<TaskModel>, visibleTaskArray: Array<number>, filter: IFilterState): Array<TaskModel> {
-		let visibleList: Array<TaskModel> = [...taskList.filter(t => visibleTaskArray.indexOf(t.id) !== -1)];
+		let visibleList: Array<TaskModel> = [...taskList.filter(t => visibleTaskArray.includes(t.id))];
 		let filteredList: Array<TaskModel>;
 
 		if (filter.searchTemplate) {

@@ -75,7 +75,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 
 			return {
 				list: state.list
-					.filter(c => c.id !== deleteId && subsById.includes(c.id))
+					.filter(c => c.id !== deleteId && !subsById.includes(c.id))
 					.map(c => c.subs.includes(deleteId) ? { ...c, subs: c.subs.filter(s => s !== deleteId) } : c),
 				activeCategory: state.activeCategory ? state.activeCategory : state.activeCategory.id === deleteId ? null : state.activeCategory
 			};

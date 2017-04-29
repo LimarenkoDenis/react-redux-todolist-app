@@ -45,6 +45,7 @@ if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
 			contentBase: '.',
 			historyApiFallback: true
 		},
+		devtool: 'eval-source-map',
 		plugins: [
 			new webpack.HotModuleReplacementPlugin(),
 			new webpack.DefinePlugin({

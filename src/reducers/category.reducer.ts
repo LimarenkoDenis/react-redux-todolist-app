@@ -1,4 +1,4 @@
-import { browserHistory } from 'react-router/lib';
+import { BrowserRouter } from 'react-router-dom'
 
 import { CategoryActions, TaskActions } from '../actions/action.types';
 import { CategoryModel } from '../models/category.model';
@@ -57,7 +57,7 @@ export const categoryReducer = (state: any = initialState, action: any): Object 
 		case CategoryActions[CategoryActions.CHOOSE_CATEGORY]: {
 			//for jest tests
 			try {
-				browserHistory.push(`${action.data.title.split(' ').join('')}`);
+				BrowserRouter.push(`${action.data.title.split(' ').join('')}`);
 			} catch (err) { }
 
 			return { list: state.list, activeCategory: action.data.id };

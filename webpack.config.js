@@ -6,28 +6,28 @@ var common = {
 	entry: path.resolve(__dirname, 'src/index.tsx'),
 	output: {
 		publicPath: '/build/',
-		path: 'build',
-		filename: 'bundle.js',
+		path: path.join(__dirname, 'build'),
+		filename: "bundle.js"
 	},
 	resolve: {
-		extensions: ['', '.ts', '.tsx', '.js']
+		extensions: ['*', '.ts', '.tsx', '.js']
 	},
 	module: {
 		loaders: [
 			{
 				test: /\.tsx?$/,
-				exclude: /node_modules/,
+				exclude: /(node_modules)/,
 				loader: 'ts-loader'
 			},
 			{
 				test: /\.(css|less)$/,
-				exclude: /node_modules/,
+				exclude: /(node_modules)/,
 				loader: 'style-loader!css-loader!less-loader'
 			},
 			{
 				test: /\.(son)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 				loader: 'file-loader	',
-				exclude: 'node_modules'
+				exclude: '/(node_modules)/'
 			},
 			{
 				test: /\.(jpe?g|png|woff|woff2|eot|ttf|svg)$/,

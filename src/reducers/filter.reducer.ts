@@ -1,5 +1,4 @@
-import { browserHistory } from 'react-router/lib';
-
+import { BrowserRouter } from 'react-router-dom'
 import { FilterActions } from '../../src/actions/action.types';
 
 export interface IFilterState {
@@ -18,9 +17,9 @@ export const filterReducer = (state: any = initialState, action: any): Object =>
 			//for jest tests
 			try {
 				if (action.data) {
-					browserHistory.push('active');
+					BrowserRouter.push('active');
 				} else {
-					browserHistory.push('all');
+					BrowserRouter.push('all');
 				}
 			} catch (err) { }
 

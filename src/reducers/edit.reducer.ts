@@ -1,4 +1,4 @@
-import { browserHistory } from 'react-router/lib';
+import { BrowserRouter } from 'react-router-dom'
 
 import { TaskActions } from '../actions/action.types';
 import { TaskModel } from '../models/task.model';
@@ -21,7 +21,7 @@ export const editReducer = (state: any = initialState, action: any): Object => {
 		case TaskActions[TaskActions.EDIT_TASK]:
 			//for jest tests
 			try {
-				browserHistory.push(`edit_${action.data.title.split(' ').join('_')}`);
+				BrowserRouter.push(`edit_${action.data.title.split(' ').join('_')}`);
 			} catch (err) { }
 
 			return { active: true, task: action.data };
